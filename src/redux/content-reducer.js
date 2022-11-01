@@ -1,14 +1,14 @@
-const CHOOSE_VARIANT = 'CHOOSE-VARIANT';
-const CLICK_VARIANT = 'CLICK-VARIANT';
-const UPDATE_USER_SCORE = 'UPDATE-USER-SCORE';
+const SAVE_LAST_GUESSED_VARIANT = 'SAVE_LAST_GUESSED_VARIANT';
+const SAVE_ALL_GUESSED_VARIANTS = 'SAVE_ALL_GUESSED_VARIANTS';
+const CHECK_USERS_ANSWER = 'CHECK_USERS_ANSWER';
 
 let initialState = {
     questions: [
         {id: 0, questionText: 'Accept or follow a decision or rule.', variants: [
-                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Abide by', isUserChooseVariant: false },
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Account for', isUserChooseVariant: false},
-                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Ache for', isUserChooseVariant: false},
-                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Act on', isUserChooseVariant: false},
+                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Abide by', expUserChoseThisVariant: false },
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Account for', expUserChoseThisVariant: false},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Ache for', expUserChoseThisVariant: false},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Act on', expUserChoseThisVariant: false},
             ]},
         {id: 1, questionText: 'To explain.', variants: [
                 {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Abide by'},
@@ -29,6 +29,10 @@ let initialState = {
                 {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Act on'},
             ]},
     ],
+    numberOfQuestionsForGame: 3,
+    usersGuessedVariants: [],
+    usersLastGuessedVariant: {},
+    isUserGuessedVariant: false,
     phrasalVerbs: [
         {id: 0, letter: 'A', Verb: 'Abide', VerbAndParticle: 'Abide by', Meaning: 'Accept or follow a decision or rule.', Example: 'We have to ABIDE BY what the court says.', CuttedExample: 'We have to _____ __ what the court says.', ExtractedVerb: 'ABIDE', ExtractedParticles: 'BY'},
         {id: 1, letter: 'A', Verb: 'Account', VerbAndParticle: 'Account for', Meaning: 'To explain.', Example: 'They had to ACCOUNT FOR all the money that had gone missing.', CuttedExample: 'They had to _______ ___ all the money that had gone missing.', ExtractedVerb: 'ACCOUNT', ExtractedParticles: 'FOR'},
@@ -42,49 +46,28 @@ let initialState = {
                 {Meaning: 'Express an emotion in your behaviour.', Example: 'Their anger is ACTED OUT in their antisocial behaviour.', CuttedExample: 'Their anger is _____ ___ in their antisocial behaviour.', ExtractedVerb: 'ACTED', ExtractedParticles: 'OUT'}
             ]},
     ],
-    messages: [
-        {id: 1, message: 'Hi'},
-        {id: 2, message: 'Yo'},
-        {id: 3, message: 'Wassup'}
-    ],
-    newMessageBody: "",
-    chosenByUser: ""
 }
 
 const contentReducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case CHOOSE_VARIANT:
+        case SAVE_LAST_GUESSED_VARIANT:
             return {
                 ...state,
-                questions: [...state.questions],
-                //variants:
+                usersLastGuessedVariant: action.variant
             }
 
-
-        case CLICK_VARIANT:
+        case SAVE_ALL_GUESSED_VARIANTS:
             return {
                 ...state,
-                questions: [...state.questions],
-                variants: state.questions[0].variants.map (v => {
-                    if (v.variantNumber === action.variantId) {
-                        if (v.isVariantTrue === true) {
-                            return {...v, isUserChooseVariant: true}
-                        }
-                        // else {
-                        //     return {...v, verbAndParticle: "No"}
-                        // }
-                        //return {...v}
-                    }
-                    return v
-                })
+                //usersGuessedVariants: [action.variant],
+                usersGuessedVariants: [...state.usersGuessedVariants, {...state.usersLastGuessedVariant}]
             }
 
-        case UPDATE_USER_SCORE:
+        case CHECK_USERS_ANSWER:
             return {
                 ...state,
-                questions: [...state.questions],
-
+                isUserGuessedVariant: action.isVariantTrue,
             }
 
         default:
@@ -92,8 +75,8 @@ const contentReducer = (state = initialState, action) => {
     }
 }
 
-//export const choseVariantAC = () => ({type: CHOOSE_VARIANT})
-export const choseVariantAC = (variantId) => ({type: CLICK_VARIANT, variantId})
-export const updateUserScoreAC = (variantId) => ({type: UPDATE_USER_SCORE, variantId: variantId})
+export const saveLastGuessedVariant = (variant) => ({type: SAVE_LAST_GUESSED_VARIANT, variant})
+export const saveAllGuessedVariants = (variant) => ({type: SAVE_ALL_GUESSED_VARIANTS, variant})
+export const checkUsersAnswer = (isVariantTrue) => ({type: CHECK_USERS_ANSWER, isVariantTrue})
 
 export default contentReducer;
