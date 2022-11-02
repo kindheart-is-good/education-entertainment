@@ -7,7 +7,12 @@ const QuizQuestion = (props) => {
 
     return (
             <div className={styles.question}>
-                <NavLink to={path}>{props.questionText}</NavLink>
+                <p>
+                    Question #{props.id+1}:
+                </p>
+                <NavLink to={path}>
+                    {props.questionText}
+                </NavLink>
             </div>
     )
 }
