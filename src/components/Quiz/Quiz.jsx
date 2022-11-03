@@ -5,100 +5,54 @@ import QuizQuestion from "./QuizQuestion/QuizQuestion";
 class Quiz extends React.Component {
 
     state = {
-        isUserChoose: false,
-        currentQuestionId: 0,
+        isQuizGameActivated: false,
     }
 
-    activateNext = () => {
+    activateQuizGame = () => {
         this.setState({
-            isUserChoose: true,
-            //currentQuestionId: this.state.currentQuestionId+1
+            isQuizGameActivated: true
         })
     }
 
-    deactivateNext() {
-        this.setState({
-            isUserChoose: false
-        })
-    }
-
-    increaseQuestionId() {
-        if (this.state.currentQuestionId < this.props.numberOfQuestionsForGame) {
-            // this.state.currentQuestionId++;
-            this.setState({
-                currentQuestionId: this.state.currentQuestionId+1
-            })
+    getQuestion() {
+        if (!this.state.isQuizGameActivated)
+        {
+            this.activateNewQuizGame();
+            return <div><p>Get ready...</p></div>
         }
+        return <QuizQuestion questionText={this.props.currentQuestion.questionText}
+                             id={this.props.currentQuestion.id} />
     }
 
-    /*questionElements = this.props.questions
-        .map(q => <div key={q.id}>
-            <div>
-                { this.state.isUserChoose
-                    ? <div>
-                        <QuizQuestion questionText={q.questionText}
-                                      id={q.id} />
-                    </div>
-                    : <div>
-                        text
-                    </div>}
-            </div>
-        </div>)*/
-
-    /*variantElements = this.props.questions[this.state.currentQuestionId].variants
-        .map(v => <div key={v.id}>
-            <button onClick={ ()=>{this.checkVariant(v)} } >
-                { v.verbAndParticle }
-            </button>
-        </div>)*/
-
-    getVariantsForQuestion(question) {
-        return question.variants
-            .map(v => <div key={v.id}>
-                <button onClick={ ()=>{this.checkVariant(v)} } >
+    getVariantsForQuestion() {
+        if (!this.state.isQuizGameActivated)
+        {
+            this.activateNewQuizGame();
+            return <div><p>good luck, have fun!</p></div>
+        }
+        return this.props.currentQuestion.variants
+            .map(v => <div key={v.variantNumber}>
+                <button onClick={ ()=>{this.props.analyzeUsersAnswer(v, this.props.currentQuestion.id)} } >
                     { v.verbAndParticle }
                 </button>
             </div>)
     }
 
-    checkVariant = (v) => {
-        //alert(this.state.isUserChoose);
-        console.log(this.state.isUserChoose);
-
-        if (v.isVariantTrue) {
-            this.activateNext();
-            this.increaseQuestionId();
-            this.props.saveLastGuessedVariant(v);
-            this.props.saveAllGuessedVariants(v);
-            this.props.checkUsersAnswer(v.isVariantTrue);
-        }
-        else {
-            this.deactivateNext();
-        }
-
-        //alert(this.state.isUserChoose);
-        console.log(this.state.isUserChoose);
-        console.log(this.state.currentQuestionId);
+    activateNewQuizGame = () => {
+        this.activateQuizGame();
+        this.props.startNewQuizGame(true);
+        this.props.giveFirstQuestion(0);    //TODO: система задаёт рандомное число
+        //TODO: сбросить user_score
+        this.props.startNewQuizGame(false);
     }
 
     render() {
         return (
             <div className={styles.content}>
 
-                {/*{ this.questionElements }*/}
-                <QuizQuestion questionText={this.props.questions[this.state.currentQuestionId].questionText}
-                              id={this.props.questions[this.state.currentQuestionId].id} />
+                { this.getQuestion() }
 
-                {/*{ this.variantElements }*/}
-                { this.getVariantsForQuestion(this.props.questions[this.state.currentQuestionId]) }
-
-                {/*{ this.props.qs
-                    .map(extractedQuestion =>
-                        <div key={extractedQuestion.id}>
-                            { extractedQuestion.questionText }
-                            <textarea value={extractedQuestion.questionText} onChange={()=>{}}></textarea>
-                        </div>)
-                }*/}
+                { this.getVariantsForQuestion() }
 
                 {/* DEBUG: */}
                 <div style={{ padding: "20px", color: "indianred" }}>

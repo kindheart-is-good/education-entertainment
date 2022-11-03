@@ -1,6 +1,6 @@
-const SAVE_LAST_GUESSED_VARIANT = 'SAVE_LAST_GUESSED_VARIANT';
-const SAVE_ALL_GUESSED_VARIANTS = 'SAVE_ALL_GUESSED_VARIANTS';
-const CHECK_USERS_ANSWER = 'CHECK_USERS_ANSWER';
+const ANALYZE_USERS_ANSWER = 'ANALYZE_USERS_ANSWER';
+const GIVE_FIRST_QUESTION = 'GIVE_FIRST_QUESTION';
+const START_NEW_QUIZ_GAME = 'START_NEW_QUIZ_GAME';
 
 let initialState = {
     questions: [
@@ -29,7 +29,10 @@ let initialState = {
                 {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Act on'},
             ]},
     ],
+    isNewQuizGameStarted: false,
     numberOfQuestionsForGame: 3,
+    currentQuestionId: 0,
+    currentQuestion: {},
     usersGuessedVariants: [],
     usersLastGuessedVariant: {},
     isUserGuessedVariant: false,
@@ -51,23 +54,55 @@ let initialState = {
 const contentReducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case SAVE_LAST_GUESSED_VARIANT:
+        case ANALYZE_USERS_ANSWER:
+        {
+            if (action.variant.isVariantTrue)
+            {
+                if (action.questionId < state.numberOfQuestionsForGame) {
+                    let giveNextQuestion = action.questionId+1;
+                    return {
+                        ...state,
+                        isUserGuessedVariant: action.isVariantTrue,
+                        currentQuestion: state.questions[giveNextQuestion],
+
+                            /* SAVE_LAST_GUESSED_VARIANT: */
+                        usersLastGuessedVariant: action.variant,
+
+                            /* SAVE_LAST_GUESSED_VARIANT: */
+                        usersGuessedVariants: [...state.usersGuessedVariants, {...state.usersLastGuessedVariant}],
+                    }
+                }
+                return {
+                    ...state,
+                    isUserGuessedVariant: action.isVariantTrue,
+                    currentQuestion: state.questions[action.questionId],    // Правильно ли???
+
+                        /* SAVE_LAST_GUESSED_VARIANT: */
+                    usersLastGuessedVariant: action.variant,
+
+                        /* SAVE_LAST_GUESSED_VARIANT: */
+                    usersGuessedVariants: [...state.usersGuessedVariants, {...state.usersLastGuessedVariant}],
+                }
+            }
+            else
+            {
+                return {
+                    ...state,
+                    isUserGuessedVariant: false,
+                }
+            }
+        }
+
+        case GIVE_FIRST_QUESTION:
             return {
                 ...state,
-                usersLastGuessedVariant: action.variant
+                currentQuestion: state.questions[action.questionId]
             }
 
-        case SAVE_ALL_GUESSED_VARIANTS:
+        case START_NEW_QUIZ_GAME:
             return {
                 ...state,
-                //usersGuessedVariants: [action.variant],
-                usersGuessedVariants: [...state.usersGuessedVariants, {...state.usersLastGuessedVariant}]
-            }
-
-        case CHECK_USERS_ANSWER:
-            return {
-                ...state,
-                isUserGuessedVariant: action.isVariantTrue,
+                isNewQuizGameStarted: action.isNewQuizGameStarted,
             }
 
         default:
@@ -75,8 +110,8 @@ const contentReducer = (state = initialState, action) => {
     }
 }
 
-export const saveLastGuessedVariant = (variant) => ({type: SAVE_LAST_GUESSED_VARIANT, variant})
-export const saveAllGuessedVariants = (variant) => ({type: SAVE_ALL_GUESSED_VARIANTS, variant})
-export const checkUsersAnswer = (isVariantTrue) => ({type: CHECK_USERS_ANSWER, isVariantTrue})
+export const analyzeUsersAnswer = (variant, questionId) => ({type: ANALYZE_USERS_ANSWER, variant, questionId})
+export const giveFirstQuestion = (questionId) => ({type: GIVE_FIRST_QUESTION, questionId})
+export const startNewQuizGame = (isNewQuizGameStarted) => ({type: START_NEW_QUIZ_GAME, isNewQuizGameStarted})
 
 export default contentReducer;
