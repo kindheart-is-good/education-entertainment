@@ -15,27 +15,26 @@ class Quiz extends React.Component {
     }
 
     getQuestion() {
-        if (!this.state.isQuizGameActivated)
+        if (this.state.isQuizGameActivated)
         {
-            this.activateNewQuizGame();
-            return <div><p>Get ready...</p></div>
+            return <QuizQuestion questionText={this.props.currentQuestion.questionText}
+                                 id={this.props.currentQuestion.id}
+            />
         }
-        return <QuizQuestion questionText={this.props.currentQuestion.questionText}
-                             id={this.props.currentQuestion.id} />
+        return <div>Want to check this Quiz Game? Press Start button below</div>
     }
 
     getVariantsForQuestion() {
-        if (!this.state.isQuizGameActivated)
+        if (this.state.isQuizGameActivated)
         {
-            this.activateNewQuizGame();
-            return <div><p>good luck, have fun!</p></div>
+            return this.props.currentQuestion.variants
+                .map(v => <div key={v.variantNumber}>
+                    <button onClick={ ()=>{this.props.analyzeUsersAnswer(v, this.props.currentQuestion.id)} } >
+                        { v.verbAndParticle }
+                    </button>
+                </div>)
         }
-        return this.props.currentQuestion.variants
-            .map(v => <div key={v.variantNumber}>
-                <button onClick={ ()=>{this.props.analyzeUsersAnswer(v, this.props.currentQuestion.id)} } >
-                    { v.verbAndParticle }
-                </button>
-            </div>)
+        return <div>bro</div>
     }
 
     activateNewQuizGame = () => {
@@ -53,6 +52,12 @@ class Quiz extends React.Component {
                 { this.getQuestion() }
 
                 { this.getVariantsForQuestion() }
+
+                <div>
+                    <button onClick={ ()=>{this.activateNewQuizGame()} } className={styles.buttonStart}>
+                        start new game
+                    </button>
+                </div>
 
                 {/* DEBUG: */}
                 <div style={{ padding: "20px", color: "indianred" }}>
