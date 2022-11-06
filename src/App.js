@@ -14,6 +14,8 @@ function App(props) {
                 <Routes>
                     <Route path="/"
                            element={<Content />} />
+                    <Route path="/content/"
+                           element={<Content />} />
                     <Route path="/quiz/*"
                            element={<QuizContainer />} />
                 </Routes>

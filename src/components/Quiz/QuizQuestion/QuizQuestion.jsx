@@ -3,16 +3,14 @@ import styles from "./QuizQuestion.module.css"
 import {NavLink} from "react-router-dom";
 
 const QuizQuestion = (props) => {
-    let path = "/quiz/" + props.id;
-
     return (
             <div className={styles.question}>
-                <p>
+                <p className={styles.questionTag}>
                     Question #{props.id+1}:
                 </p>
-                <NavLink to={path}>
+                <p className={styles.questionText}>
                     {props.questionText}
-                </NavLink>
+                </p>
             </div>
     )
 }

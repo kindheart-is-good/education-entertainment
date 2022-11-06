@@ -1,5 +1,24 @@
 .navbar {
     grid-area: navbar;
-    background-color: lightcyan;
+
     margin: 20px;
+    padding-top: 30px;
+    height: 256px;
+    background-color: #d0faf9;
+
+}
+
+.item {
+    margin: 10px;
+
+    color: #868686;
+    text-decoration: none;
+}
+
+.active
+{
+    margin: 20px;
+
+    color: darkslategrey;
+    text-decoration: none;
 }

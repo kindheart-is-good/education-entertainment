@@ -1,8 +1,8 @@
 import {combineReducers, legacy_createStore} from "redux";
-import contentReducer from "./content-reducer";
+import quizReducer from "./quiz-reducer";
 
 let reducers = combineReducers({
-    quizPage: contentReducer
+    quizPage: quizReducer
 });
 
 let store = legacy_createStore(reducers);

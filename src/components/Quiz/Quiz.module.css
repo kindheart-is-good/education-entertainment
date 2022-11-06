@@ -1,10 +1,27 @@
 .content {
     grid-area: content;
-    background-color: yellow;
+
     margin: 20px;
+    background-color: #fff53d;
+    text-align: center;
 }
 
 .buttonStart {
     margin: 40px;
     padding: 10px;
+}
+
+.variantButton {
+    margin: 5px;
+    padding: 7px;
+    font-size: 14px;
+}
+
+.introduction {
+    padding-top: 45px;
+}
+
+.debugSection {
+    padding: 20px;
+    color: #868686;
 }

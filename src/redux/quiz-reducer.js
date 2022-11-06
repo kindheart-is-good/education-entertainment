@@ -6,9 +6,9 @@ let initialState = {
     questions: [
         {id: 0, questionText: 'Accept or follow a decision or rule.', variants: [
                 {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Abide by', expUserChoseThisVariant: false },
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Account for', expUserChoseThisVariant: false},
-                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Ache for', expUserChoseThisVariant: false},
-                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Act on', expUserChoseThisVariant: false},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Square with', expUserChoseThisVariant: false},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Dial in', expUserChoseThisVariant: false},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Cut through', expUserChoseThisVariant: false},
             ]},
         {id: 1, questionText: 'To explain.', variants: [
                 {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Ache for'},
@@ -27,6 +27,48 @@ let initialState = {
                 {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Account for'},
                 {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Act out'},
                 {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Act on'},
+            ]},
+        {id: 4, questionText: 'Perform something with actions and gestures.', variants: [
+                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Act out'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Act upon'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Act up'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Act on'},
+            ]},
+        {id: 5, questionText: 'Give out, distribute.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Fetch up'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Talk around'},
+                {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Dole out'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Press on'},
+            ]},
+        {id: 6, questionText: 'Amount to, be the most important aspect.', variants: [
+                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Come down to'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Roll back'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Stump up'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Cover up'},
+            ]},
+        {id: 7, questionText: 'Make or persuade someone to accept something you don\'t want.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Reason out'},
+                {variantNumber: 2, isVariantTrue: true, verbAndParticle: 'Fob on'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Reel on'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Take it upon'},
+            ]},
+        {id: 8, questionText: 'Visit.', variants: [
+                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Come by'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Tag along'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Walk in on'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Walk up'},
+            ]},
+        {id: 9, questionText: 'Dress smartly or improve the appearance of something.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Dwell on'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Lead on'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Drop out'},
+                {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Gussy up'},
+            ]},
+        {id: 10, questionText: 'Get rid of something.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Splash out'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Talk around'},
+                {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Stamp out'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Bring forth'},
             ]},
     ],
     isNewQuizGameStarted: false,
@@ -51,7 +93,7 @@ let initialState = {
     ],
 }
 
-const contentReducer = (state = initialState, action) => {
+const quizReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case ANALYZE_USERS_ANSWER:
@@ -114,4 +156,4 @@ export const analyzeUsersAnswer = (variant, questionId) => ({type: ANALYZE_USERS
 export const giveFirstQuestion = (questionId) => ({type: GIVE_FIRST_QUESTION, questionId})
 export const startNewQuizGame = (isNewQuizGameStarted) => ({type: START_NEW_QUIZ_GAME, isNewQuizGameStarted})
 
-export default contentReducer;
+export default quizReducer;

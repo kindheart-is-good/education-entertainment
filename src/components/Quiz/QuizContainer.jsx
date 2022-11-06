@@ -4,7 +4,7 @@ import {
     startNewQuizGame,
     giveFirstQuestion,
     analyzeUsersAnswer
-} from "../../redux/content-reducer";
+} from "../../redux/quiz-reducer";
 import {connect} from "react-redux";
 
 class QuizContainer extends React.Component {

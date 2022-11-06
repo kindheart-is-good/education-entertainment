@@ -21,7 +21,7 @@ class Quiz extends React.Component {
                                  id={this.props.currentQuestion.id}
             />
         }
-        return <div>Want to check this Quiz Game? Press Start button below</div>
+        return <div className={styles.introduction}>Want to check this Quiz Game? Press Start button below</div>
     }
 
     getVariantsForQuestion() {
@@ -29,12 +29,13 @@ class Quiz extends React.Component {
         {
             return this.props.currentQuestion.variants
                 .map(v => <div key={v.variantNumber}>
-                    <button onClick={ ()=>{this.props.analyzeUsersAnswer(v, this.props.currentQuestion.id)} } >
+                    <button className={styles.variantButton}
+                            onClick={ ()=>{this.props.analyzeUsersAnswer(v, this.props.currentQuestion.id)} } >
                         { v.verbAndParticle }
                     </button>
                 </div>)
         }
-        return <div>bro</div>
+        return <div className={styles}>bro</div>
     }
 
     activateNewQuizGame = () => {
@@ -60,7 +61,7 @@ class Quiz extends React.Component {
                 </div>
 
                 {/* DEBUG: */}
-                <div style={{ padding: "20px", color: "indianred" }}>
+                <div className={styles.debugSection}>
                     DEBUG, last guessed variant:
                     <p>{this.props.usersLastGuessedVariant.verbAndParticle}</p>
                 </div>
