@@ -1,13 +1,19 @@
 .content {
     grid-area: content;
 
+    min-height: 286px;
     margin: 20px;
     background-color: #fff53d;
     text-align: center;
 }
 
+.introduction {
+    padding-top: 45px;
+}
+
 .buttonStart {
-    margin: 40px;
+    margin-top: 35px;
+    margin-bottom: 40px;
     padding: 10px;
 }
 
@@ -17,11 +23,22 @@
     font-size: 14px;
 }
 
-.introduction {
-    padding-top: 45px;
+.userScore {
+    padding-top: 50px;
+    padding-right: 130px;
+    text-align: right;
+}
+
+.userScoreResult {
+    padding-top: 50px;
 }
 
 .debugSection {
+    margin-top: 50px;
     padding: 20px;
+    color: #868686;
+}
+
+.debugSectionResult {
     color: #868686;
 }
