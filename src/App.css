@@ -1,6 +1,22 @@
+.globalTheme {
+
+        /*      for DISPLAY: 2560*1600 scale: 125%    */
+  /*height: 1169px;*/
+  /*width: auto;*/
+
+        /*      for DISPLAY: 2560*1600 scale: 150%    */
+  height: 956px;
+
+        /*      LIGHT THEME     */
+  /*background-color: #ffffff*/   /* это стандартный белый цвет который даётся по умолчанию.  */
+
+        /*      DARK THEME      */
+  background-color: #373737;
+}
+
 .app-wrapper {
   margin: 0 auto;
-  width: 1200px;
+  width: 1400px;
 
   display: grid;
 
@@ -8,5 +24,5 @@
   "header header"
   "navbar content";
   grid-template-rows: 60px 1fr;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 4fr 14fr;
 }

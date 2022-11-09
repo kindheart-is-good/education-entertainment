@@ -73,13 +73,13 @@ let initialState = {
             ]},
     ],
     isNewQuizGameStarted: false,
-    numberOfQuestionsForGame: 3,
-    userScore: 0,
+    numberOfQuestionsForGame: 9,
     currentQuestionId: 0,
     currentQuestion: {},
-    usersGuessedVariants: [],
-    usersLastGuessedVariant: {},
+    userScore: 0,
     isUserGuessedVariant: false,
+    usersLastGuessedVariant: {},
+    usersGuessedVariants: [],
     isGameFinished: false,
     phrasalVerbs: [
         {id: 0, letter: 'A', Verb: 'Abide', VerbAndParticle: 'Abide by', Meaning: 'Accept or follow a decision or rule.', Example: 'We have to ABIDE BY what the court says.', CuttedExample: 'We have to _____ __ what the court says.', ExtractedVerb: 'ABIDE', ExtractedParticles: 'BY'},
@@ -124,10 +124,10 @@ const quizReducer = (state = initialState, action) => {
                             userScore: state.userScore + 10,
                             currentQuestion: state.questions[giveNextQuestion],
 
-                            /* SAVE_LAST_GUESSED_VARIANT: */
+                                        /* SAVE_LAST_GUESSED_VARIANT: */
                             usersLastGuessedVariant: action.variant,
 
-                            /* SAVE_LAST_GUESSED_VARIANT: */
+                                        /* SAVE_LAST_GUESSED_VARIANT: */
                             usersGuessedVariants: [...state.usersGuessedVariants, {...state.usersLastGuessedVariant}],
                         }
                     }
@@ -138,10 +138,10 @@ const quizReducer = (state = initialState, action) => {
                         isGameFinished: true,
                         /*currentQuestion: state.questions[action.questionId],   // Правильно ли???*/
 
-                        /* SAVE_LAST_GUESSED_VARIANT: */
+                                    /* SAVE_LAST_GUESSED_VARIANT: */
                         usersLastGuessedVariant: action.variant,
 
-                        /* SAVE_LAST_GUESSED_VARIANT: */
+                                    /* SAVE_LAST_GUESSED_VARIANT: */
                         usersGuessedVariants: [...state.usersGuessedVariants, {...state.usersLastGuessedVariant}],
                     }
                 } else {
@@ -172,6 +172,7 @@ const quizReducer = (state = initialState, action) => {
                 ...state,
                 userScore: 0,
 
+                /*usersLastGuessedVariant: {},*/
                 /*isNewQuizGameStarted: false,
                 userScore: 0,
                 currentQuestionId: 0,

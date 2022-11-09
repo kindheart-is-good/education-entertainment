@@ -1,6 +1,14 @@
 .header {
     grid-area: header;
 
+    height: 20px;
     margin: 20px;
-    background-color: #fdd142;
+    padding-bottom: 1px;
+    padding-right: 30px;
+    /*background-color: #fdd142;*/
+    background-color: #e5e5e5;
+    /*outline: solid 6px #e5e5e5;*/
+    border: 6px solid #fdd142;
+    border-radius: 10px;
+    text-align: right;
 }

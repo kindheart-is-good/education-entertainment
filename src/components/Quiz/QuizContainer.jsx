@@ -26,15 +26,15 @@ class QuizContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        questions: state.quizPage.questions,
-        userScore: state.quizPage.userScore,
+        /*questions: state.quizPage.questions,*/
         isNewQuizGameStarted: state.quizPage.isNewQuizGameStarted,
         numberOfQuestionsForGame: state.quizPage.numberOfQuestionsForGame,
         currentQuestionId: state.quizPage.currentQuestionId,
         currentQuestion: state.quizPage.currentQuestion,
-        usersGuessedVariants: state.quizPage.usersGuessedVariants,
-        usersLastGuessedVariant: state.quizPage.usersLastGuessedVariant,
+        userScore: state.quizPage.userScore,
         isUserGuessedVariant: state.quizPage.isUserGuessedVariant,
+        usersLastGuessedVariant: state.quizPage.usersLastGuessedVariant,
+        usersGuessedVariants: state.quizPage.usersGuessedVariants,
         isGameFinished: state.quizPage.isGameFinished,
     }
 }

@@ -17,7 +17,7 @@ class Quiz extends React.Component {
     activateNewQuizGame = () => {
         this.activateQuizGame();
         this.props.startNewQuizGame(true);
-        this.props.giveFirstQuestion(0);    //TODO: система задаёт рандомное число
+        this.props.giveFirstQuestion(5);    //TODO: система задаёт рандомное число
         this.props.resetUserScore();
         this.props.startNewQuizGame(false);
     }
@@ -27,7 +27,7 @@ class Quiz extends React.Component {
         {
             return <div>
                 <button onClick={ ()=>{this.activateNewQuizGame()} } className={styles.buttonStart}>
-                    start new game
+                    START THIS GAME
                 </button>
             </div>
         }
@@ -45,7 +45,7 @@ class Quiz extends React.Component {
         {
             return <></>
         }
-        return <div className={styles.introduction}>Want to check this Quiz Game? Press Start button below</div>
+        return <div className={styles.introduction}>CHECK this QUIZ Game!</div>
     }
 
     getVariantsForQuestion() {
@@ -63,7 +63,9 @@ class Quiz extends React.Component {
         {
             return this.showResult();
         }
-        return <div>bro</div>
+            return <div>
+                <p>Press Start button below</p>
+                <p>bro</p></div>
     }
 
     showUserScore() {

@@ -3,7 +3,11 @@
 
     min-height: 286px;
     margin: 20px;
-    background-color: #fff53d;
+    /*background-color: #fff53d;*/
+    background-color: #e5e5e5;
+    /*outline: solid 6px #e5e5e5;*/
+    border: 10px solid #fff53d;
+    border-radius: 10px;
     text-align: center;
 }
 

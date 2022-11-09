@@ -4,12 +4,14 @@
     margin: 20px;
     padding-top: 30px;
     height: 256px;
-    background-color: #d0faf9;
-
+    /*background-color: #d0faf9;*/
+    background-color: #e5e5e5;
+    border: 10px solid #d0faf9;
+    border-radius: 10px;
 }
 
 .item {
-    margin: 10px;
+    margin: 20px;
 
     color: #868686;
     text-decoration: none;
@@ -17,7 +19,7 @@
 
 .active
 {
-    margin: 20px;
+    margin: 35px;
 
     color: darkslategrey;
     text-decoration: none;
