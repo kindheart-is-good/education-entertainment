@@ -1,5 +1,6 @@
 const START_NEW_QUIZ_GAME = 'START_NEW_QUIZ_GAME';
 const GIVE_FIRST_QUESTION = 'GIVE_FIRST_QUESTION';
+const USER_STARTED_ACTIVITY = 'USER_STARTED_ACTIVITY';
 const ANALYZE_USERS_ANSWER = 'ANALYZE_USERS_ANSWER';
 const RESET_USER_SCORE = 'RESET_USER_SCORE';
 
@@ -36,47 +37,73 @@ let initialState = {
                 {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Act on'},
             ]},
         {id: 5, questionText: 'Give out, distribute.', variants: [
-                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Fetch up'},
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Talk around'},
-                {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Dole out'},
-                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Press on'},
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Fetch up', meaning: 'Arrive unintentionally.', example: 'The boat FETCHED UP on the beach.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Talk around', meaning: 'Persuade.', example: 'She TALKED them AROUND to accepting her point of view.'},
+                {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Dole out', meaning: 'Give out, distribute.', example: 'They were DOLING OUT leaflets in front of the station.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Press on', meaning: 'Continue with something.', example: 'We PRESSED ON to get to our destination before night fell.'},
             ]},
         {id: 6, questionText: 'Amount to, be the most important aspect.', variants: [
-                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Come down to'},
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Roll back'},
-                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Stump up'},
-                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Cover up'},
+                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Come down to', meaning: 'Amount to, be the most important aspect.', example: 'It all COMES DOWN TO a question of who tries hardest.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Roll back', meaning: 'Retreat.', example: 'The army ROLLED BACK when they came under attack.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Stump up', meaning: 'Pay for something.', example: 'He didn\'t want to pay me back, but I got him to STUMP UP in the end.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Cover up', meaning: 'Conceal, try to stop people finding out.', example: 'They tried to COVER UP the incident but it got into the newspapers.'},
             ]},
         {id: 7, questionText: 'Make or persuade someone to accept something you don\'t want.', variants: [
-                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Reason out'},
-                {variantNumber: 2, isVariantTrue: true, verbAndParticle: 'Fob on'},
-                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Reel on'},
-                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Take it upon'},
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Reason out', meaning: 'Come to a conclusion or solution after some thought.', example: 'He REASONED OUT the answer to the math problem.'},
+                {variantNumber: 2, isVariantTrue: true, verbAndParticle: 'Fob on', meaning: 'Make or persuade someone to accept something you don\'t want.', example: 'I FOBBED the work ON the others.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Reel in', meaning: 'Catch a fish on a line and pull the line to land.', example: 'He REELED IN a ten-pound salmon.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Take it upon', meaning: 'Take responsibility, often without consulting other people.', example: 'I TOOK IT UPON myself to make sure he got up on time.'},
             ]},
         {id: 8, questionText: 'Visit.', variants: [
-                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Come by'},
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Tag along'},
-                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Walk in on'},
-                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Walk up'},
+                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Come by', meaning: 'Visit.', example: 'I\'ll COME BY after work and see if you need any help.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Tag along', meaning: 'Accompany someone, especially if they haven\'t specifically invited you.', example: 'You\'re off to the cinema; can we TAG ALONG?'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Walk in on', meaning: 'Enter somewhere unexpectedly and see something.', example: 'He WALKED IN ON them planning to sack him.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Walk up', meaning: 'Go to someone.', example: 'A man WALKED UP and asked me the time.'},
             ]},
         {id: 9, questionText: 'Dress smartly or improve the appearance of something.', variants: [
-                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Dwell on'},
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Lead on'},
-                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Drop out'},
-                {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Gussy up'},
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Dwell on', meaning: 'Spend a lot of time on something.', example: '"The programme DWELLED ON little other than the scandal.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Lead on', meaning: 'Falsely or cruelly raise hopes.', example: 'She LED him ON about her desire to get married.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Drop out', meaning: 'Quit a course.', example: 'She DROPPED OUT of college and went straight into a good job.'},
+                {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Gussy up', meaning: 'Dress smartly or improve the appearance of something.', example: 'They spent a fortune GUSSYING UP the house.'},
             ]},
         {id: 10, questionText: 'Get rid of something.', variants: [
-                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Splash out'},
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Talk around'},
-                {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Stamp out'},
-                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Bring forth'},
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Splash out', meaning: 'Spend a lot of money on something that is not essential.', example: 'We went to an expensive restaurant and SPLASHED OUT to celebrate'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Take through', meaning: 'Explain something to someone.', example: 'He TOOK me THROUGH the procedures before we started.'},
+                {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Stamp out', meaning: 'Get rid of something.', example: 'The government has started a campaign to STAMP OUT drugs in schools.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Bring forth', meaning: 'Produce something, make it known or visible.', example: 'The prosecution BROUGHT FORTH a lot of evidence against him.'},
+            ]},
+        {id: 11, questionText: 'Persevere, not give up.', variants: [
+                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Hang in there', meaning: 'Persevere, not give up.', example: 'Were were doing badly, but we HUNG IN THERE till we finished.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Jack in', meaning: 'Quit, give up.', example: 'I JACKED my job IN because my boss refused to give me a raise.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Mug up', meaning: 'Study quickly, revise.', example: 'I have to MUG UP before the exam.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Fluff up', meaning: 'Shake or pat a cushion so that it fills with air.', example: 'He FLUFFED UP the pillow before going to bed.'},
+            ]},
+        {id: 12, questionText: 'Look in a place to try to find something.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Opt into', meaning: 'Choose to be a member or part of something.', example: 'I OPTED INTO the scheme.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Hover around', meaning: 'Move about a place.', example: 'She was HOVERING AROUND to see what we were talking about.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Wade through', meaning: 'Get to the end of something with difficulty.', example: 'It took me ages to WADE THROUGH the book.'},
+                {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Root about', meaning: 'Look in a place to try to find something.', example: 'He ROOTED ABOUT in his briefcase, trying to find a pen.'},
+            ]},
+        {id: 13, questionText: 'Make something sticky.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Juice up', meaning: 'Make something more exciting or perform better.', example: 'I need to buy some memory to JUICE my computer UP.'},
+                {variantNumber: 2, isVariantTrue: true, verbAndParticle: 'Clag up', meaning: 'Make something sticky.', example: 'His arteries are CLAGGED UP because he eats so much saturated fat.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Chime in', meaning: 'Contribute to a discussion.', example: 'If it\'s Ok, I\'d like to CHIME IN because I think it\'s a good idea.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Stick up', meaning: 'Stand on end.', example: 'The static electricity made my hair STICK UP.'},
+            ]},
+        {id: 14, questionText: 'Add or attach something that wasn\'t planned to something.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Tone up', meaning: 'Make stronger or firmer.', example: 'The exercises will TONE UP your stomach muscles.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Chance upon', meaning: 'Find something by accident.', example: 'I CHANCED UPON a very rare book in car boot sale and bought it for 65p.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Ratchet up', meaning: 'Increase.', example: 'The media are trying to RATCHET UP the pressure on the person.'},
+                {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Tack onto', meaning: 'Add or attach something that wasn\'t planned to something.', example: 'I TACKED a quick message ONTO the end of the letter after I\'d printed it.'},
             ]},
     ],
-    isNewQuizGameStarted: false,
-    numberOfQuestionsForGame: 9,
+    isNewGameActivatorRun: false,
+    numberOfQuestionsForGame: 7,
     currentQuestionId: 0,
     currentQuestion: {},
     userScore: 0,
+    isUserStarted: false,
+    usersLastChosenVariant: {},
     isUserGuessedVariant: false,
     usersLastGuessedVariant: {},
     usersGuessedVariants: [],
@@ -102,7 +129,7 @@ const quizReducer = (state = initialState, action) => {
         case START_NEW_QUIZ_GAME:
             return {
                 ...state,
-                isNewQuizGameStarted: action.isNewQuizGameStarted,
+                isNewGameActivatorRun: action.isNewGameActivatorRun,
                 isGameFinished: false
             }
 
@@ -110,6 +137,12 @@ const quizReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentQuestion: state.questions[action.questionId]
+            }
+
+        case USER_STARTED_ACTIVITY:
+            return {
+                ...state,
+                isUserStarted: true,
             }
 
         case ANALYZE_USERS_ANSWER:
@@ -120,28 +153,30 @@ const quizReducer = (state = initialState, action) => {
                         let giveNextQuestion = action.questionId + 1;
                         return {
                             ...state,
-                            isUserGuessedVariant: action.isVariantTrue,
+                            isUserGuessedVariant: action.variant.isVariantTrue,
                             userScore: state.userScore + 10,
                             currentQuestion: state.questions[giveNextQuestion],
 
                                         /* SAVE_LAST_GUESSED_VARIANT: */
+                            usersLastChosenVariant: action.variant,
                             usersLastGuessedVariant: action.variant,
 
-                                        /* SAVE_LAST_GUESSED_VARIANT: */
+                                        /* SAVE_LAST_GUESSED_VARIANTS: */
                             usersGuessedVariants: [...state.usersGuessedVariants, {...state.usersLastGuessedVariant}],
                         }
                     }
                     return {
                         ...state,
-                        isUserGuessedVariant: action.isVariantTrue,
+                        isUserGuessedVariant: action.variant.isVariantTrue,
                         userScore: state.userScore + 10,
                         isGameFinished: true,
                         /*currentQuestion: state.questions[action.questionId],   // Правильно ли???*/
 
                                     /* SAVE_LAST_GUESSED_VARIANT: */
+                        usersLastChosenVariant: action.variant,
                         usersLastGuessedVariant: action.variant,
 
-                                    /* SAVE_LAST_GUESSED_VARIANT: */
+                                    /* SAVE_LAST_GUESSED_VARIANTS: */
                         usersGuessedVariants: [...state.usersGuessedVariants, {...state.usersLastGuessedVariant}],
                     }
                 } else {
@@ -149,19 +184,25 @@ const quizReducer = (state = initialState, action) => {
                         ...state,
                         isUserGuessedVariant: false,
                         userScore: state.userScore - 5,
+
+                                    /* SAVE_LAST_CHOSEN_VARIANT: */
+                        usersLastChosenVariant: action.variant,
                     }
                 }
             } else {
                 return {
                     ...state,
 
-                    /*isNewQuizGameStarted: false,
-                    userScore: 0,
+                    /*isNewGameActivatorRun: false,
+                    numberOfQuestionsForGame: 7,
                     currentQuestionId: 0,
                     currentQuestion: {},
-                    usersGuessedVariants: [],
-                    usersLastGuessedVariant: {},
+                    userScore: 0,
+                    isUserStarted: false,
+                    usersLastChosenVariant: {},
                     isUserGuessedVariant: false,
+                    usersLastGuessedVariant: {},
+                    usersGuessedVariants: [],
                     isGameFinished: false,*/
                 }
             }
@@ -171,15 +212,16 @@ const quizReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userScore: 0,
+                isUserStarted: false,
+                usersLastChosenVariant: {},
+                isUserGuessedVariant: false,
+                usersLastGuessedVariant: {},
+                usersGuessedVariants: [],
 
-                /*usersLastGuessedVariant: {},*/
-                /*isNewQuizGameStarted: false,
-                userScore: 0,
+                /*isNewGameActivatorRun: false,
+                numberOfQuestionsForGame: 7,
                 currentQuestionId: 0,
                 currentQuestion: {},
-                usersGuessedVariants: [],
-                usersLastGuessedVariant: {},
-                isUserGuessedVariant: false,
                 isGameFinished: false,*/
             }
 
@@ -188,9 +230,10 @@ const quizReducer = (state = initialState, action) => {
     }
 }
 
-export const analyzeUsersAnswer = (variant, questionId) => ({type: ANALYZE_USERS_ANSWER, variant, questionId})
+export const startNewQuizGame = (isNewGameActivatorRun) => ({type: START_NEW_QUIZ_GAME, isNewGameActivatorRun})
 export const giveFirstQuestion = (questionId) => ({type: GIVE_FIRST_QUESTION, questionId})
-export const startNewQuizGame = (isNewQuizGameStarted) => ({type: START_NEW_QUIZ_GAME, isNewQuizGameStarted})
+export const userStartedActivity = () => ({type: USER_STARTED_ACTIVITY})
+export const analyzeUsersAnswer = (variant, questionId) => ({type: ANALYZE_USERS_ANSWER, variant, questionId})
 export const resetUserScore = () => ({type: RESET_USER_SCORE})
 
 export default quizReducer;

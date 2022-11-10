@@ -27,22 +27,74 @@
     font-size: 14px;
 }
 
-.userScore {
+.scoreDefault {
     padding-top: 50px;
     padding-right: 130px;
     text-align: right;
 }
 
-.userScoreResult {
+.scoreIfUserGuessed {
+    padding-top: 50px;
+    padding-right: 130px;
+    text-align: right;
+}
+
+.scoreIfUserGuessed span {
+    /*color: blue;*/
+}
+
+.scoreIfUserWrong {
+    padding-top: 50px;
+    padding-right: 130px;
+    text-align: right;
+}
+
+.scoreIfUserWrong span {
+    color: #d2beb5;
+    /*color: #d31e27;*/
+}
+
+.scoreFinalResult {
     padding-top: 50px;
 }
 
-.debugSection {
-    margin-top: 50px;
+.tipIfUserGuessed {
+    margin: 50px auto;
+    /*margin-top: 50px;*/
     padding: 20px;
-    color: #868686;
+    width: max-content;
+    /*background-color: #fff53d;*/
+    /*background-color: #f8f8f8;*/
+    /*background-color: #868686;*/
+    /*background-color: #d2beb5;*/
+    /*background-color: #c5c5c5;*/
+    /*color: #e5e5e5;*/
+    /*color: #fff53d;*/
+    /*outline: solid 10px #c5c5c5;*/
+    /*border: 1px solid #868686;*/
+    /*border: 4px ridge rgba(211, 220, 50, .6);*/
+    /*border: thick double #32a1ce;*/
+    /*border: 6px dashed #32a1ce;*/
+    /*border-style: outset;*/
+    /*border-style: inset;*/
+    /*border-style: groove;*/
+    border-radius: 10px;
+
+    border: 12px double green;
+    background-clip: padding-box;
+    /*padding: 10px;*/
+    /*border-image-outset: 31px;*/
+    /*border-image-width: auto;*/
+    border-image: url(http://content.mycutegraphics.com/borders/wavy-border.png) 100 round;
+    /*border-image-slice: 17px;*/
 }
 
-.debugSectionResult {
-    color: #868686;
+.tipIfUserWrong {
+    width: 100px;
+    position: relative;
+    left: 250px;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: #d2beb5;
+    text-align: center;
 }

@@ -54,60 +54,81 @@ class Quiz extends React.Component {
             return this.props.currentQuestion.variants
                 .map(v => <div key={v.variantNumber}>
                     <button className={styles.variantButton}
-                            onClick={ ()=>{this.props.analyzeUsersAnswer(v, this.props.currentQuestion.id)} } >
+                            onClick={ ()=>{
+                                this.props.analyzeUsersAnswer(v, this.props.currentQuestion.id);
+                                this.props.userStartedActivity();
+                                /*this.showTips(v);*/
+                            } } >
                         { v.verbAndParticle }
                     </button>
                 </div>)
         }
         if (this.state.isQuizGameActivated && this.props.isGameFinished)
         {
-            return this.showResult();
+            return this.showFinalResult();
         }
-            return <div>
-                <p>Press Start button below</p>
-                <p>bro</p></div>
-    }
-
-    showUserScore() {
-        if (this.state.isQuizGameActivated && !this.props.isGameFinished)
-        {
-            return <div className={styles.userScore}>
-                SCORE: {this.props.userScore}
-            </div>
-        }
-        return <div></div>
-    }
-
-    showResult() {
-        return <div className={styles.userScoreResult}>
-            {/*<p>your last guessed variant: {this.props.usersLastGuessedVariant.verbAndParticle}</p>*/}
-            <p>your score: {this.props.userScore}</p>
+        return <div>
+            <p>Press Start button below</p>
+            <p>bro</p>
         </div>
     }
 
-    showDebugSection() {
-        if (this.state.isQuizGameActivated && !this.props.isGameFinished)
+    showTips() {
+        if (this.state.isQuizGameActivated && !this.props.isGameFinished && !this.props.isUserGuessedVariant && this.props.isUserStarted)
         {
-            return <div className={styles.debugSection}>
-                DEBUG, last guessed variant:
-                <p>{this.props.usersLastGuessedVariant.verbAndParticle}</p>
+            return <div className={styles.tipIfUserWrong}>
+                <b>MEANING of this phrasal verb:</b>
+                <p>{this.props.usersLastChosenVariant.meaning}</p>
             </div>
         }
-        if (this.state.isQuizGameActivated && this.props.isGameFinished)
+        if (this.state.isQuizGameActivated && !this.props.isGameFinished && this.props.isUserGuessedVariant)
         {
-            return <div className={styles.debugSectionResult}>
-                DEBUG, last guessed variant:
-                <p>{this.props.usersLastGuessedVariant.verbAndParticle}</p>
+            return <div className={styles.tipIfUserGuessed}>
+                <p><b>last guessed variant:</b> {this.props.usersLastGuessedVariant.verbAndParticle}</p>
+                <p><b>example of using:</b> {this.props.usersLastGuessedVariant.example}</p>
             </div>
         }
+        if (this.state.isQuizGameActivated && this.props.isGameFinished && this.props.isUserGuessedVariant)
+        {
+            return <div className={styles.tipIfUserGuessed}>
+                <p><b>last guessed variant:</b> {this.props.usersLastGuessedVariant.verbAndParticle}</p>
+                <p><b>example of using:</b> {this.props.usersLastGuessedVariant.example}</p>
+            </div>
+        }
+        return <></>
+    }
 
+    showUserScore() {
+        if (this.state.isQuizGameActivated && !this.props.isGameFinished && this.props.isUserGuessedVariant)
+        {
+            return <div className={styles.scoreDefault}>
+                <span>SCORE:</span> {this.props.userScore}
+            </div>
+        }
+        if (this.state.isQuizGameActivated && !this.props.isGameFinished && !this.props.isUserGuessedVariant && !this.props.isUserStarted)
+        {
+            return <div className={styles.scoreIfUserGuessed}>
+                <span>SCORE:</span> {this.props.userScore}
+            </div>
+        }
+        if (this.state.isQuizGameActivated && !this.props.isGameFinished && !this.props.isUserGuessedVariant && this.props.isUserStarted)
+        {
+            return <div className={styles.scoreIfUserWrong}>
+                <span>SCORE:</span> {this.props.userScore}
+            </div>
+        }
         return <div></div>
+    }
+
+    showFinalResult() {
+        return <div className={styles.scoreFinalResult}>
+            <p>your score: {this.props.userScore}</p>
+        </div>
     }
 
     render() {
         return (
             <div className={styles.content}>
-
                 { this.showUserScore() }
 
                 { this.getQuestion() }
@@ -116,8 +137,7 @@ class Quiz extends React.Component {
 
                 { this.showButtonStart() }
 
-                {/*     DEBUG:      */}
-                { this.showDebugSection() }
+                { this.showTips() }
             </div>
         )
     }

@@ -3,8 +3,9 @@ import Quiz from "./Quiz";
 import {
     startNewQuizGame,
     giveFirstQuestion,
+    userStartedActivity,
     analyzeUsersAnswer,
-    resetUserScore
+    resetUserScore,
 } from "../../redux/quiz-reducer";
 import {connect} from "react-redux";
 
@@ -19,6 +20,7 @@ class QuizContainer extends React.Component {
                   giveFirstQuestion={this.props.giveFirstQuestion}
                   analyzeUsersAnswer={this.props.analyzeUsersAnswer}
                   resetUserScore={this.props.resetUserScore}
+                  userStartedActivity={this.props.userStartedActivity}
             />
         )
     }
@@ -27,11 +29,13 @@ class QuizContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         /*questions: state.quizPage.questions,*/
-        isNewQuizGameStarted: state.quizPage.isNewQuizGameStarted,
+        isNewGameActivatorRun: state.quizPage.isNewGameActivatorRun,
         numberOfQuestionsForGame: state.quizPage.numberOfQuestionsForGame,
         currentQuestionId: state.quizPage.currentQuestionId,
         currentQuestion: state.quizPage.currentQuestion,
         userScore: state.quizPage.userScore,
+        isUserStarted: state.quizPage.isUserStarted,
+        usersLastChosenVariant: state.quizPage.usersLastChosenVariant,
         isUserGuessedVariant: state.quizPage.isUserGuessedVariant,
         usersLastGuessedVariant: state.quizPage.usersLastGuessedVariant,
         usersGuessedVariants: state.quizPage.usersGuessedVariants,
@@ -41,5 +45,5 @@ let mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    {startNewQuizGame, giveFirstQuestion, analyzeUsersAnswer, resetUserScore}
+    {startNewQuizGame, giveFirstQuestion, userStartedActivity, analyzeUsersAnswer, resetUserScore}
 )(QuizContainer);
