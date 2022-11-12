@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Quiz.module.css"
 import QuizQuestion from "./QuizQuestion/QuizQuestion";
+import QuizVariantButton from "./QuizVariantButton/QuizVariantButton";
 
 class Quiz extends React.Component {
 
@@ -17,7 +18,7 @@ class Quiz extends React.Component {
     activateNewQuizGame = () => {
         this.activateQuizGame();
         this.props.startNewQuizGame(true);
-        this.props.giveFirstQuestion(5);    //TODO: система задаёт рандомное число
+        this.props.giveFirstQuestion(10);    //TODO: система задаёт рандомное число
         this.props.resetUserScore();
         this.props.startNewQuizGame(false);
     }
@@ -25,7 +26,7 @@ class Quiz extends React.Component {
     showButtonStart() {
         if (!this.state.isQuizGameActivated || this.props.isGameFinished)
         {
-            return <div>
+            return <div className={styles.startQuiz}>
                 <button onClick={ ()=>{this.activateNewQuizGame()} } className={styles.buttonStart}>
                     START THIS GAME
                 </button>
@@ -45,32 +46,37 @@ class Quiz extends React.Component {
         {
             return <></>
         }
-        return <div className={styles.introduction}>CHECK this QUIZ Game!</div>
+        return <div className={styles.introduction}>
+            <p>CHECK this QUIZ Game!</p>
+            <p>Press Start button below</p>
+            <p>bro</p>
+        </div>
     }
 
     getVariantsForQuestion() {
         if (this.state.isQuizGameActivated && !this.props.isGameFinished)
         {
-            return this.props.currentQuestion.variants
-                .map(v => <div key={v.variantNumber}>
-                    <button className={styles.variantButton}
-                            onClick={ ()=>{
-                                this.props.analyzeUsersAnswer(v, this.props.currentQuestion.id);
-                                this.props.userStartedActivity();
-                                /*this.showTips(v);*/
-                            } } >
-                        { v.verbAndParticle }
-                    </button>
-                </div>)
+            return <div className={styles.variants}>
+                { this.props.currentQuestion.variants
+                    .map(v => <div key={v.variantNumber}>
+                            <QuizVariantButton variantNumber={v.variantNumber}
+                                               isUserGuessedVariant={this.props.isUserGuessedVariant}
+                                               isUserStarted={this.props.isUserStarted}
+                                               currentQuestionId={this.props.currentQuestion.id}
+                                               v={v}
+                                               verbAndParticle={v.verbAndParticle}
+                                               analyzeUsersAnswer={this.props.analyzeUsersAnswer}
+                                               userStartedActivity={this.props.userStartedActivity}
+                            />
+                        </div>
+                        )}
+                    </div>
         }
         if (this.state.isQuizGameActivated && this.props.isGameFinished)
         {
             return this.showFinalResult();
         }
-        return <div>
-            <p>Press Start button below</p>
-            <p>bro</p>
-        </div>
+        return <></>
     }
 
     showTips() {
@@ -84,8 +90,8 @@ class Quiz extends React.Component {
         if (this.state.isQuizGameActivated && !this.props.isGameFinished && this.props.isUserGuessedVariant)
         {
             return <div className={styles.tipIfUserGuessed}>
-                <p><b>last guessed variant:</b> {this.props.usersLastGuessedVariant.verbAndParticle}</p>
-                <p><b>example of using:</b> {this.props.usersLastGuessedVariant.example}</p>
+                <p><b>last guessed variant:</b></p> <p>{this.props.usersLastGuessedVariant.verbAndParticle}</p>
+                <p><b>example of using:</b></p> <p>{this.props.usersLastGuessedVariant.example}</p>
             </div>
         }
         if (this.state.isQuizGameActivated && this.props.isGameFinished && this.props.isUserGuessedVariant)
@@ -101,23 +107,29 @@ class Quiz extends React.Component {
     showUserScore() {
         if (this.state.isQuizGameActivated && !this.props.isGameFinished && this.props.isUserGuessedVariant)
         {
-            return <div className={styles.scoreDefault}>
-                <span>SCORE:</span> {this.props.userScore}
+            return <div className={styles.scoreWrapper}>
+                <div className={styles.scoreDefault}>
+                    <span>SCORE:</span> {this.props.userScore}
+                </div>
             </div>
         }
         if (this.state.isQuizGameActivated && !this.props.isGameFinished && !this.props.isUserGuessedVariant && !this.props.isUserStarted)
         {
-            return <div className={styles.scoreIfUserGuessed}>
-                <span>SCORE:</span> {this.props.userScore}
+            return <div className={styles.scoreWrapper}>
+                <div className={styles.scoreIfUserGuessed}>
+                    <span>SCORE:</span> {this.props.userScore}
+                </div>
             </div>
         }
         if (this.state.isQuizGameActivated && !this.props.isGameFinished && !this.props.isUserGuessedVariant && this.props.isUserStarted)
         {
-            return <div className={styles.scoreIfUserWrong}>
-                <span>SCORE:</span> {this.props.userScore}
+            return <div className={styles.scoreWrapper}>
+                <div className={styles.scoreIfUserWrong}>
+                    <span>SCORE:</span> {this.props.userScore}
+                </div>
             </div>
         }
-        return <div></div>
+        return <></>
     }
 
     showFinalResult() {
@@ -128,7 +140,7 @@ class Quiz extends React.Component {
 
     render() {
         return (
-            <div className={styles.content}>
+            <div className={styles.quizWrapper}>
                 { this.showUserScore() }
 
                 { this.getQuestion() }

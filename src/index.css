@@ -5,9 +5,25 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /*      LIGHT THEME     */
+  /*background-color: #ffffff*/   /* это стандартный белый цвет который даётся по умолчанию.  */
+
+  /*      DARK THEME      */
+  background-color: #373737;
+
+  /*      FONTS     */
+  /*font-size: 3em;*/
+  /*font-family: 'Poppins', sans-serif;*/
+  font-family: 'Montserrat', sans-serif;
+  /*font-family: 'Lato', sans-serif;*/
+  /*font-family: 'Inter', sans-serif;*/
+  /*font-family: 'Nunito', sans-serif;*/
+  /*font-family: 'Manrope', sans-serif;*/
+  /*font-family: 'Rubik', sans-serif;*/
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  /*font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;*/
 }

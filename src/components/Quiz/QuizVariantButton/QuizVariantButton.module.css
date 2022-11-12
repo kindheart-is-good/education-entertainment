@@ -1,3 +1,31 @@
+.variants {
+    grid-area: options;
+}
+
 .variantButton {
-    padding: 5px 20px;
+    margin: 5px;
+    padding: 12px;
+    font-size: 20px;
+
+    transition-property: background-color;
+    transition-duration: 1s;
+}
+
+.variantButtonIfGuessed {
+    margin: 5px;
+    padding: 12px;
+    background-color: #e3fd00;
+    font-size: 20px;
+}
+
+.variantButtonIfWrong {
+    margin: 5px;
+    padding: 12px;
+    background-color: #e2754e;
+    font-size: 20px;
+}
+
+.animated {
+    transition-property: background-color;
+    transition-duration: 3s;
 }

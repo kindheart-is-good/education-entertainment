@@ -7,20 +7,18 @@ import QuizContainer from "./components/Quiz/QuizContainer";
 
 function App(props) {
     return (
-        <div className='globalTheme'>
-            <div className='app-wrapper'>
-                <Header/>
-                <Sidebar/>
-                <div className='app-wrapper-content'>
-                    <Routes>
-                        <Route path="/"
-                               element={<Content />} />
-                        <Route path="/content/"
-                               element={<Content />} />
-                        <Route path="/quiz/*"
-                               element={<QuizContainer />} />
-                    </Routes>
-                </div>
+        <div className='app-wrapper'>
+            <Header/>
+            <Sidebar/>
+            <div className='app-wrapper-content'>
+                <Routes>
+                    <Route path="/"
+                           element={<Content />} />
+                    <Route path="/content/"
+                           element={<Content />} />
+                    <Route path="/quiz/*"
+                           element={<QuizContainer />} />
+                </Routes>
             </div>
         </div>
     );

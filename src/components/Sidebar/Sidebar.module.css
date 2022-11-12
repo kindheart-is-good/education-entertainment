@@ -11,7 +11,7 @@
 }
 
 .item {
-    margin: 20px;
+    margin: 10px;
 
     color: #868686;
     text-decoration: none;
@@ -19,7 +19,7 @@
 
 .active
 {
-    margin: 35px;
+    margin: 20px;
 
     color: darkslategrey;
     text-decoration: none;

@@ -1,12 +1,14 @@
 .question {
     /*padding: 20px;*/
+    grid-area: question;
+    margin: 50px;
 }
 
 .questionTag {
-    font-size: 17px;
+    font-size: 23px;
 }
 
 .questionText {
     color: #0192c6;
-    font-size: 18px;
+    font-size: 22px;
 }

@@ -7,34 +7,34 @@ const RESET_USER_SCORE = 'RESET_USER_SCORE';
 let initialState = {
     questions: [
         {id: 0, questionText: 'Accept or follow a decision or rule.', variants: [
-                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Abide by', expUserChoseThisVariant: false },
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Square with', expUserChoseThisVariant: false},
-                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Dial in', expUserChoseThisVariant: false},
-                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Cut through', expUserChoseThisVariant: false},
+                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Abide by', expUserChoseThisVariant: false, meaning: 'Accept or follow a decision or rule.', example: 'We have to ABIDE BY what the court says.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Square with', expUserChoseThisVariant: false, meaning: 'Check with someone that something is Ok.', example: 'I\'ll have to SQUARE that WITH my boss before I can confirm it.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Dial in', expUserChoseThisVariant: false, meaning: 'Join a teleconference.', example: 'They reported the meeting and people DIALLED IN to listen.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Cut through', expUserChoseThisVariant: false, meaning: 'Deal quickly with a complex issue that is causing trouble.', example: 'She CUT THROUGH the bureaucracy that was holding us up and got the deal done.'},
             ]},
         {id: 1, questionText: 'To explain.', variants: [
-                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Ache for'},
-                {variantNumber: 2, isVariantTrue: true, verbAndParticle: 'Account for'},
-                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Act out'},
-                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Act on'},
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Ache for', meaning: 'Want something or someone a lot.', example: 'My partner\'s been away for a fortnight  - I am ACHING FOR her.'},
+                {variantNumber: 2, isVariantTrue: true, verbAndParticle: 'Account for', meaning: 'To explain.', example: 'They had to ACCOUNT FOR all the money that had gone missing.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Act out', meaning: 'Perform something with actions and gestures.', example: 'They ACTED OUT the story on stage.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Act on', meaning: 'To take action because of something like information received.', example: 'The police were ACTING ON a tip from an informer and caught the gang red-handed.'},
             ]},
         {id: 2, questionText: 'Want something or someone a lot.', variants: [
-                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Act on'},
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Act out'},
-                {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Ache for'},
-                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Account for'},
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Act on', meaning: 'To take action because of something like information received.', example: 'The police were ACTING ON a tip from an informer and caught the gang red-handed.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Act out', meaning: 'Perform something with actions and gestures.', example: 'They ACTED OUT the story on stage.'},
+                {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Ache for', meaning: 'Want something or someone a lot.', example: 'My partner\'s been away for a fortnight  - I am ACHING FOR her.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Account for', meaning: 'To explain.', example: 'They had to ACCOUNT FOR all the money that had gone missing.'},
             ]},
         {id: 3, questionText: 'To take action because of something like information received.', variants: [
-                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Abide by'},
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Account for'},
-                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Act out'},
-                {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Act on'},
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Abide by', meaning: 'Accept or follow a decision or rule.', example: 'We have to ABIDE BY what the court says.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Account for', meaning: 'To explain.', example: 'They had to ACCOUNT FOR all the money that had gone missing.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Act out', meaning: 'Perform something with actions and gestures.', example: 'They ACTED OUT the story on stage.'},
+                {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Act on', meaning: 'To take action because of something like information received.', example: 'The police were ACTING ON a tip from an informer and caught the gang red-handed.'},
             ]},
         {id: 4, questionText: 'Perform something with actions and gestures.', variants: [
-                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Act out'},
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Act upon'},
-                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Act up'},
-                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Act on'},
+                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Act out', meaning: 'Perform something with actions and gestures.', example: 'They ACTED OUT the story on stage.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Act upon', meaning: 'Affect.', example: 'The enzyme ACTS UPON certain proteins.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Act up', meaning: 'Behave badly or strangely.', example: 'My computer\'s ACTING UP; I think I might have a virus.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Act on', meaning: 'To take action because of something like information received.', example: 'The police were ACTING ON a tip from an informer and caught the gang red-handed.'},
             ]},
         {id: 5, questionText: 'Give out, distribute.', variants: [
                 {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Fetch up', meaning: 'Arrive unintentionally.', example: 'The boat FETCHED UP on the beach.'},
@@ -60,17 +60,17 @@ let initialState = {
                 {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Walk in on', meaning: 'Enter somewhere unexpectedly and see something.', example: 'He WALKED IN ON them planning to sack him.'},
                 {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Walk up', meaning: 'Go to someone.', example: 'A man WALKED UP and asked me the time.'},
             ]},
-        {id: 9, questionText: 'Dress smartly or improve the appearance of something.', variants: [
-                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Dwell on', meaning: 'Spend a lot of time on something.', example: '"The programme DWELLED ON little other than the scandal.'},
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Lead on', meaning: 'Falsely or cruelly raise hopes.', example: 'She LED him ON about her desire to get married.'},
-                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Drop out', meaning: 'Quit a course.', example: 'She DROPPED OUT of college and went straight into a good job.'},
-                {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Gussy up', meaning: 'Dress smartly or improve the appearance of something.', example: 'They spent a fortune GUSSYING UP the house.'},
-            ]},
-        {id: 10, questionText: 'Get rid of something.', variants: [
+        {id: 9, questionText: 'Get rid of something.', variants: [
                 {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Splash out', meaning: 'Spend a lot of money on something that is not essential.', example: 'We went to an expensive restaurant and SPLASHED OUT to celebrate'},
                 {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Take through', meaning: 'Explain something to someone.', example: 'He TOOK me THROUGH the procedures before we started.'},
                 {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Stamp out', meaning: 'Get rid of something.', example: 'The government has started a campaign to STAMP OUT drugs in schools.'},
                 {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Bring forth', meaning: 'Produce something, make it known or visible.', example: 'The prosecution BROUGHT FORTH a lot of evidence against him.'},
+            ]},
+        {id: 10, questionText: 'Dress smartly or improve the appearance of something.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Dwell on', meaning: 'Spend a lot of time on something.', example: '"The programme DWELLED ON little other than the scandal.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Lead on', meaning: 'Falsely or cruelly raise hopes.', example: 'She LED him ON about her desire to get married.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Drop out', meaning: 'Quit a course.', example: 'She DROPPED OUT of college and went straight into a good job.'},
+                {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Gussy up', meaning: 'Dress smartly or improve the appearance of something.', example: 'They spent a fortune GUSSYING UP the house.'},
             ]},
         {id: 11, questionText: 'Persevere, not give up.', variants: [
                 {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Hang in there', meaning: 'Persevere, not give up.', example: 'Were were doing badly, but we HUNG IN THERE till we finished.'},
@@ -98,7 +98,7 @@ let initialState = {
             ]},
     ],
     isNewGameActivatorRun: false,
-    numberOfQuestionsForGame: 7,
+    numberOfQuestionsForGame: 14,
     currentQuestionId: 0,
     currentQuestion: {},
     userScore: 0,
@@ -153,6 +153,7 @@ const quizReducer = (state = initialState, action) => {
                         let giveNextQuestion = action.questionId + 1;
                         return {
                             ...state,
+                            isUserStarted: false,
                             isUserGuessedVariant: action.variant.isVariantTrue,
                             userScore: state.userScore + 10,
                             currentQuestion: state.questions[giveNextQuestion],
@@ -167,6 +168,7 @@ const quizReducer = (state = initialState, action) => {
                     }
                     return {
                         ...state,
+                        isUserStarted: false,
                         isUserGuessedVariant: action.variant.isVariantTrue,
                         userScore: state.userScore + 10,
                         isGameFinished: true,

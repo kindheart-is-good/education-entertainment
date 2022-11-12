@@ -1,4 +1,4 @@
-.content {
+.quizWrapper {
     grid-area: content;
 
     min-height: 286px;
@@ -9,92 +9,150 @@
     border: 10px solid #fff53d;
     border-radius: 10px;
     text-align: center;
+
+    display: grid;
+    grid-template-columns: 200px 2fr 200px;
+    grid-template-rows: 1fr 1fr 50px;
+    grid-template-areas:
+    "topOne question score"
+    "tipsIfGuessed options tipsIfWrong"
+    "tipsIfGuessed botTwo tipsIfWrong";
 }
 
 .introduction {
-    padding-top: 45px;
+    grid-area: question;
+    padding-top: 50px;
+    font-size: 21px;
+}
+
+.startQuiz {
+    grid-area: options;
 }
 
 .buttonStart {
-    margin-top: 35px;
-    margin-bottom: 40px;
+    margin-top: 70px;
     padding: 10px;
+    font-size: 21px;
+}
+
+.variants {
+    grid-area: options;
 }
 
 .variantButton {
     margin: 5px;
-    padding: 7px;
-    font-size: 14px;
+    padding: 12px;
+    font-size: 20px;
+}
+
+.variantButtonIfGuessed {
+    margin: 5px;
+    padding: 12px;
+    background-color: #e3fd00;
+    font-size: 20px;
+}
+
+.variantButtonIfWrong {
+    margin: 5px;
+    padding: 12px;
+    background-color: #e2754e;
+    font-size: 20px;
+}
+
+.scoreWrapper {
+    grid-area: score;
+    padding-right: 50px;
 }
 
 .scoreDefault {
-    padding-top: 50px;
-    padding-right: 130px;
-    text-align: right;
+    border: 10px solid inherit;
+    border-radius: 30px;
+    margin-top: 40px;
+    padding: 10px 10px;
+    background-color: #e3fd00;
+    /*background-color: #e8d2a1;*/
+    text-align: center;
+    font-size: 18px;
+}
+
+.scoreDefault span {
+    /*color: #e3fd00;*/
 }
 
 .scoreIfUserGuessed {
-    padding-top: 50px;
-    padding-right: 130px;
-    text-align: right;
+    border: 10px solid inherit;
+    border-radius: 30px;
+    margin-top: 40px;
+    padding: 10px 10px;
+    background-color: #e3fd00;
+    /*background-color: #e8d2a1;*/
+    text-align: center;
+    font-size: 18px;
 }
 
 .scoreIfUserGuessed span {
-    /*color: blue;*/
+    /*color: #e3fd00;*/
 }
 
 .scoreIfUserWrong {
-    padding-top: 50px;
-    padding-right: 130px;
-    text-align: right;
+    border: 10px solid inherit;
+    border-radius: 30px;
+    margin-top: 40px;
+    padding: 10px 10px;
+    /*background-color: #d2beb5;*/
+    /*background-color: #e9a379;*/
+    /*background-color: #d31e27;*/
+    background-color: #e2754e;
+    text-align: center;
+    font-size: 18px;
 }
 
 .scoreIfUserWrong span {
-    color: #d2beb5;
-    /*color: #d31e27;*/
+    /*color: #d2beb5;*/
 }
 
 .scoreFinalResult {
+    grid-area: question;
     padding-top: 50px;
+    font-size: 27px;
 }
 
 .tipIfUserGuessed {
-    margin: 50px auto;
-    /*margin-top: 50px;*/
-    padding: 20px;
-    width: max-content;
-    /*background-color: #fff53d;*/
-    /*background-color: #f8f8f8;*/
-    /*background-color: #868686;*/
-    /*background-color: #d2beb5;*/
-    /*background-color: #c5c5c5;*/
-    /*color: #e5e5e5;*/
-    /*color: #fff53d;*/
-    /*outline: solid 10px #c5c5c5;*/
-    /*border: 1px solid #868686;*/
-    /*border: 4px ridge rgba(211, 220, 50, .6);*/
-    /*border: thick double #32a1ce;*/
-    /*border: 6px dashed #32a1ce;*/
-    /*border-style: outset;*/
-    /*border-style: inset;*/
-    /*border-style: groove;*/
-    border-radius: 10px;
+    grid-area: tipsIfGuessed;
 
-    border: 12px double green;
-    background-clip: padding-box;
-    /*padding: 10px;*/
-    /*border-image-outset: 31px;*/
-    /*border-image-width: auto;*/
-    border-image: url(http://content.mycutegraphics.com/borders/wavy-border.png) 100 round;
-    /*border-image-slice: 17px;*/
+    /*margin-left: 50px;*/
+    width: 200px;
+    /*position: relative;
+    left: 250px;
+    margin: 0 auto;*/
+    padding: 25px;
+    /*margin-left: 40px;*/
+    /*background-color: #d0fe15;*/
+     background-color: #e3fd00;
+    /*background-color: #f1eea1;*/
+        /*background-color: #eeeee4;*/
+    /*background-color: #dde5d8;*/
+    /*background-color: #99f2c8;*/
+    /*background-color: #a0eec7;*/
+    /*background-color: #a7e0d7;*/
+    /*background-color: #cff1fb;*/
+    /*background-color: #e8d2a1;*/
+    text-align: center;
+    font-size: 18px;
 }
 
 .tipIfUserWrong {
-    width: 100px;
-    position: relative;
-    left: 250px;
-    margin: 0 auto;
-    padding: 50px;
-    background-color: #d2beb5;
+    grid-area: tipsIfWrong;
+
+    width: 150px;
+    /*position: relative;*/
+    /*left: 250px;*/
+    /*margin: 0 auto;*/
+    padding: 25px;
+    /*background-color: #d2beb5;*/
+    /*background-color: #e9a379;*/
+    /*background-color: #d31e27;*/
+    background-color: #e2754e;
     text-align: center;
+    font-size: 18px;
 }
