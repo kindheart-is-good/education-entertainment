@@ -4,7 +4,7 @@ import styles from "./QuizVariantButton.module.css"
 const QuizVariantButton = (props) => {
 
     let onChangeColor = (variant, variantNumber, currentQuestionId) => {
-        /*if (!props.isUserStarted)
+        /*if (props.isWasFirstClickOnNewQuestion)
         {
             document.getElementById("button"+props.variantNumber).style.backgroundColor='white';
         }
@@ -30,6 +30,8 @@ const QuizVariantButton = (props) => {
         else {
             document.getElementById("button"+props.variantNumber).style.backgroundColor='#e2754e';
         }*/
+
+
     }
 
     return (
@@ -38,7 +40,8 @@ const QuizVariantButton = (props) => {
             /*disabled={!props.v.isVariantTrue}*/
                     onClick={() => {
                         props.analyzeUsersAnswer(props.v, props.currentQuestionId);
-                        props.userStartedActivity();
+                        props.getPlayerStartingActivity();
+                        props.getPlayerActivity();
                         onChangeColor(props.v, props.variantNumber, props.currentQuestionId);
                     }}>
             {props.verbAndParticle}

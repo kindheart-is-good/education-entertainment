@@ -12,11 +12,11 @@
 
     display: grid;
     grid-template-columns: 200px 2fr 200px;
-    grid-template-rows: 1fr 1fr 50px;
+    grid-template-rows: 1fr 1fr 160px;
     grid-template-areas:
-    "topOne question score"
+    "progress question score"
     "tipsIfGuessed options tipsIfWrong"
-    "tipsIfGuessed botTwo tipsIfWrong";
+    "tipsIfGuessed debug tipsIfWrong";
 }
 
 .introduction {
@@ -35,28 +35,50 @@
     font-size: 21px;
 }
 
+.debugSection {
+    grid-area: debug;
+    background-color: #868686;
+    /*background-color: #e5e5e5;*/
+}
+
+.debugSection span {
+    color: #e5e5e5;
+    font-size: 13px;
+}
+
 .variants {
     grid-area: options;
 }
 
-.variantButton {
-    margin: 5px;
-    padding: 12px;
-    font-size: 20px;
+.userProgress {
+    grid-area: progress;
+    /*background-color: grey;*/
+    background-color: #e5e5e5;
 }
 
-.variantButtonIfGuessed {
-    margin: 5px;
-    padding: 12px;
+.progressText {
+    margin: 30px;
+}
+
+.progressDivIfGuess {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid #0192c6;
+    /*outline: solid 1px #868686;*/
+    margin-left: 100px;
+    margin-top: 5px;
     background-color: #e3fd00;
-    font-size: 20px;
 }
 
-.variantButtonIfWrong {
-    margin: 5px;
-    padding: 12px;
+.progressDivIfWrong {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid #0192c6;
+    /*outline: solid 1px #868686;*/
+    margin-left: 90px;
     background-color: #e2754e;
-    font-size: 20px;
 }
 
 .scoreWrapper {

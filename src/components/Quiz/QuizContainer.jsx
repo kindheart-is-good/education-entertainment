@@ -3,9 +3,10 @@ import Quiz from "./Quiz";
 import {
     startNewQuizGame,
     giveFirstQuestion,
-    userStartedActivity,
+    getPlayerStartingActivity,
     analyzeUsersAnswer,
     resetUserScore,
+    getPlayerActivity,
 } from "../../redux/quiz-reducer";
 import {connect} from "react-redux";
 
@@ -20,7 +21,7 @@ class QuizContainer extends React.Component {
                   giveFirstQuestion={this.props.giveFirstQuestion}
                   analyzeUsersAnswer={this.props.analyzeUsersAnswer}
                   resetUserScore={this.props.resetUserScore}
-                  userStartedActivity={this.props.userStartedActivity}
+                  getPlayerStartingActivity={this.props.getPlayerStartingActivity}
             />
         )
     }
@@ -31,11 +32,13 @@ let mapStateToProps = (state) => {
         /*questions: state.quizPage.questions,*/
         isNewGameActivatorRun: state.quizPage.isNewGameActivatorRun,
         numberOfQuestionsForGame: state.quizPage.numberOfQuestionsForGame,
-        currentQuestionId: state.quizPage.currentQuestionId,
+        currentQuestionNumber: state.quizPage.currentQuestionNumber,
         currentQuestion: state.quizPage.currentQuestion,
         userScore: state.quizPage.userScore,
         isUserStarted: state.quizPage.isUserStarted,
+        isWasFirstClickOnNewQuestion: state.quizPage.isWasFirstClickOnNewQuestion,
         usersLastChosenVariant: state.quizPage.usersLastChosenVariant,
+        usersChosenVariants: state.quizPage.usersChosenVariants,
         isUserGuessedVariant: state.quizPage.isUserGuessedVariant,
         usersLastGuessedVariant: state.quizPage.usersLastGuessedVariant,
         usersGuessedVariants: state.quizPage.usersGuessedVariants,
@@ -45,5 +48,5 @@ let mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    {startNewQuizGame, giveFirstQuestion, userStartedActivity, analyzeUsersAnswer, resetUserScore}
+    {startNewQuizGame, giveFirstQuestion, getPlayerStartingActivity, getPlayerActivity, analyzeUsersAnswer, resetUserScore}
 )(QuizContainer);

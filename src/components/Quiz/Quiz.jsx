@@ -18,7 +18,7 @@ class Quiz extends React.Component {
     activateNewQuizGame = () => {
         this.activateQuizGame();
         this.props.startNewQuizGame(true);
-        this.props.giveFirstQuestion(10);    //TODO: система задаёт рандомное число
+        this.props.giveFirstQuestion(0);    // TODO: система задаёт рандомное число
         this.props.resetUserScore();
         this.props.startNewQuizGame(false);
     }
@@ -39,6 +39,7 @@ class Quiz extends React.Component {
         if (this.state.isQuizGameActivated && !this.props.isGameFinished)
         {
             return <QuizQuestion questionText={this.props.currentQuestion.questionText}
+                                 currentQuestionNumber={this.props.currentQuestionNumber}
                                  id={this.props.currentQuestion.id}
             />
         }
@@ -47,8 +48,8 @@ class Quiz extends React.Component {
             return <></>
         }
         return <div className={styles.introduction}>
-            <p>CHECK this QUIZ Game!</p>
-            <p>Press Start button below</p>
+            <p>CHECK this QUIZ Game?</p>
+            <p>Press start button below</p>
             <p>bro</p>
         </div>
     }
@@ -59,14 +60,16 @@ class Quiz extends React.Component {
             return <div className={styles.variants}>
                 { this.props.currentQuestion.variants
                     .map(v => <div key={v.variantNumber}>
-                            <QuizVariantButton variantNumber={v.variantNumber}
-                                               isUserGuessedVariant={this.props.isUserGuessedVariant}
-                                               isUserStarted={this.props.isUserStarted}
-                                               currentQuestionId={this.props.currentQuestion.id}
-                                               v={v}
+                            <QuizVariantButton v={v}
+                                               variantNumber={v.variantNumber}
                                                verbAndParticle={v.verbAndParticle}
+                                               currentQuestionId={this.props.currentQuestion.id}
+                                               isUserStarted={this.props.isUserStarted}
+                                               isWasFirstClickOnNewQuestion={this.props.isWasFirstClickOnNewQuestion}
+                                               isUserGuessedVariant={this.props.isUserGuessedVariant}
                                                analyzeUsersAnswer={this.props.analyzeUsersAnswer}
-                                               userStartedActivity={this.props.userStartedActivity}
+                                               getPlayerStartingActivity={this.props.getPlayerStartingActivity}
+                                               getPlayerActivity={this.props.getPlayerActivity}
                             />
                         </div>
                         )}
@@ -104,6 +107,37 @@ class Quiz extends React.Component {
         return <></>
     }
 
+    showUserProgress() {
+
+        function createSmallField() {
+            const card = document.createElement('div')
+            card.className = 'progressDiv'
+
+            for(let i = 0; i < this.props.currentQuestionNumber; i++) {
+                const   insideExistDiv = document.getElementsByClassName('userProgress')[0];
+                insideExistDiv.appendChild(card)
+            }
+        }
+
+        return <div className={styles.userProgress}>
+            <div className={styles.progressText}>
+                {this.props.currentQuestionNumber} / {this.props.numberOfQuestionsForGame}
+            </div>
+
+            {/*{()=>{createSmallField()}}*/}
+
+            { this.props.usersChosenVariants
+                .map(v => <div key={v.id}>
+                    {/*{v.isVariantTrue && this.props.isUserGuessedVariant*/}
+                    {v.isVariantTrue
+                        ? <div className={styles.progressDivIfGuess}></div>
+                        : <div className={styles.progressDivIfWrong}></div>
+                    }
+                </div>)
+            }
+        </div>
+    }
+
     showUserScore() {
         if (this.state.isQuizGameActivated && !this.props.isGameFinished && this.props.isUserGuessedVariant)
         {
@@ -138,18 +172,34 @@ class Quiz extends React.Component {
         </div>
     }
 
+    debugSection() {
+        return <div className={styles.debugSection}>
+            {/*<p><span>currentQuestionNumber:</span> {this.props.currentQuestionNumber}</p>*/}
+            <p><span>this.state: isQuizGameActivated:</span> {this.state.isQuizGameActivated.toString()}</p>
+            <p><span>isNewGameActivatorRun:</span> {this.props.isNewGameActivatorRun.toString()}</p>
+            <p><span>isUserStarted:</span> {this.props.isUserStarted.toString()}</p>
+            <p><span>isWasFirstClickOnNewQuestion:</span> {this.props.isWasFirstClickOnNewQuestion.toString()}</p>
+            <p><span>isUserGuessedVariant:</span> {this.props.isUserGuessedVariant.toString()}</p>
+            <p><span>isGameFinished:</span> {this.props.isGameFinished.toString()}</p>
+        </div>
+    }
+
     render() {
         return (
             <div className={styles.quizWrapper}>
-                { this.showUserScore() }
+                { this.showButtonStart() }
 
                 { this.getQuestion() }
 
                 { this.getVariantsForQuestion() }
 
-                { this.showButtonStart() }
+                { this.showUserProgress() }
+
+                { this.showUserScore() }
 
                 { this.showTips() }
+
+                { this.debugSection() }
             </div>
         )
     }
