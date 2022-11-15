@@ -1,7 +1,7 @@
 const START_NEW_QUIZ_GAME = 'START_NEW_QUIZ_GAME';
 const GIVE_FIRST_QUESTION = 'GIVE_FIRST_QUESTION';
 const GET_PLAYER_STARTING_ACTIVITY = 'GET_PLAYER_STARTING_ACTIVITY';
-const GET_PLAYER_ACTIVITY = 'GET_PLAYER_ACTIVITY';
+/*const GET_PLAYER_ACTIVITY = 'GET_PLAYER_ACTIVITY';*/
 const ANALYZE_USERS_ANSWER = 'ANALYZE_USERS_ANSWER';
 const RESET_USER_SCORE = 'RESET_USER_SCORE';
 
@@ -101,7 +101,7 @@ let initialState = {
     isNewGameActivatorRun: false,
     numberOfQuestionsForGame: 3,
     /*isItNewQuestion: true,*/
-    isWasFirstClickOnNewQuestion: false,
+    /*isWasFirstClickOnNewQuestion: false,*/
     currentQuestionNumber: 1,
     currentQuestion: {},
     userScore: 0,
@@ -149,13 +149,16 @@ const quizReducer = (state = initialState, action) => {
                 isUserStarted: true,
             }
 
-        case GET_PLAYER_ACTIVITY:
+        /*case GET_PLAYER_ACTIVITY:
             if (state.isUserGuessedVariant) {
                 return {
                     ...state,
-                    isItFirstClickOnNewQuestion: false,
+                    isWasFirstClickOnNewQuestion: false,
                 }
             }
+            return {
+                ...state,
+            }*/
 
         case ANALYZE_USERS_ANSWER:
         {
@@ -166,7 +169,7 @@ const quizReducer = (state = initialState, action) => {
                         return {
                             ...state,
                             isUserStarted: false,
-                            isItFirstClickOnNewQuestion: true,
+                            /*isWasFirstClickOnNewQuestion: true,*/
                             isUserGuessedVariant: action.variant.isVariantTrue,
                             userScore: state.userScore + 10,
                             currentQuestionNumber: state.currentQuestionNumber+1,
@@ -185,7 +188,7 @@ const quizReducer = (state = initialState, action) => {
                     return {
                         ...state,
                         isUserStarted: false,
-                        isItFirstClickOnNewQuestion: true,
+                        /*isWasFirstClickOnNewQuestion: true,*/
                         isUserGuessedVariant: action.variant.isVariantTrue,
                         userScore: state.userScore + 10,
                         currentQuestionNumber: state.currentQuestionNumber+1,
@@ -204,7 +207,7 @@ const quizReducer = (state = initialState, action) => {
                     return {
                         ...state,
                         isUserGuessedVariant: false,
-                        isItFirstClickOnNewQuestion: true,
+                        /*isWasFirstClickOnNewQuestion: true,*/
                         userScore: state.userScore - 5,
 
                                     /* SAVE_LAST_CHOSEN_VARIANT: */
@@ -239,7 +242,7 @@ const quizReducer = (state = initialState, action) => {
                 ...state,
                 userScore: 0,
                 isUserStarted: false,
-                /*isItFirstClickOnNewQuestion: false,*/
+                /*isWasFirstClickOnNewQuestion: false,*/
                 currentQuestionNumber: 1,
                 usersLastChosenVariant: {},
                 usersChosenVariants: [],
@@ -261,7 +264,7 @@ const quizReducer = (state = initialState, action) => {
 export const startNewQuizGame = (isNewGameActivatorRun) => ({type: START_NEW_QUIZ_GAME, isNewGameActivatorRun})
 export const giveFirstQuestion = (questionId) => ({type: GIVE_FIRST_QUESTION, questionId})
 export const getPlayerStartingActivity = () => ({type: GET_PLAYER_STARTING_ACTIVITY})
-export const getPlayerActivity = () => ({type: GET_PLAYER_ACTIVITY})
+/*export const getPlayerActivity = () => ({type: GET_PLAYER_ACTIVITY})*/
 export const analyzeUsersAnswer = (variant, questionId) => ({type: ANALYZE_USERS_ANSWER, variant, questionId})
 export const resetUserScore = () => ({type: RESET_USER_SCORE})
 

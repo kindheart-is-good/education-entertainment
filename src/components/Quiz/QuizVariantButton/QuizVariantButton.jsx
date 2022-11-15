@@ -30,8 +30,6 @@ const QuizVariantButton = (props) => {
         else {
             document.getElementById("button"+props.variantNumber).style.backgroundColor='#e2754e';
         }*/
-
-
     }
 
     return (
@@ -41,7 +39,7 @@ const QuizVariantButton = (props) => {
                     onClick={() => {
                         props.analyzeUsersAnswer(props.v, props.currentQuestionId);
                         props.getPlayerStartingActivity();
-                        props.getPlayerActivity();
+                        /*props.getPlayerActivity();*/
                         onChangeColor(props.v, props.variantNumber, props.currentQuestionId);
                     }}>
             {props.verbAndParticle}

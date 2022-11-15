@@ -6,7 +6,6 @@ import {
     getPlayerStartingActivity,
     analyzeUsersAnswer,
     resetUserScore,
-    getPlayerActivity,
 } from "../../redux/quiz-reducer";
 import {connect} from "react-redux";
 
@@ -19,9 +18,9 @@ class QuizContainer extends React.Component {
             <Quiz {...this.props}
                   startNewQuizGame={this.props.startNewQuizGame}
                   giveFirstQuestion={this.props.giveFirstQuestion}
+                  getPlayerStartingActivity={this.props.getPlayerStartingActivity}
                   analyzeUsersAnswer={this.props.analyzeUsersAnswer}
                   resetUserScore={this.props.resetUserScore}
-                  getPlayerStartingActivity={this.props.getPlayerStartingActivity}
             />
         )
     }
@@ -36,7 +35,7 @@ let mapStateToProps = (state) => {
         currentQuestion: state.quizPage.currentQuestion,
         userScore: state.quizPage.userScore,
         isUserStarted: state.quizPage.isUserStarted,
-        isWasFirstClickOnNewQuestion: state.quizPage.isWasFirstClickOnNewQuestion,
+        /*isWasFirstClickOnNewQuestion: state.quizPage.isWasFirstClickOnNewQuestion,*/
         usersLastChosenVariant: state.quizPage.usersLastChosenVariant,
         usersChosenVariants: state.quizPage.usersChosenVariants,
         isUserGuessedVariant: state.quizPage.isUserGuessedVariant,
@@ -48,5 +47,5 @@ let mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    {startNewQuizGame, giveFirstQuestion, getPlayerStartingActivity, getPlayerActivity, analyzeUsersAnswer, resetUserScore}
+    {startNewQuizGame, giveFirstQuestion, getPlayerStartingActivity, analyzeUsersAnswer, resetUserScore}
 )(QuizContainer);

@@ -1,33 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./Quiz.module.css"
 import QuizQuestion from "./QuizQuestion/QuizQuestion";
 import QuizVariantButton from "./QuizVariantButton/QuizVariantButton";
 
-class Quiz extends React.Component {
+const Quiz = (props) =>  {
 
-    state = {
-        isQuizGameActivated: false,
+    let [isQuizGameActivated, setActivation] = useState(false);
+
+    const activateQuizGame = () => {
+        setActivation(true);
     }
 
-    activateQuizGame = () => {
-        this.setState({
-            isQuizGameActivated: true
-        })
+    const activateNewQuizGame = () => {
+        activateQuizGame();
+        props.startNewQuizGame(true);
+        props.giveFirstQuestion(0);    // TODO: система задаёт рандомное число
+        props.resetUserScore();
+        props.startNewQuizGame(false);
     }
 
-    activateNewQuizGame = () => {
-        this.activateQuizGame();
-        this.props.startNewQuizGame(true);
-        this.props.giveFirstQuestion(0);    // TODO: система задаёт рандомное число
-        this.props.resetUserScore();
-        this.props.startNewQuizGame(false);
-    }
+    useEffect( () => {
+        /*setActivation(true);*/
+        /*<div className={styles.debugSection}>asdsad</div>*/
+    }, [isQuizGameActivated] )
 
-    showButtonStart() {
-        if (!this.state.isQuizGameActivated || this.props.isGameFinished)
+    const showButtonStart = () => {
+        if (!isQuizGameActivated || props.isGameFinished)
         {
             return <div className={styles.startQuiz}>
-                <button onClick={ ()=>{this.activateNewQuizGame()} } className={styles.buttonStart}>
+                <button onClick={ ()=>{activateNewQuizGame()} } className={styles.buttonStart}>
                     START THIS GAME
                 </button>
             </div>
@@ -35,15 +36,15 @@ class Quiz extends React.Component {
         return <></>
     }
 
-    getQuestion() {
-        if (this.state.isQuizGameActivated && !this.props.isGameFinished)
+    const getQuestion = () => {
+        if (isQuizGameActivated && !props.isGameFinished)
         {
-            return <QuizQuestion questionText={this.props.currentQuestion.questionText}
-                                 currentQuestionNumber={this.props.currentQuestionNumber}
-                                 id={this.props.currentQuestion.id}
+            return <QuizQuestion questionText={props.currentQuestion.questionText}
+                                 currentQuestionNumber={props.currentQuestionNumber}
+                                 id={props.currentQuestion.id}
             />
         }
-        if (this.state.isQuizGameActivated && this.props.isGameFinished)
+        if (isQuizGameActivated && props.isGameFinished)
         {
             return <></>
         }
@@ -54,66 +55,66 @@ class Quiz extends React.Component {
         </div>
     }
 
-    getVariantsForQuestion() {
-        if (this.state.isQuizGameActivated && !this.props.isGameFinished)
+    const getVariantsForQuestion = () => {
+        if (isQuizGameActivated && !props.isGameFinished)
         {
             return <div className={styles.variants}>
-                { this.props.currentQuestion.variants
+                { props.currentQuestion.variants
                     .map(v => <div key={v.variantNumber}>
                             <QuizVariantButton v={v}
                                                variantNumber={v.variantNumber}
                                                verbAndParticle={v.verbAndParticle}
-                                               currentQuestionId={this.props.currentQuestion.id}
-                                               isUserStarted={this.props.isUserStarted}
-                                               isWasFirstClickOnNewQuestion={this.props.isWasFirstClickOnNewQuestion}
-                                               isUserGuessedVariant={this.props.isUserGuessedVariant}
-                                               analyzeUsersAnswer={this.props.analyzeUsersAnswer}
-                                               getPlayerStartingActivity={this.props.getPlayerStartingActivity}
-                                               getPlayerActivity={this.props.getPlayerActivity}
+                                               currentQuestionId={props.currentQuestion.id}
+                                               isUserStarted={props.isUserStarted}
+                                               /*isWasFirstClickOnNewQuestion={props.isWasFirstClickOnNewQuestion}*/
+                                               isUserGuessedVariant={props.isUserGuessedVariant}
+                                               analyzeUsersAnswer={props.analyzeUsersAnswer}
+                                               getPlayerStartingActivity={props.getPlayerStartingActivity}
+                                               /*getPlayerActivity={props.getPlayerActivity}*/
                             />
                         </div>
                         )}
                     </div>
         }
-        if (this.state.isQuizGameActivated && this.props.isGameFinished)
+        if (isQuizGameActivated && props.isGameFinished)
         {
-            return this.showFinalResult();
+            return showFinalResult();
         }
         return <></>
     }
 
-    showTips() {
-        if (this.state.isQuizGameActivated && !this.props.isGameFinished && !this.props.isUserGuessedVariant && this.props.isUserStarted)
+    const showTips = () => {
+        if (isQuizGameActivated && !props.isGameFinished && !props.isUserGuessedVariant && props.isUserStarted)
         {
             return <div className={styles.tipIfUserWrong}>
                 <b>MEANING of this phrasal verb:</b>
-                <p>{this.props.usersLastChosenVariant.meaning}</p>
+                <p>{props.usersLastChosenVariant.meaning}</p>
             </div>
         }
-        if (this.state.isQuizGameActivated && !this.props.isGameFinished && this.props.isUserGuessedVariant)
+        if (isQuizGameActivated && !props.isGameFinished && props.isUserGuessedVariant)
         {
             return <div className={styles.tipIfUserGuessed}>
-                <p><b>last guessed variant:</b></p> <p>{this.props.usersLastGuessedVariant.verbAndParticle}</p>
-                <p><b>example of using:</b></p> <p>{this.props.usersLastGuessedVariant.example}</p>
+                <p><b>last guessed variant:</b></p> <p>{props.usersLastGuessedVariant.verbAndParticle}</p>
+                <p><b>example of using:</b></p> <p>{props.usersLastGuessedVariant.example}</p>
             </div>
         }
-        if (this.state.isQuizGameActivated && this.props.isGameFinished && this.props.isUserGuessedVariant)
+        if (isQuizGameActivated && props.isGameFinished && props.isUserGuessedVariant)
         {
             return <div className={styles.tipIfUserGuessed}>
-                <p><b>last guessed variant:</b> {this.props.usersLastGuessedVariant.verbAndParticle}</p>
-                <p><b>example of using:</b> {this.props.usersLastGuessedVariant.example}</p>
+                <p><b>last guessed variant:</b> {props.usersLastGuessedVariant.verbAndParticle}</p>
+                <p><b>example of using:</b> {props.usersLastGuessedVariant.example}</p>
             </div>
         }
         return <></>
     }
 
-    showUserProgress() {
+    const showUserProgress = () => {
 
         function createSmallField() {
             const card = document.createElement('div')
             card.className = 'progressDiv'
 
-            for(let i = 0; i < this.props.currentQuestionNumber; i++) {
+            for(let i = 0; i < props.currentQuestionNumber; i++) {
                 const   insideExistDiv = document.getElementsByClassName('userProgress')[0];
                 insideExistDiv.appendChild(card)
             }
@@ -121,14 +122,14 @@ class Quiz extends React.Component {
 
         return <div className={styles.userProgress}>
             <div className={styles.progressText}>
-                {this.props.currentQuestionNumber} / {this.props.numberOfQuestionsForGame}
+                {props.currentQuestionNumber} / {props.numberOfQuestionsForGame}
             </div>
 
             {/*{()=>{createSmallField()}}*/}
 
-            { this.props.usersChosenVariants
-                .map(v => <div key={v.id}>
-                    {/*{v.isVariantTrue && this.props.isUserGuessedVariant*/}
+            { props.usersChosenVariants
+                .map(v => <div key={v.verbAndParticle+v.variantNumber}>
+                    {/*{v.isVariantTrue && props.isUserGuessedVariant*/}
                     {v.isVariantTrue
                         ? <div className={styles.progressDivIfGuess}></div>
                         : <div className={styles.progressDivIfWrong}></div>
@@ -138,71 +139,69 @@ class Quiz extends React.Component {
         </div>
     }
 
-    showUserScore() {
-        if (this.state.isQuizGameActivated && !this.props.isGameFinished && this.props.isUserGuessedVariant)
+    const showUserScore = () => {
+        if (isQuizGameActivated && !props.isGameFinished && props.isUserGuessedVariant)
         {
             return <div className={styles.scoreWrapper}>
                 <div className={styles.scoreDefault}>
-                    <span>SCORE:</span> {this.props.userScore}
+                    <span>SCORE:</span> {props.userScore}
                 </div>
             </div>
         }
-        if (this.state.isQuizGameActivated && !this.props.isGameFinished && !this.props.isUserGuessedVariant && !this.props.isUserStarted)
+        if (isQuizGameActivated && !props.isGameFinished && !props.isUserGuessedVariant && !props.isUserStarted)
         {
             return <div className={styles.scoreWrapper}>
                 <div className={styles.scoreIfUserGuessed}>
-                    <span>SCORE:</span> {this.props.userScore}
+                    <span>SCORE:</span> {props.userScore}
                 </div>
             </div>
         }
-        if (this.state.isQuizGameActivated && !this.props.isGameFinished && !this.props.isUserGuessedVariant && this.props.isUserStarted)
+        if (isQuizGameActivated && !props.isGameFinished && !props.isUserGuessedVariant && props.isUserStarted)
         {
             return <div className={styles.scoreWrapper}>
                 <div className={styles.scoreIfUserWrong}>
-                    <span>SCORE:</span> {this.props.userScore}
+                    <span>SCORE:</span> {props.userScore}
                 </div>
             </div>
         }
         return <></>
     }
 
-    showFinalResult() {
+    const showFinalResult = () => {
         return <div className={styles.scoreFinalResult}>
-            <p>your score: {this.props.userScore}</p>
+            <p>your score: {props.userScore}</p>
         </div>
     }
 
-    debugSection() {
+    const debugSection = () => {
         return <div className={styles.debugSection}>
-            {/*<p><span>currentQuestionNumber:</span> {this.props.currentQuestionNumber}</p>*/}
-            <p><span>this.state: isQuizGameActivated:</span> {this.state.isQuizGameActivated.toString()}</p>
-            <p><span>isNewGameActivatorRun:</span> {this.props.isNewGameActivatorRun.toString()}</p>
-            <p><span>isUserStarted:</span> {this.props.isUserStarted.toString()}</p>
-            <p><span>isWasFirstClickOnNewQuestion:</span> {this.props.isWasFirstClickOnNewQuestion.toString()}</p>
-            <p><span>isUserGuessedVariant:</span> {this.props.isUserGuessedVariant.toString()}</p>
-            <p><span>isGameFinished:</span> {this.props.isGameFinished.toString()}</p>
+            {/*<p><span>currentQuestionNumber:</span> {props.currentQuestionNumber}</p>*/}
+            <p><span>from hook: isQuizGameActivated:</span> {isQuizGameActivated.toString()}</p>
+            <p><span>isNewGameActivatorRun:</span> {props.isNewGameActivatorRun.toString()}</p>
+            <p><span>isUserStarted:</span> {props.isUserStarted.toString()}</p>
+            {/*<p><span>isWasFirstClickOnNewQuestion:</span> {props.isWasFirstClickOnNewQuestion.toString()}</p>*/}
+            <p><span>isUserGuessedVariant:</span> {props.isUserGuessedVariant.toString()}</p>
+            <p><span>isGameFinished:</span> {props.isGameFinished.toString()}</p>
         </div>
     }
 
-    render() {
-        return (
-            <div className={styles.quizWrapper}>
-                { this.showButtonStart() }
+    return (
+        <div className={styles.quizWrapper}>
+            { showButtonStart() }
 
-                { this.getQuestion() }
+            { getQuestion() }
 
-                { this.getVariantsForQuestion() }
+            { getVariantsForQuestion() }
 
-                { this.showUserProgress() }
+            { showUserProgress() }
 
-                { this.showUserScore() }
+            { showUserScore() }
 
-                { this.showTips() }
+            { showTips() }
 
-                { this.debugSection() }
-            </div>
-        )
-    }
+            { debugSection() }
+        </div>
+    )
 }
 
 export default Quiz;
