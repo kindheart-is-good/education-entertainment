@@ -5,7 +5,8 @@ const QuizQuestion = (props) => {
     return (
             <div className={styles.question}>
                 <p className={styles.questionTag}>
-                    Question #{props.currentQuestionNumber} (id:{props.id}):
+                    {/*Question #{props.currentQuestionNumber} (id:{props.id}):*/}
+                    Question #{props.currentQuestionNumber}:
                 </p>
                 <p className={styles.questionText}>
                     {props.questionText}

@@ -1,9 +1,7 @@
-const START_NEW_QUIZ_GAME = 'START_NEW_QUIZ_GAME';
-const GIVE_FIRST_QUESTION = 'GIVE_FIRST_QUESTION';
-const GET_PLAYER_STARTING_ACTIVITY = 'GET_PLAYER_STARTING_ACTIVITY';
-const SET_NEW_LEVEL = 'SET_NEW_LEVEL';
-const ANALYZE_USERS_ANSWER = 'ANALYZE_USERS_ANSWER';
-const RESET_USER_SCORE = 'RESET_USER_SCORE';
+const SET_NEW_QUESTION = 'SET_NEW_QUESTION';
+const ANALYZE_RIGHT_USERS_ANSWER = 'ANALYZE_RIGHT_USERS_ANSWER';
+const ANALYZE_WRONG_USERS_ANSWER = 'ANALYZE_WRONG_USERS_ANSWER';
+const RESET_USER_ACTIVITY = 'RESET_USER_SCORE';
 
 let initialState = {
     questions: [
@@ -98,22 +96,13 @@ let initialState = {
                 {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Tack onto', meaning: 'Add or attach something that wasn\'t planned to something.', example: 'I TACKED a quick message ONTO the end of the letter after I\'d printed it.'},
             ]},
     ],
-    isNewGameActivatorRun: false,
-    numberOfQuestionsForGame: 3,
-    isItNewQuestion: false,
-    currentQuestionNumber: 1,
+    numberOfQuestionsForGame: 5,
     currentQuestion: {},
-    nextQuestionId: 0,
-    nextQuestion: {},
-    userScore: 0,
-    isUserStarted: false,
     usersLastChosenVariant: {},
     usersChosenVariants: [],
-    isUserGuessedVariant: false,
     usersLastGuessedVariant: {},
     usersGuessedVariants: [],
     usersWrongSelectedVariants: [],
-    isGameFinished: false,
     phrasalVerbs: [
         {id: 0, letter: 'A', Verb: 'Abide', VerbAndParticle: 'Abide by', Meaning: 'Accept or follow a decision or rule.', Example: 'We have to ABIDE BY what the court says.', CuttedExample: 'We have to _____ __ what the court says.', ExtractedVerb: 'ABIDE', ExtractedParticles: 'BY'},
         {id: 1, letter: 'A', Verb: 'Account', VerbAndParticle: 'Account for', Meaning: 'To explain.', Example: 'They had to ACCOUNT FOR all the money that had gone missing.', CuttedExample: 'They had to _______ ___ all the money that had gone missing.', ExtractedVerb: 'ACCOUNT', ExtractedParticles: 'FOR'},
@@ -132,139 +121,43 @@ let initialState = {
 const quizReducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case START_NEW_QUIZ_GAME:
+        case SET_NEW_QUESTION:
             return {
                 ...state,
-                isNewGameActivatorRun: action.isNewGameActivatorRun,
-                isGameFinished: false
+                currentQuestion: state.questions[action.questionId]
             }
 
-        case GIVE_FIRST_QUESTION:
-            return {
-                ...state,
-                currentQuestion: state.questions[action.questionId],
-                nextQuestionId: action.questionId + 1,
-                nextQuestion: state.questions[action.questionId + 1],
-            }
-
-        case GET_PLAYER_STARTING_ACTIVITY:
-            return {
-                ...state,
-                isUserStarted: true,
-            }
-
-        case SET_NEW_LEVEL:
-            if (state.isUserGuessedVariant) {
-                return {
-                    ...state,
-                    isItNewQuestion: false,
-                }
-            }
-            return {
-                ...state,
-            }
-
-        case ANALYZE_USERS_ANSWER:
+        case ANALYZE_RIGHT_USERS_ANSWER:
         {
-            if (!state.isGameFinished) {
-                if (action.variant.isVariantTrue) {
-                    if (state.currentQuestionNumber < state.numberOfQuestionsForGame) {
-                        /*let giveNextQuestion = action.questionId + 1;*/
-                        return {
-                            ...state,
-                            isUserStarted: false,
-                            isUserGuessedVariant: true,
-                            isItNewQuestion: true,
-                            userScore: state.userScore + 10,
-                            currentQuestionNumber: state.currentQuestionNumber + 1,
-                            nextQuestionId: action.questionId + 2,  //TODO: подключить рандомизатор.
-                            currentQuestion: state.questions[action.questionId + 1],
-                            nextQuestion: state.questions[action.questionId + 2],
-
-                                        /* SAVE_LAST_GUESSED_VARIANT: */
-                            usersLastChosenVariant: action.variant,
-                            usersLastGuessedVariant: action.variant,
-
-                                        /* SAVE_LAST_GUESSED_VARIANTS: */
-                            usersChosenVariants: [...state.usersChosenVariants, action.variant],
-                            /*usersGuessedVariants: [...state.usersGuessedVariants, {...state.usersLastGuessedVariant}],*/
-                            usersGuessedVariants: [...state.usersGuessedVariants, action.variant],
-                            usersWrongSelectedVariants: [],
-                        }
-                    }
-                    return {
-                        ...state,
-                        isUserStarted: false,
-                        isUserGuessedVariant: false,
-                        isItNewQuestion: true,
-                        userScore: state.userScore + 10,
-                        isGameFinished: true,
-
-                                    /* SAVE_LAST_GUESSED_VARIANT: */
-                        usersLastChosenVariant: action.variant,
-                        usersLastGuessedVariant: action.variant,
-
-                                    /* SAVE_LAST_GUESSED_VARIANTS: */
-                        usersChosenVariants: [...state.usersChosenVariants, action.variant],
-                        usersGuessedVariants: [...state.usersGuessedVariants, action.variant],
-                        usersWrongSelectedVariants: 0,
-                    }
-                } else {
-                    return {
-                        ...state,
-                        isUserGuessedVariant: false,
-                        isItNewQuestion: false,
-                        userScore: state.userScore - 5,
-
-                                    /* SAVE_LAST_CHOSEN_VARIANT: */
-                        usersLastChosenVariant: action.variant,
-
-                                    /* SAVE_LAST_CHOSEN_VARIANTS: */
-                        usersChosenVariants: [...state.usersChosenVariants, action.variant],
-                        usersWrongSelectedVariants: [...state.usersWrongSelectedVariants, action.variant],
-                    }
-                }
-            } else {
-                return {
-                    ...state,
-
-                    /*isNewGameActivatorRun: false,
-                    numberOfQuestionsForGame: 7,
-                    currentQuestionNumber: 1,
-                    currentQuestion: {},
-                    userScore: 0,
-                    isUserStarted: false,
-                    usersLastChosenVariant: {},
-                    usersChosenVariants: [],
-                    isUserGuessedVariant: false,
-                    usersLastGuessedVariant: {},
-                    usersGuessedVariants: [],
-                    isGameFinished: false,*/
-                }
+            return {
+                ...state,
+                usersLastChosenVariant: action.variant,
+                usersLastGuessedVariant: action.variant,
+                usersChosenVariants: [...state.usersChosenVariants, action.variant],
+                /*usersGuessedVariants: [...state.usersGuessedVariants, {...state.usersLastGuessedVariant}],*/
+                usersGuessedVariants: [...state.usersGuessedVariants, action.variant],
+                usersWrongSelectedVariants: [],
             }
         }
 
-        case RESET_USER_SCORE:
+        case ANALYZE_WRONG_USERS_ANSWER:
+        {
             return {
                 ...state,
-                userScore: 0,
-                isUserStarted: false,
-                isItNewQuestion: false,
-                currentQuestionNumber: 1,
-                /*nextQuestionId: actions? or state?
-                currentQuestion:
-                nextQuestion: */
+                usersLastChosenVariant: action.variant,
+                usersChosenVariants: [...state.usersChosenVariants, action.variant],
+                usersWrongSelectedVariants: [...state.usersWrongSelectedVariants, action.variant],
+            }
+        }
+
+        case RESET_USER_ACTIVITY:
+            return {
+                ...state,
                 usersLastChosenVariant: {},
                 usersChosenVariants: [],
-                isUserGuessedVariant: false,
                 usersLastGuessedVariant: {},
                 usersGuessedVariants: [],
                 usersWrongSelectedVariants: [],
-
-                /*isNewGameActivatorRun: false,
-                numberOfQuestionsForGame: 7,
-                currentQuestion: {},
-                isGameFinished: false,*/
             }
 
         default:
@@ -272,11 +165,9 @@ const quizReducer = (state = initialState, action) => {
     }
 }
 
-export const startNewQuizGame = (isNewGameActivatorRun) => ({type: START_NEW_QUIZ_GAME, isNewGameActivatorRun})
-export const giveFirstQuestion = (questionId) => ({type: GIVE_FIRST_QUESTION, questionId})
-export const getPlayerStartingActivity = () => ({type: GET_PLAYER_STARTING_ACTIVITY})
-export const setNewLevel = () => ({type: SET_NEW_LEVEL})
-export const analyzeUsersAnswer = (variant, questionId) => ({type: ANALYZE_USERS_ANSWER, variant, questionId})
-export const resetUserScore = () => ({type: RESET_USER_SCORE})
+export const setNewQuestion = (questionId) => ({type: SET_NEW_QUESTION, questionId})
+export const analyzeRightUsersAnswer = (variant, questionId) => ({type: ANALYZE_RIGHT_USERS_ANSWER, variant, questionId})
+export const analyzeWrongUsersAnswer = (variant, questionId) => ({type: ANALYZE_WRONG_USERS_ANSWER, variant, questionId})
+export const resetUserActivity = () => ({type: RESET_USER_ACTIVITY})
 
 export default quizReducer;
