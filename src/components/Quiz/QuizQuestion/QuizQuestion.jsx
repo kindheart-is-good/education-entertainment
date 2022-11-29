@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./QuizQuestion.module.css"
+import {motion} from "framer-motion";
 
 const QuizQuestion = (props) => {
     return (
@@ -8,9 +9,16 @@ const QuizQuestion = (props) => {
                     {/*Question #{props.currentQuestionNumber} (id:{props.id}):*/}
                     Question #{props.currentQuestionNumber}:
                 </p>
-                <p className={styles.questionText}>
+                <motion.p className={styles.questionText}
+                          whileHover={{
+                              scale: 1.3,
+                          }}
+                          whileTap={{
+                              color: '#f3f3f3'
+                          }}
+                >
                     {props.questionText}
-                </p>
+                </motion.p>
             </div>
     )
 }

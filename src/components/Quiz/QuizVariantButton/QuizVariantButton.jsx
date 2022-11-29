@@ -46,6 +46,7 @@ const QuizVariantButton = (props) => {
         }
     }
 
+    console.log('VARIANTS: ');
     return (
         <button className={styles.variantButton}
                 id={"button"+props.v.variantNumber}

@@ -11,6 +11,7 @@ ___
 * react-router-dom
 * redux
 * react-redux
+* framer-motion
 
 <div><i>This project was created with utility:</i></div>
 :white_check_mark: npx create-react-app

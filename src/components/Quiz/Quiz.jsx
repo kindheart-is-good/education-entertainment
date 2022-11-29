@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import styles from "./Quiz.module.css"
+import {motion} from "framer-motion";
 import QuizQuestion from "./QuizQuestion/QuizQuestion";
 import QuizVariantButton from "./QuizVariantButton/QuizVariantButton";
 
@@ -13,9 +14,10 @@ const Quiz = (props) =>  {
     const [isQuizGameActivated, setActivation] = useState(false);
     const [isGameFinished, setGameFinished] = useState(false);
     const [clickCounter, setClickCounter] = useState(0);
+    const [isNewLevel, setNewLevel] = useState(false);
 
     const [question, setCurrentQuestion] = useState('');
-    const [questionCounter, setQuestionCounter] = useState(1);
+    const [questionCounter, setQuestionCounter] = useState(0);
     const [isUserGuess, setUsersGuess] = useState(false);
     const [usersLastChosenVariant, setUsersLastChosenVariant] = useState('');
     const [userScore, setUserScore] = useState(0);
@@ -25,24 +27,56 @@ const Quiz = (props) =>  {
         setCurrentQuestion(props.currentQuestion);
     }, [] )
 
+    /*useEffect( () => {
+        if (isUserGuess) {
+            props.setNewQuestion(randomInteger(1, 11));
+            setCurrentQuestion(props.currentQuestion);
+        }
+    }, [isNewLevel] )*/
+
+    useEffect( () => {
+        if (isUserGuess) {
+            /*console.log("useEffect #1 isUserGuess: " + isUserGuess);
+            console.log("useEffect #1 isNewLevel: " + isNewLevel);*/
+
+            setNewLevel(true);
+
+            console.log("useEffect #2 isUserGuess: " + isUserGuess);
+            console.log("useEffect #2 isNewLevel: " + isNewLevel);
+
+            setTimeout(() => {
+                setNewLevel(false);
+                console.log("useEffect #3 isUserGuess: " + isUserGuess);
+                console.log("useEffect #3 isNewLevel: " + isNewLevel);
+            }, 500)
+
+            /*setNewLevel(false);*/
+        }
+    }, [questionCounter] )
+
+    useEffect( () => {
+        console.log("--- NEW LEVEL");
+    }, [isNewLevel] )
+
+    useEffect( () => {
+        console.log("--------- USER GUESS");
+    }, [isUserGuess] )
+
+    /*const activateNewQuizGame = useCallback(() => {*/
     const activateNewQuizGame = () => {
         setActivation(true);
         setGameFinished(false);
         setClickCounter(0);
         setUsersGuess(false);
+        setNewLevel(true);
 
-        /*setCurrentQuestion(props.questions[0]);*/
-        props.setNewQuestion(randomInteger(1, 11));     // не успевает передать (доходит после сворачивания окна), возможно из-за асинхронщины. Поэтому временным решением добавил дополнительное условие внутри getQuestion()
+        props.setNewQuestion(randomInteger(1, 11));     // не успевает передать (доходит после сворачивания окна), возможно из-за асинхронщины. Поэтому временным решением добавил дополнительное условие внутри getQuestion(). Второе решние добавить useEffect
         setCurrentQuestion(props.currentQuestion);
         setQuestionCounter(1);
         setUserScore(0);
         props.resetUserActivity();
-
-        /*props.startNewQuizGame(true);*/
-            /*props.giveFirstQuestion(randomInteger(1, 11));*/
-            /*setQuestion(props.currentQuestion);*/     // не успевает передать (доходит после сворачивания окна), возможно из-за асинхронщины. Поэтому временным решением добавил дополнительное условие внутри getQuestion()
-        /*props.startNewQuizGame(false);*/
     }
+    /*}, [isGameFinished])*/
 
     const showButtonStart = () => {
         if (!isQuizGameActivated || isGameFinished)
@@ -59,7 +93,26 @@ const Quiz = (props) =>  {
         return <></>
     }
 
-    const getQuestion = () => {
+    const showIntroduction = () => {
+        return (
+            <div className={styles.introduction}>
+                <p>CHECK this QUIZ Game?</p>
+                <p>Press start button below</p>
+                <p>bro</p>
+            </div>
+        )
+    }
+
+    const getQuestion = useCallback(() => {
+        console.log('QUESTION: ' + question.questionText);
+        return <QuizQuestion questionText={question.questionText}
+                                    currentQuestionNumber={questionCounter}
+                                    id={question.id}
+        />
+    }, [isNewLevel])
+    /*}, [questionCounter])*/
+
+    const showQuestion = () => {
             /*    временное дополнительное условие.   */
         /*if (isQuizGameActivated && !isGameFinished && clickCounter===0)
         {
@@ -70,36 +123,61 @@ const Quiz = (props) =>  {
         }*/
         if (isQuizGameActivated && !isGameFinished)
         {
-            return <QuizQuestion questionText={question.questionText}
-                                 currentQuestionNumber={questionCounter}
-                                 id={question.id}
-            />
+            return getQuestion();
         }
-        if (isQuizGameActivated && isGameFinished)
+        if (!isQuizGameActivated)
         {
-            return <></>
+            return showIntroduction()
         }
-        return <div className={styles.introduction}>
-            <p>CHECK this QUIZ Game?</p>
-            <p>Press start button below</p>
-            <p>bro</p>
-        </div>
+        return <></>
     }
 
-    const getVariantsForQuestion = () => {
+    const buttonVariantsAnimation = {
+        visible: i => ({
+            opacity: 1,
+            /*y: 0,*/
+            transition: {
+                delay: i * 0.3,
+            }
+        }),
+        hidden: {
+            opacity: 0,
+            /*y: -100,*/
+        }
+    }
+
+    const getVariants = useCallback(() => {
+        return <div className={styles.variants}>
+            { question.variants.map((v, i) => (
+                <motion.div key={v.verbAndParticle+clickCounter}
+                            variants={buttonVariantsAnimation}
+                            initial='hidden'
+                            animate='visible'
+                            custom={i}>
+                {/*<motion.div key={v.verbAndParticle+clickCounter}
+                            initial={{
+                                x:-1000,
+                            }}
+                            animate={{
+                                x: 0,
+                            }}
+                            transition={{
+                                delay: 0.5
+                            }}>*/}
+                    <QuizVariantButton
+                        v={v}
+                        usersWrongSelectedVariants={props.usersWrongSelectedVariants}
+                        analyzeUsersAnswer={analyzeUsersAnswer}
+                    />
+                </motion.div>
+            ))}
+        </div>
+    }, [isNewLevel])
+
+    const showVariantsForQuestion = () => {
         if (isQuizGameActivated && !isGameFinished)
         {
-            return <div className={styles.variants}>
-                { props.currentQuestion.variants.map(v => (
-                    <div key={v.variantNumber}>
-                            <QuizVariantButton
-                                v={v}
-                                usersWrongSelectedVariants={props.usersWrongSelectedVariants}
-                                analyzeUsersAnswer={analyzeUsersAnswer}
-                            />
-                    </div>
-                ))}
-                </div>
+            return getVariants();
         }
         if (isQuizGameActivated && isGameFinished)
         {
@@ -154,8 +232,8 @@ const Quiz = (props) =>  {
 
                 {/*{()=>{createSmallField()}}*/}
 
-                {props.usersChosenVariants.map(v => (
-                    <div key={v.verbAndParticle}>
+                {props.usersChosenVariants.map((v, i) => (
+                    <div key={i}>
                         {v.isVariantTrue
                             ? <div className={styles.progressDivIfGuess}></div>
                             : <div className={styles.progressDivIfWrong}></div>
@@ -205,10 +283,11 @@ const Quiz = (props) =>  {
 
     const showDebugSection = () => {
         return <div className={styles.debugSection}>
-            <p><span>isQuizGameActivated:</span> {isQuizGameActivated.toString()}</p>
-            <p><span>isGameFinished:</span> {isGameFinished.toString()}</p>
+            {/*<p><span>isQuizGameActivated:</span> {isQuizGameActivated.toString()}</p>
+            <p><span>isGameFinished:</span> {isGameFinished.toString()}</p>*/}
             <p><span>clickCounter:</span> {clickCounter}</p>
             <p><span>isUserGuess:</span> {isUserGuess.toString()}</p>
+            <p><span>isNewLevel:</span> {isNewLevel.toString()}</p>
             <p><span>questionCounter:</span> {questionCounter}</p>
             <p><span>que.id:</span> {question.id}</p>
             <p><span>que.questionText:</span> {question.questionText}</p>
@@ -261,9 +340,9 @@ const Quiz = (props) =>  {
         <div className={styles.quizWrapper}>
             { showButtonStart() }
 
-            { getQuestion() }
+            { showQuestion() }
 
-            { getVariantsForQuestion() }
+            { showVariantsForQuestion() }
 
             { showUserProgress() }
 
