@@ -4,6 +4,7 @@ import {
     setNewQuestion,
     analyzeRightUsersAnswer,
     analyzeWrongUsersAnswer,
+    savePrevQuestions,
     resetUserActivity,
 } from "../../redux/quiz-reducer";
 import Quiz from "./Quiz";
@@ -29,6 +30,7 @@ let mapStateToProps = (state) => {
         /*questions: state.quizPage.questions,*/
         numberOfQuestionsForGame: state.quizPage.numberOfQuestionsForGame,
         currentQuestion: state.quizPage.currentQuestion,
+        previousQuestions: state.quizPage.previousQuestions,
         usersLastChosenVariant: state.quizPage.usersLastChosenVariant,
         usersChosenVariants: state.quizPage.usersChosenVariants,
         usersLastGuessedVariant: state.quizPage.usersLastGuessedVariant,
@@ -39,5 +41,5 @@ let mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    {setNewQuestion, analyzeRightUsersAnswer, analyzeWrongUsersAnswer, resetUserActivity}
+    {setNewQuestion, analyzeRightUsersAnswer, analyzeWrongUsersAnswer, savePrevQuestions, resetUserActivity}
 )(QuizContainer);

@@ -1,6 +1,7 @@
 const SET_NEW_QUESTION = 'SET_NEW_QUESTION';
 const ANALYZE_RIGHT_USERS_ANSWER = 'ANALYZE_RIGHT_USERS_ANSWER';
 const ANALYZE_WRONG_USERS_ANSWER = 'ANALYZE_WRONG_USERS_ANSWER';
+const SAVE_PREV_QUESTIONS = 'SAVE_PREV_QUESTIONS';
 const RESET_USER_ACTIVITY = 'RESET_USER_SCORE';
 
 let initialState = {
@@ -35,11 +36,11 @@ let initialState = {
                 {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Act up', meaning: 'Behave badly or strangely.', example: 'My computer\'s ACTING UP; I think I might have a virus.'},
                 {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Act on', meaning: 'To take action because of something like information received.', example: 'The police were ACTING ON a tip from an informer and caught the gang red-handed.'},
             ]},
-        {id: 5, questionText: 'Give out, distribute.', variants: [
-                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Fetch up', meaning: 'Arrive unintentionally.', example: 'The boat FETCHED UP on the beach.'},
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Talk around', meaning: 'Persuade.', example: 'She TALKED them AROUND to accepting her point of view.'},
-                {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Dole out', meaning: 'Give out, distribute.', example: 'They were DOLING OUT leaflets in front of the station.'},
-                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Press on', meaning: 'Continue with something.', example: 'We PRESSED ON to get to our destination before night fell.'},
+        {id: 5, questionText: 'Add or attach something that wasn\'t planned to something.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Tone up', meaning: 'Make stronger or firmer.', example: 'The exercises will TONE UP your stomach muscles.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Chance upon', meaning: 'Find something by accident.', example: 'I CHANCED UPON a very rare book in car boot sale and bought it for 65p.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Ratchet up', meaning: 'Increase.', example: 'The media are trying to RATCHET UP the pressure on the person.'},
+                {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Tack onto', meaning: 'Add or attach something that wasn\'t planned to something.', example: 'I TACKED a quick message ONTO the end of the letter after I\'d printed it.'},
             ]},
         {id: 6, questionText: 'Amount to, be the most important aspect.', variants: [
                 {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Come down to', meaning: 'Amount to, be the most important aspect.', example: 'It all COMES DOWN TO a question of who tries hardest.'},
@@ -89,15 +90,16 @@ let initialState = {
                 {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Chime in', meaning: 'Contribute to a discussion.', example: 'If it\'s Ok, I\'d like to CHIME IN because I think it\'s a good idea.'},
                 {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Stick up', meaning: 'Stand on end.', example: 'The static electricity made my hair STICK UP.'},
             ]},
-        {id: 14, questionText: 'Add or attach something that wasn\'t planned to something.', variants: [
-                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Tone up', meaning: 'Make stronger or firmer.', example: 'The exercises will TONE UP your stomach muscles.'},
-                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Chance upon', meaning: 'Find something by accident.', example: 'I CHANCED UPON a very rare book in car boot sale and bought it for 65p.'},
-                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Ratchet up', meaning: 'Increase.', example: 'The media are trying to RATCHET UP the pressure on the person.'},
-                {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Tack onto', meaning: 'Add or attach something that wasn\'t planned to something.', example: 'I TACKED a quick message ONTO the end of the letter after I\'d printed it.'},
+        {id: 14, questionText: 'Give out, distribute.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Fetch up', meaning: 'Arrive unintentionally.', example: 'The boat FETCHED UP on the beach.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Talk around', meaning: 'Persuade.', example: 'She TALKED them AROUND to accepting her point of view.'},
+                {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Dole out', meaning: 'Give out, distribute.', example: 'They were DOLING OUT leaflets in front of the station.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Press on', meaning: 'Continue with something.', example: 'We PRESSED ON to get to our destination before night fell.'},
             ]},
     ],
     numberOfQuestionsForGame: 5,
     currentQuestion: {},
+    previousQuestions: [],
     usersLastChosenVariant: {},
     usersChosenVariants: [],
     usersLastGuessedVariant: {},
@@ -150,9 +152,18 @@ const quizReducer = (state = initialState, action) => {
             }
         }
 
+        case SAVE_PREV_QUESTIONS:
+        {
+            return {
+                ...state,
+                previousQuestions: [...state.previousQuestions, action.question],
+            }
+        }
+
         case RESET_USER_ACTIVITY:
             return {
                 ...state,
+                previousQuestions: [],
                 usersLastChosenVariant: {},
                 usersChosenVariants: [],
                 usersLastGuessedVariant: {},
@@ -168,6 +179,7 @@ const quizReducer = (state = initialState, action) => {
 export const setNewQuestion = (questionId) => ({type: SET_NEW_QUESTION, questionId})
 export const analyzeRightUsersAnswer = (variant, questionId) => ({type: ANALYZE_RIGHT_USERS_ANSWER, variant, questionId})
 export const analyzeWrongUsersAnswer = (variant, questionId) => ({type: ANALYZE_WRONG_USERS_ANSWER, variant, questionId})
+export const savePrevQuestions = (question) => ({type: SAVE_PREV_QUESTIONS, question})
 export const resetUserActivity = () => ({type: RESET_USER_ACTIVITY})
 
 export default quizReducer;

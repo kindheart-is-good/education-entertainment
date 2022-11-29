@@ -23,8 +23,9 @@ const Quiz = (props) =>  {
     const [userScore, setUserScore] = useState(0);
 
     useEffect( () => {
-        props.setNewQuestion(randomInteger(1, 11));
+        props.setNewQuestion(randomInteger(1, 12));
         setCurrentQuestion(props.currentQuestion);
+        console.log("QUESTION FROM useEffect ||| props.id: " + props.currentQuestion.id + ', q.id' + question.id);
     }, [] )
 
     /*useEffect( () => {
@@ -36,21 +37,16 @@ const Quiz = (props) =>  {
 
     useEffect( () => {
         if (isUserGuess) {
-            /*console.log("useEffect #1 isUserGuess: " + isUserGuess);
-            console.log("useEffect #1 isNewLevel: " + isNewLevel);*/
-
             setNewLevel(true);
 
-            console.log("useEffect #2 isUserGuess: " + isUserGuess);
-            console.log("useEffect #2 isNewLevel: " + isNewLevel);
+            /*console.log("useEffect #2 isUserGuess: " + isUserGuess);
+            console.log("useEffect #2 isNewLevel: " + isNewLevel);*/
 
             setTimeout(() => {
                 setNewLevel(false);
-                console.log("useEffect #3 isUserGuess: " + isUserGuess);
-                console.log("useEffect #3 isNewLevel: " + isNewLevel);
+                /*console.log("useEffect #3 isUserGuess: " + isUserGuess);
+                console.log("useEffect #3 isNewLevel: " + isNewLevel);*/
             }, 500)
-
-            /*setNewLevel(false);*/
         }
     }, [questionCounter] )
 
@@ -70,8 +66,9 @@ const Quiz = (props) =>  {
         setUsersGuess(false);
         setNewLevel(true);
 
-        props.setNewQuestion(randomInteger(1, 11));     // не успевает передать (доходит после сворачивания окна), возможно из-за асинхронщины. Поэтому временным решением добавил дополнительное условие внутри getQuestion(). Второе решние добавить useEffect
+        props.setNewQuestion(randomInteger(1, 12));     // не успевает передать (доходит после сворачивания окна), возможно из-за асинхронщины. Поэтому временным решением добавил дополнительное условие внутри getQuestion(). Второе решние добавить useEffect
         setCurrentQuestion(props.currentQuestion);
+        console.log("QUESTION FROM activateNewQuizGame() ||| props.id: " + props.currentQuestion.id + ', q.id' + question.id);
         setQuestionCounter(1);
         setUserScore(0);
         props.resetUserActivity();
@@ -104,7 +101,7 @@ const Quiz = (props) =>  {
     }
 
     const getQuestion = useCallback(() => {
-        console.log('QUESTION: ' + question.questionText);
+        /*console.log('QUESTION: ' + question.questionText);*/
         return <QuizQuestion questionText={question.questionText}
                                     currentQuestionNumber={questionCounter}
                                     id={question.id}
@@ -295,6 +292,35 @@ const Quiz = (props) =>  {
         </div>
     }
 
+    const [newQuestionIndex, setNewQuestionIndex] = useState(0);
+    let newRandomIndex = 0;
+
+    const generateNewQuestion = () => {
+        newRandomIndex = randomInteger(1, 5);
+        setNewQuestionIndex(newRandomIndex);
+        /*alert('newQuestionIndex = ' + newRandomIndex + ', question id = ' + question.id);*/
+
+        //debugger;
+        if (props.previousQuestions.length > 0) {
+            //debugger;
+            while (props.previousQuestions.some(q => q.id === newRandomIndex))
+            {
+                console.log('wrong INDEX = ' + newRandomIndex + ', question id = ' + question.id)
+                newRandomIndex = randomInteger(1, 6);
+                setNewQuestionIndex(newRandomIndex);
+                //debugger;
+                console.log('FIXED INDEX = ' + newRandomIndex + ', question id = ' + question.id);
+                //debugger;
+            }
+        }
+        //debugger;
+        props.setNewQuestion(newQuestionIndex);
+        setCurrentQuestion(props.currentQuestion);
+        console.log(` ||||||||| newRandomIndex = ${newRandomIndex}, 
+         ~ newQuestionIndex = ${newQuestionIndex}, 
+         ~ question id = ${question.id}`)
+    }
+
     const analyzeUsersAnswer = (variant) => {
         /*props.getPlayerStartingActivity();*/
         setClickCounter(prev => prev + 1);
@@ -303,28 +329,31 @@ const Quiz = (props) =>  {
 
         if (variant.isVariantTrue) {
             props.analyzeRightUsersAnswer(variant);
-
-            setUsersGuess(true);
             console.log('YES');
+            setUsersGuess(true);
+            setUserScore(prev => prev + 10);
+
+            props.savePrevQuestions(question);
+            /*props.previousQuestions.forEach((item, index, array) => {
+                console.log(`q.id #${item.id} имеет позицию ${index} в ${array}`);
+            });*/
 
             if (questionCounter < props.numberOfQuestionsForGame)
             {
                 setQuestionCounter(prev => prev + 1);
-                props.setNewQuestion(randomInteger(1, 11));
-                setCurrentQuestion(props.currentQuestion);
-
-                setUserScore(prev => prev + 10);
+                generateNewQuestion();
             }
             else {
                 setGameFinished(true)
+                props.previousQuestions.forEach((item, index, array) => {
+                    console.log(`q.id #${item.id} имеет позицию ${index} в ${array}`);
+                });
             }
         }
         else {
             props.analyzeWrongUsersAnswer(variant);
-
-            setUsersGuess(false);
             console.log('NO');
-
+            setUsersGuess(false);
             setUserScore(prev => prev - 5);
         }
     }
