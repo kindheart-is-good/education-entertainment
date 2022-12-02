@@ -1,0 +1,60 @@
+.modal {
+    height: 100vh;
+    width: 100vw;
+    /*background-color: rgba(0,0,0,0.4);*/
+    background-color: rgba(0,0,0,0.6);
+    /*background-color: green;*/
+    position: fixed;    /* Чтобы при скроле страницы Модальное_Окно всегда оставалось посередине */
+    top: 0;
+    left: 0;
+    /* Ниже 3-мя строчками отцентруем это Окно по горизонтали и по вертикали: */
+    /*display: flex;*/
+    /*align-items: center;
+    justify-content: center;*/
+
+    /*transform: scale(0);*/    /* Т.е. уменьшим до такой степени что Окна не будет видно */
+
+    opacity: 0;     /* Сделаем Модальное_Окно прозрачным */
+    pointer-events: none;   /* Чтобы Модальное_Окно не перекрывало элементы на странице (чтобы мы могли с ними взаимодействовать) */
+
+    transition: 0.5s;   /* Чтобы анимировать открытие Модального_Окна */
+}
+
+.modal.active {
+    /*.active {*/
+    /*transform: scale(1);*/    /* Т.е. увеличим Окно до полного размера (заданного в css-классе modal) */
+
+    opacity: 1;
+    pointer-events: all;    /* Т.к. когда мы отключили pointer-events в css-классе modal то Окно становится некликабельным */
+}
+
+.modalContent {
+    margin: 200px 525px;
+
+    padding: 50px;
+    border: 10px solid #e5e5e5;;
+    border-radius: 12px;
+    /*background-color: blue;*/
+    /*color: aqua;*/
+    font-size: 23px;
+
+    transform: scale(0.5);
+    transition: 0.4s all;
+
+    /*height: 400px;
+    width: 400px;*/
+    /* Высоту будем задавать динамически (благодаря тому что внутри есть какой-то текст) */
+    width: 50vw;
+
+
+    /*width: 200px;*/
+
+    /*background-color: #e3fd00;*/
+    background-color: #fff53d;
+    /*text-align: center;*/
+    /*font-size: 18px;*/
+}
+
+.modalContent.active {
+    transform: scale(1);
+}

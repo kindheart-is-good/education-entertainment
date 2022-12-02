@@ -48,9 +48,10 @@ const QuizVariantButton = (props) => {
 
     /*console.log('VARIANTS: ');*/
     return (
-        <button className={styles.variantButton}
+        /*<button className={styles.variantButton}*/
+        <button className={styles.button17} role="button"
                 id={"button"+props.v.variantNumber}
-                /*disabled={onDisabled()}*/
+                disabled={onDisabled()}
                 onClick={() => {
                     /*onChangeColor(props.v);*/
                     props.analyzeUsersAnswer(props.v);
