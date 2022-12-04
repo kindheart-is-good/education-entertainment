@@ -1,15 +1,22 @@
 .header {
     grid-area: header;
 
-    height: 20px;
+    height: 50px;
     margin: 20px;
-    padding-bottom: 1px;
-    padding-right: 30px;
-    /*background-color: #fdd142;*/
-    background-color: #e5e5e5;
+
     /*outline: solid 6px #e5e5e5;*/
-    border: 6px solid #fdd142;
-    border-radius: 10px;
+    border: 11px solid #fdd142;
+    /*border: #fdd142 dashed 10px;*/
+    /*outline: 3px solid #fff;*/
+    border-radius: 16px;
+    /*border-radius: 100px 15px 100px 15px;*/
+    background-color: #e5e5e5;
+    /*background-color: #fdd142;*/
+}
+
+.headerText {
+    padding-right: 30px;
+    padding-top: 16px;
     text-align: right;
-    /*font-size: 23px;*/
+    font-size: 18px;
 }

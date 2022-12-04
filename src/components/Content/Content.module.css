@@ -3,10 +3,11 @@
 
     margin: 20px;
     padding: 100px;
-    min-height: 86px;
+    min-height: 133px;
+    border: 12px solid #fff53d;
+    border-radius: 16px;
     /*background-color: #fff53d;*/
     background-color: #e5e5e5;
-    border: 10px solid #fff53d;
-    border-radius: 10px;
     text-align: center;
+    font-size: 18px;
 }

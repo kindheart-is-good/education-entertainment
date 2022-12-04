@@ -34,7 +34,7 @@ const Quiz = (props) =>  {
     const [modalActive, setModalActive] = useState(false);
 
     useEffect( () => {
-        props.setNewQuestion(randomInteger(1, 12));
+        props.setNewQuestion(randomInteger(1, 17));
         setCurrentQuestion(props.currentQuestion);
         console.log(`||| Question FROM useEffect \n||| props.id: ${props.currentQuestion.id}, q.id: ${question.id}`);
     }, [] )
@@ -81,7 +81,7 @@ const Quiz = (props) =>  {
         setUsersGuess(false);
         setNewLevel(true);
 
-        props.setNewQuestion(randomInteger(1, 12));     // не успевает передать (доходит после сворачивания окна), возможно из-за асинхронщины. Поэтому временным решением добавил дополнительное условие внутри getQuestion(). Второе решние добавить useEffect
+        props.setNewQuestion(randomInteger(1, 17));     // не успевает передать (доходит после сворачивания окна), возможно из-за асинхронщины. Поэтому временным решением добавил дополнительное условие внутри getQuestion(). Второе решние добавить useEffect
         setCurrentQuestion(props.currentQuestion);
         console.log(`||| Question FROM activateNewQuizGame() \n||| props.id: ${props.currentQuestion.id}, q.id: ${question.id}`);
         setQuestionCounter(1);
@@ -248,11 +248,20 @@ const Quiz = (props) =>  {
             }
         }
 
+        if (clickCounter === 0)
+            return <></>
+
         if (isQuizGameActivated) {
             return <div className={styles.userProgress}>
-                <div className={styles.progressText}>
+                <motion.div className={styles.progressText}
+                            whileHover={{
+                                scale: 1.3,
+                            }}
+                            whileTap={{
+                                color: '#f3f3f3'
+                            }}>
                     {questionCounter} / {props.numberOfQuestionsForGame}
-                </div>
+                </motion.div>
 
                 {/*{()=>{createSmallField()}}*/}
 
@@ -269,31 +278,50 @@ const Quiz = (props) =>  {
         return <></>
     }
 
+
     const showUserScore = () => {
         if (isQuizGameActivated && !isGameFinished && isUserGuess)
         {
             return <div className={styles.scoreWrapper}>
-                <div className={styles.scoreDefault}>
+                <motion.div className={styles.scoreDefault}
+                            whileHover={{
+                                scale: 1.2,
+                            }}
+                            whileTap={{
+                                color: '#f3f3f3'
+                            }}>
                     <span>SCORE:</span> {userScore}
-                </div>
+                </motion.div>
             </div>
         }
         /*if (isQuizGameActivated && !isGameFinished && !isUserGuess && !props.isUserStarted)*/
         if (isQuizGameActivated && !isGameFinished && !isUserGuess && clickCounter===0)
         {
             return <div className={styles.scoreWrapper}>
-                <div className={styles.scoreIfUserGuessed}>
+                <motion.div className={styles.scoreIfUserGuessed}
+                            whileHover={{
+                                scale: 1.2,
+                            }}
+                            whileTap={{
+                                color: '#f3f3f3'
+                            }}>
                     <span>SCORE:</span> {userScore}
-                </div>
+                </motion.div>
             </div>
         }
         /*if (isQuizGameActivated && !isGameFinished && !isUserGuess && props.isUserStarted)*/
         if (isQuizGameActivated && !isGameFinished && !isUserGuess)
         {
             return <div className={styles.scoreWrapper}>
-                <div className={styles.scoreIfUserWrong}>
+                <motion.div className={styles.scoreIfUserWrong}
+                            whileHover={{
+                                scale: 1.2,
+                            }}
+                            whileTap={{
+                                color: '#f3f3f3'
+                            }}>
                     <span>SCORE:</span> {userScore}
-                </div>
+                </motion.div>
             </div>
         }
         return <></>
@@ -324,7 +352,7 @@ const Quiz = (props) =>  {
     let newRandomIndex = 0;
 
     const generateNewQuestion = () => {
-        newRandomIndex = randomInteger(1, 5);
+        newRandomIndex = randomInteger(1, 17);
         setNewQuestionIndex(newRandomIndex);
         /*alert('newQuestionIndex = ' + newRandomIndex + ', question id = ' + question.id);*/
 
@@ -334,7 +362,7 @@ const Quiz = (props) =>  {
             while (props.previousQuestions.some(q => q.id === newRandomIndex))
             {
                 console.log('wrong INDEX = ' + newRandomIndex + ', question id = ' + question.id)
-                newRandomIndex = randomInteger(1, 6);
+                newRandomIndex = randomInteger(1, 17);
                 setNewQuestionIndex(newRandomIndex);
                 //debugger;
                 console.log('FIXED INDEX = ' + newRandomIndex + ', question id = ' + question.id);

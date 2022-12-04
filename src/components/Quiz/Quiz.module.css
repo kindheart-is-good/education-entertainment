@@ -3,15 +3,15 @@
 
     min-height: 286px;
     margin: 20px;
+    /*outline: solid 6px #e5e5e5;*/
+    border: 12px solid #fff53d;
+    border-radius: 16px;
     /*background-color: #fff53d;*/
     background-color: #e5e5e5;
-    /*outline: solid 6px #e5e5e5;*/
-    border: 10px solid #fff53d;
-    border-radius: 10px;
     text-align: center;
 
     display: grid;
-    grid-template-columns: 200px 2fr 200px;
+    grid-template-columns: 210px 2fr 210px;
     grid-template-rows: 1fr 1fr 150px;
     grid-template-areas:
     "progress question score"
@@ -22,7 +22,7 @@
 .introduction {
     grid-area: question;
     padding-top: 50px;
-    font-size: 21px;
+    font-size: 22px;
 }
 
 .startQuiz {
@@ -48,53 +48,68 @@
 
 .variants {
     grid-area: options;
+    margin-top: 5px;
 }
 
 .userProgress {
     grid-area: progress;
+    margin-top: 95px;
+    /*margin-top: 160px;*/
     /*background-color: grey;*/
     background-color: #e5e5e5;
 }
 
 .progressText {
     margin: 30px;
+    font-size: 18px;
 }
 
 .progressDivIfGuess {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: 1px solid #0192c6;
-    /*outline: solid 1px #868686;*/
-    margin-left: 100px;
+    height: 13px;
+    width: 18px;
+    margin: 6px;
+    /*margin-left: 115px;*/
+    /*margin-left: 107px;*/
+    /*margin-left: 97px;*/
+    /*margin-left: 87px;*/
+    margin-left: 92px;
     margin-top: 5px;
+    /*outline: solid 1px #868686;*/
+    border: 1px solid #0192c6;
+    border-radius: 50%;
     background-color: #e3fd00;
 }
 
 .progressDivIfWrong {
-    width: 10px;
     height: 10px;
-    border-radius: 50%;
-    border: 1px solid #0192c6;
+    width: 22px;
+    margin: 3px;
+    /*margin-left: 95px;*/
+    /*margin-left: 87px;*/
+    /*margin-left: 117px;*/
+    /*margin-left: 107px;*/
+    margin-left: 103px;
     /*outline: solid 1px #868686;*/
-    margin-left: 90px;
+    border: 1px solid #0192c6;
+    border-radius: 35%;
     background-color: #e2754e;
 }
 
 .scoreWrapper {
     grid-area: score;
-    padding-right: 50px;
+    margin-right: 60px;
+    margin-left: 0px;
 }
 
 .scoreDefault {
-    border: 10px solid inherit;
-    border-radius: 30px;
     margin-top: 40px;
     padding: 10px 10px;
+    border: 10px solid inherit;
+    border-radius: 30px;
     background-color: #e3fd00;
     /*background-color: #e8d2a1;*/
     text-align: center;
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .scoreDefault span {
@@ -102,14 +117,14 @@
 }
 
 .scoreIfUserGuessed {
-    border: 10px solid inherit;
-    border-radius: 30px;
     margin-top: 40px;
     padding: 10px 10px;
+    border: 10px solid inherit;
+    border-radius: 30px;
     background-color: #e3fd00;
     /*background-color: #e8d2a1;*/
     text-align: center;
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .scoreIfUserGuessed span {
@@ -117,16 +132,16 @@
 }
 
 .scoreIfUserWrong {
-    border: 10px solid inherit;
-    border-radius: 30px;
     margin-top: 40px;
     padding: 10px 10px;
+    border: 10px solid inherit;
+    border-radius: 30px;
     /*background-color: #d2beb5;*/
     /*background-color: #e9a379;*/
     /*background-color: #d31e27;*/
     background-color: #e2754e;
     text-align: center;
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .scoreIfUserWrong span {
@@ -135,48 +150,24 @@
 
 .scoreFinalResult {
     grid-area: question;
-    padding-top: 50px;
+    padding-top: 55px;
     font-size: 27px;
 }
 
-.tipIfUserGuessed {
-    grid-area: tipsIfGuessed;
-
-    /*margin-left: 50px;*/
-    width: 200px;
-    /*position: relative;
-    left: 250px;
-    margin: 0 auto;*/
-    padding: 25px;
-    /*margin-left: 40px;*/
-    /*background-color: #d0fe15;*/
-     background-color: #e3fd00;
-    /*background-color: #f1eea1;*/
-        /*background-color: #eeeee4;*/
-    /*background-color: #dde5d8;*/
-    /*background-color: #99f2c8;*/
-    /*background-color: #a0eec7;*/
-    /*background-color: #a7e0d7;*/
-    /*background-color: #cff1fb;*/
-    /*background-color: #e8d2a1;*/
-    text-align: center;
-    font-size: 18px;
-}
-
 .modalTitle {
-    padding-bottom: 25px;
     /*margin: 20px;*/
+    padding-bottom: 25px;
 }
 
 .tipIfUserWrong {
     grid-area: tipsIfWrong;
 
+    /*margin: 0 auto;*/
+    margin-bottom: 90px;
+    padding: 25px;
     width: 150px;
     position: relative;
-    left: -25px;
-    /*margin: 0 auto;*/
-    padding: 25px;
-    margin-bottom: 90px;
+    left: -15px;
     /*background-color: #d2beb5;*/
     /*background-color: #e9a379;*/
     /*background-color: #d31e27;*/

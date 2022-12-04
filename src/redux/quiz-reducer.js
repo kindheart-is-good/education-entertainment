@@ -84,13 +84,55 @@ let initialState = {
                 {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Wade through', meaning: 'Get to the end of something with difficulty.', example: 'It took me ages to WADE THROUGH the book.'},
                 {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Root about', meaning: 'Look in a place to try to find something.', example: 'He ROOTED ABOUT in his briefcase, trying to find a pen.'},
             ]},
-        {id: 13, questionText: 'Make something sticky.', variants: [
+        {id: 13, questionText: 'Become noticeable in something.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Cruise through', meaning: 'Pass or succeed easily.', example: 'He CRUISED THROUGH the exam.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Cover for', meaning: 'Do someone\'s work while they are temporarily absent.', example: 'I COVERED FOR her while she was off sick.'},
+                {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Creep into', meaning: 'Become noticeable in something.', example: 'An angry tone CREPT INTO her voice.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Count for', meaning: 'Be recognised as important, worthwhile or valuable.', example: 'Experience COUNTS FOR a lot in decision making.'},
+            ]},
+        {id: 14, questionText: 'Continue doing something.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Get along with', meaning: 'Have a good relationship with someone.', example: 'I don\'t GET ALONG WITH my sister - we have nothing in common.'},
+                {variantNumber: 2, isVariantTrue: true, verbAndParticle: 'Get on', meaning: 'Continue doing something.', example: 'The teacher asked the pupils to GET ON with some work quietly as she had to leave the classroom.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Get into', meaning: 'Be accepted or admitted.', example: 'She did well and GOT INTO Cambridge University.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Get it on with', meaning: 'Have sex with.', example: 'Did you GET IT ON WITH him?'},
+            ]},
+        {id: 15, questionText: 'Start doing something.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Set up', meaning: 'Prepare equipment, software, etc., for use.', example: 'The technician SET UP the computer network perfectly.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Set to', meaning: 'Work hard or enthusiastically.', example: 'If we all SET TO, we should be able to finish this in a few hours.'},
+                {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Set about', meaning: 'Start doing something.', example: 'We SET ABOUT the cleaning and got it done before lunchtime.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Set in', meaning: 'Change season noticeably.', example: 'Winter has SET IN; it\'s started snowing.'},
+            ]},
+        {id: 16, questionText: 'Develop in a positive way.', variants: [
+                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Shape up', meaning: 'Develop in a positive way.', example: 'Things are SHAPING UP at work - everything\'s going well again.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Settle on', meaning: 'Agree.', example: 'They couldn\'t agree at first on a name for their daughter, but finally SETTLED ON Alice.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Share in', meaning: 'Have a part in a project, activity, etc.', example: 'A number of firms will SHARE IN the development.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Stem from', meaning: 'Originate, be caused by.', example: 'The trouble STEMS FROM their refusal to discuss the matter.'},
+            ]},
+        {id: 17, questionText: 'Mention.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Tag on', meaning: 'Add an additional point to something written or spoken.', example: 'He TAGGED ON a few comments after reading my report.'},
+                {variantNumber: 2, isVariantTrue: true, verbAndParticle: 'Touch upon', meaning: 'Mention.', example: 'They didn\'t TOUCH UPON the subject because of the controversy.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Talk through', meaning: 'Guide someone through an issue.', example: 'The teacher TALKED me THROUGH the test so I knew what to expect.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Tick along', meaning: 'Make reasonable progress without any serious problems.', example: 'Things are TICKING ALONG at work while the director\'s away.'},
+            ]},
+        {id: 18, questionText: 'Become.', variants: [
+                {variantNumber: 1, isVariantTrue: true, verbAndParticle: 'Turn into', meaning: 'Become.', example: 'Tadpoles TURN INTO frogs.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Turn in', meaning: 'Hand in, submit.', example: 'She TURNED IN her paper.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Turn up', meaning: 'Appear.', example: 'She didn\'t TURN UP for class today.'},
+                {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Turn to', meaning: 'Try to get help.', example: 'She had nobody to TURN TO when her husband died.'},
+            ]},
+        {id: 19, questionText: 'Just get enough to succeed, pass or be accepted.', variants: [
+                {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Scrape by', meaning: 'Just manage to pass something.', example: 'I thought I was going to fail, but SCRAPED BY with 51%.'},
+                {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Scrape along', meaning: 'Manage with little money.', example: 'I\'ve been SCRAPING ALONG on temporary work since I lost my job.'},
+                {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Scrape into', meaning: 'Be accepted somewhere, but only just.', example: 'She got mediocre grades and just SCRAPED INTO university.'},
+                {variantNumber: 4, isVariantTrue: true, verbAndParticle: 'Scrape in', meaning: 'Just get enough to succeed, pass or be accepted.', example: 'The government SCRAPED IN with 51% of the votes cast.'},
+            ]},
+        {id: 20, questionText: 'Make something sticky.', variants: [
                 {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Juice up', meaning: 'Make something more exciting or perform better.', example: 'I need to buy some memory to JUICE my computer UP.'},
                 {variantNumber: 2, isVariantTrue: true, verbAndParticle: 'Clag up', meaning: 'Make something sticky.', example: 'His arteries are CLAGGED UP because he eats so much saturated fat.'},
                 {variantNumber: 3, isVariantTrue: false, verbAndParticle: 'Chime in', meaning: 'Contribute to a discussion.', example: 'If it\'s Ok, I\'d like to CHIME IN because I think it\'s a good idea.'},
                 {variantNumber: 4, isVariantTrue: false, verbAndParticle: 'Stick up', meaning: 'Stand on end.', example: 'The static electricity made my hair STICK UP.'},
             ]},
-        {id: 14, questionText: 'Give out, distribute.', variants: [
+        {id: 21, questionText: 'Give out, distribute.', variants: [
                 {variantNumber: 1, isVariantTrue: false, verbAndParticle: 'Fetch up', meaning: 'Arrive unintentionally.', example: 'The boat FETCHED UP on the beach.'},
                 {variantNumber: 2, isVariantTrue: false, verbAndParticle: 'Talk around', meaning: 'Persuade.', example: 'She TALKED them AROUND to accepting her point of view.'},
                 {variantNumber: 3, isVariantTrue: true, verbAndParticle: 'Dole out', meaning: 'Give out, distribute.', example: 'They were DOLING OUT leaflets in front of the station.'},
