@@ -2,7 +2,7 @@
     grid-area: options;
 }*/
 
-.variantButton1 {
+.variantButton {
     margin: 5px;
     padding: 12px;
     /*height: 100px;*/
@@ -16,7 +16,7 @@
     font-size: 20px;
 }
 
-.variantButton {
+.variantButton1 {
     margin: 5px;
     padding: 12px;
     /*height: 100px;*/
@@ -66,12 +66,13 @@
     text-transform: none;
     font-size: 22px;
     font-weight: 100;
-    letter-spacing: .25px;
+    /*letter-spacing: .25px;*/
 }
 
 .button17:hover {
     background: #F6F9FE;
     color: #174ea6;
+    /*color: #0192c6;*/
 }
 
 .button17:active {
@@ -81,7 +82,7 @@
 
 .button17:focus {
     outline: none;
-    border: 2px solid #4285f4;
+    border: 2px solid #0192c6;
 }
 
 .button17:not(:disabled) {

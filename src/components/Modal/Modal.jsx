@@ -9,7 +9,6 @@ const Modal = ({active, setActive, children}) => {
             /*className={d => d.isActive(active) ? styles.active : styles.modal}*/
             onClick={() => setActive(false)}
         >
-            Hello
             <div
                 className={active ? "modalContent active" : "modalContent"}
                 onClick={e => e.stopPropagation()}  /* stopPropagation() - Чтобы окно не закрывалось при нажатии на контентную часть */

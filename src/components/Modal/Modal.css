@@ -29,19 +29,20 @@
 }
 
 .modalContent {
-    margin: 205px 525px;
+    margin: 220px 550px;
     padding: 50px;
     /*height: 400px;
     width: 400px;*/
     /*width: 200px;*/
     /* Высоту будем задавать динамически (благодаря тому что внутри есть какой-то текст) */
-    width: 50vw;
+    height: 355px;
+    width: 800px;
 
-    border: 10px solid #e5e5e5;;
+    border: 9px solid #e5e5e5;
     border-radius: 12px;
-    /*background-color: blue;*/
-    /*background-color: #e3fd00;*/
-    background-color: #fff53d;
+    /*background-color: #fff53d;*/
+    background-color: #e3fd00;
+    /*background-color: #dcd7d2;*/
     /*color: aqua;*/
 
     transform: scale(0.5);
@@ -49,7 +50,7 @@
 
     /*text-align: center;*/
     /*font-size: 18px;*/
-    font-size: 23px;
+    font-size: 22px;
 }
 
 .modalContent.active {

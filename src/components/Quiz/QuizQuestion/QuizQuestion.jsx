@@ -11,7 +11,7 @@ const QuizQuestion = (props) => {
                 </p>
                 <motion.p className={styles.questionText}
                           whileHover={{
-                              scale: 1.3,
+                              scale: 1.185,
                           }}
                           whileTap={{
                               color: '#f3f3f3'

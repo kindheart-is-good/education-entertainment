@@ -156,7 +156,27 @@
 
 .modalTitle {
     /*margin: 20px;*/
-    padding-bottom: 25px;
+    padding-bottom: 5px;
+    font-size: 29px;
+    letter-spacing: 3px;
+    color: #868686;
+    /*color: #f4f4f2;*/
+    /*color: #e3fd00;*/
+    /*text-shadow: -0.5px -0.5px 0 black, 0.5px -0.5px 0 black, -0.5px 0.5px 0 black, 0.5px 0.5px 0 black;*/
+    /*text-shadow: black 0px 0px 1px;
+    -webkit-font-smoothing: antialiased;*/
+    text-shadow: 2px 2px wheat;
+    /*text-shadow: 2px 2px black;*/
+}
+
+.modalTitle p {
+    letter-spacing: 1.5px;
+}
+
+.modalAboutAnswer {
+    /*margin: 20px;*/
+    /*padding-bottom: 15px;*/
+    /*font-size: 23px;*/
 }
 
 .tipIfUserWrong {

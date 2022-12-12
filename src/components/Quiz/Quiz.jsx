@@ -34,7 +34,7 @@ const Quiz = (props) =>  {
     const [modalActive, setModalActive] = useState(false);
 
     useEffect( () => {
-        props.setNewQuestion(randomInteger(1, 17));
+        props.setNewQuestion(randomInteger(1, 19));
         setCurrentQuestion(props.currentQuestion);
         console.log(`||| Question FROM useEffect \n||| props.id: ${props.currentQuestion.id}, q.id: ${question.id}`);
     }, [] )
@@ -81,7 +81,7 @@ const Quiz = (props) =>  {
         setUsersGuess(false);
         setNewLevel(true);
 
-        props.setNewQuestion(randomInteger(1, 17));     // не успевает передать (доходит после сворачивания окна), возможно из-за асинхронщины. Поэтому временным решением добавил дополнительное условие внутри getQuestion(). Второе решние добавить useEffect
+        props.setNewQuestion(randomInteger(1, 19));     // не успевает передать (доходит после сворачивания окна), возможно из-за асинхронщины. Поэтому временным решением добавил дополнительное условие внутри getQuestion(). Второе решние добавить useEffect
         setCurrentQuestion(props.currentQuestion);
         console.log(`||| Question FROM activateNewQuizGame() \n||| props.id: ${props.currentQuestion.id}, q.id: ${question.id}`);
         setQuestionCounter(1);
@@ -128,6 +128,7 @@ const Quiz = (props) =>  {
 
     const getQuestion = useCallback(() => {
         /*console.log('QUESTION: ' + question.questionText);*/
+        /*return <QuizQuestion questionText={props.currentQuestion.questionText}*/
         return <QuizQuestion questionText={question.questionText}
                                     currentQuestionNumber={questionCounter}
                                     id={question.id}
@@ -171,6 +172,7 @@ const Quiz = (props) =>  {
 
     const getVariants = useCallback(() => {
         return <div className={styles.variants}>
+            {/*{ props.currentQuestion.variants.map((v, i) => (*/}
             { question.variants.map((v, i) => (
                 <motion.div key={v.verbAndParticle+clickCounter}
                             variants={buttonVariantsAnimation}
@@ -255,7 +257,7 @@ const Quiz = (props) =>  {
             return <div className={styles.userProgress}>
                 <motion.div className={styles.progressText}
                             whileHover={{
-                                scale: 1.3,
+                                scale: 1.23,
                             }}
                             whileTap={{
                                 color: '#f3f3f3'
@@ -267,7 +269,7 @@ const Quiz = (props) =>  {
 
                 {props.usersChosenVariants.map((v, i) => (
                     <div key={i}>
-                        {v.isVariantTrue
+                        {v.isRightAnswer
                             ? <div className={styles.progressDivIfGuess}></div>
                             : <div className={styles.progressDivIfWrong}></div>
                         }
@@ -278,14 +280,13 @@ const Quiz = (props) =>  {
         return <></>
     }
 
-
     const showUserScore = () => {
         if (isQuizGameActivated && !isGameFinished && isUserGuess)
         {
             return <div className={styles.scoreWrapper}>
                 <motion.div className={styles.scoreDefault}
                             whileHover={{
-                                scale: 1.2,
+                                scale: 1.12,
                             }}
                             whileTap={{
                                 color: '#f3f3f3'
@@ -300,7 +301,7 @@ const Quiz = (props) =>  {
             return <div className={styles.scoreWrapper}>
                 <motion.div className={styles.scoreIfUserGuessed}
                             whileHover={{
-                                scale: 1.2,
+                                scale: 1.12,
                             }}
                             whileTap={{
                                 color: '#f3f3f3'
@@ -315,7 +316,7 @@ const Quiz = (props) =>  {
             return <div className={styles.scoreWrapper}>
                 <motion.div className={styles.scoreIfUserWrong}
                             whileHover={{
-                                scale: 1.2,
+                                scale: 1.12,
                             }}
                             whileTap={{
                                 color: '#f3f3f3'
@@ -330,7 +331,16 @@ const Quiz = (props) =>  {
     const showFinalResult = () => {
         return <div className={styles.scoreFinalResult}>
             <p style={{color: "orange"}}>Congratulations to you bro</p>
-            <p style={{color: "darkorange"}}>Your score:</p> <span>{userScore}</span>
+            <p style={{color: "darkorange"}}>Your score:</p>
+            <motion.div
+                whileHover={{
+                    scale: 1.3,
+                }}
+                whileTap={{
+                    color: '#f3f3f3'
+                }}>
+                {userScore}
+            </motion.div>
         </div>
     }
 
@@ -352,21 +362,28 @@ const Quiz = (props) =>  {
     let newRandomIndex = 0;
 
     const generateNewQuestion = () => {
-        newRandomIndex = randomInteger(1, 17);
-        setNewQuestionIndex(newRandomIndex);
-        /*alert('newQuestionIndex = ' + newRandomIndex + ', question id = ' + question.id);*/
+        /*newRandomIndex = randomInteger(1, 18);
+        setNewQuestionIndex(newRandomIndex);*/
+        setNewQuestionIndex(randomInteger(1, 25));
 
         //debugger;
         if (props.previousQuestions.length > 0) {
             //debugger;
-            while (props.previousQuestions.some(q => q.id === newRandomIndex))
+            console.log(`@ question id = ${question.id},
+                       \n@ props.currentQ id = ${props.currentQuestion.id},
+                       \n@ newQuestionIndex = ${newQuestionIndex},  
+                       \n@ newRandomIndex = ${newRandomIndex}`)
+
+            while (props.previousQuestions.some(q => q.id === newQuestionIndex))
             {
-                console.log('wrong INDEX = ' + newRandomIndex + ', question id = ' + question.id)
-                newRandomIndex = randomInteger(1, 17);
-                setNewQuestionIndex(newRandomIndex);
+                console.log('wrong INDEX = ' + newQuestionIndex + ', question id = ' + question.id)
+                /*newRandomIndex = randomInteger(1, 18);
+                setNewQuestionIndex(newRandomIndex);*/
+                setNewQuestionIndex(randomInteger(1, 25));
                 //debugger;
-                console.log('FIXED INDEX = ' + newRandomIndex + ', question id = ' + question.id);
+                console.log('FIXED INDEX = ' + newQuestionIndex + ', question id = ' + question.id);
                 //debugger;
+                if (props.previousQuestions.some(q => q.id !== newQuestionIndex)) break;
             }
         }
         //debugger;
@@ -378,11 +395,12 @@ const Quiz = (props) =>  {
                    \n~ newRandomIndex = ${newRandomIndex}`);
 
         /*      После ответа, question.id = предыдущему вопросу
-            question.id:           отстаёт на 1 вопроса.    Т.е. после ответа на 1 вопрос сожержит номер 1 вопроса
+            question.id:           отстаёт на 1 вопрос.     Т.е. после ответа на 1 вопрос сожержит номер 1 вопроса
             props.currentQuestion: содержит текущий вопрос. Т.е. после ответа на 1 вопрос содержит номер 2 вопроса
             newQuestionIndex:      опережает на 1 вопроса.  Т.е. после ответа на 1 вопрос содержит номер 3 вопроса
             newRandomIndex:        опережает на 2 вопроса.  Т.е. после ответа на 1 вопрос содержит номер 4 вопроса
          */
+        //debugger;
     }
 
     const openModalWindow = useCallback(() => {
@@ -391,21 +409,23 @@ const Quiz = (props) =>  {
 
     /*const analyzeUsersAnswer = (variant) => setTimeout(() => {*/
     const analyzeUsersAnswer = (variant) => {
+        //debugger;
         /*props.getPlayerStartingActivity();*/
         setClickCounter(prev => prev + 1);
 
         setUsersLastChosenVariant(variant);
 
-        if (variant.isVariantTrue) {
+        if (variant.isRightAnswer) {
             props.analyzeRightUsersAnswer(variant);
             console.log('* YES');
             setUsersGuess(true);
             setUserScore(prev => prev + 10);
 
-            props.savePrevQuestions(question);
-            /*props.previousQuestions.forEach((item, index, array) => {
+            /*props.savePrevQuestions(question);*/
+            props.savePrevQuestions(props.currentQuestion);
+            props.previousQuestions.forEach((item, index, array) => {
                 console.log(`q.id #${item.id} имеет позицию ${index} в ${array}`);
-            });*/
+            });
 
             openModalWindow();
 
@@ -456,14 +476,37 @@ const Quiz = (props) =>  {
 
             <Modal active={modalActive} setActive={setModalActive}>
                 <div>
-                    <div className={styles.modalTitle}>
-                        <p><b>last guessed variant:</b></p> <p>{usersLastChosenVariant.verbAndParticle}</p>
+                    <motion.div className={styles.modalTitle}
+                         whileHover={{
+                             scale: 1.123,
+                         }}
+                         whileTap={{
+                             color: '#f3f3f3'
+                         }}>
+                        <b>ViCTORY!
+                        <p>Right answer is: {usersLastChosenVariant.verbAndParticle}</p></b>
+                    </motion.div>
+                    <div className={styles.modalAboutAnswer}>
+                        <p><b>meaning:</b></p> <motion.p
+                                                    whileHover={{
+                                                        scale: 1.01,
+                                                    }}
+                                                    whileTap={{
+                                                        color: '#f3f3f3'
+                                                    }}>
+                        {usersLastChosenVariant.meaning}</motion.p>
+                        <p><b>example of using:</b></p> <motion.p
+                                                    whileHover={{
+                                                        scale: 1.01,
+                                                    }}
+                                                    whileTap={{
+                                                        color: '#f3f3f3'
+                                                    }}>
+                        {usersLastChosenVariant.example}</motion.p>
                     </div>
-                    <p><b>example of using:</b></p> <p>{usersLastChosenVariant.example}</p>
                 </div>
             </Modal>
         </div>
-
     )
 }
 
