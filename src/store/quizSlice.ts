@@ -1,10 +1,19 @@
-const SET_NEW_QUESTION = 'SET_NEW_QUESTION';
-const ANALYZE_RIGHT_USERS_ANSWER = 'ANALYZE_RIGHT_USERS_ANSWER';
-const ANALYZE_WRONG_USERS_ANSWER = 'ANALYZE_WRONG_USERS_ANSWER';
-const SAVE_PREV_QUESTIONS = 'SAVE_PREV_QUESTIONS';
-const RESET_USER_ACTIVITY = 'RESET_USER_SCORE';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {IPhrasalVerbQuestion, IPhrasalVerbVariant} from "../models/IPhrasalVerbQuestion";
 
-let initialState = {
+interface QuizState {
+    questions: IPhrasalVerbQuestion[];
+    numberOfQuestionsForGame: number;
+    currentQuestion: IPhrasalVerbQuestion | null;
+    previousQuestions: IPhrasalVerbQuestion[];
+    usersLastChosenVariant: IPhrasalVerbVariant | null;
+    usersChosenVariants: IPhrasalVerbVariant[] | null;
+    usersLastGuessedVariant: IPhrasalVerbVariant | null | {};
+    usersGuessedVariants: IPhrasalVerbVariant[];
+    usersWrongSelectedVariants: IPhrasalVerbVariant[];
+}
+
+const initialState: QuizState = {
     questions: [
         {id: 0, questionText: 'Accept or follow a decision or rule.', variants: [
                 {variantNumber: 1, isRightAnswer: true, verbAndParticle: 'Abide by', meaning: 'Accept or follow a decision or rule.', example: 'We have to ABIDE BY what the court says.'},
@@ -164,88 +173,62 @@ let initialState = {
             ]},
     ],
     numberOfQuestionsForGame: 5,
-    currentQuestion: {},
+    currentQuestion: null,
     previousQuestions: [],
-    usersLastChosenVariant: {},
+    usersLastChosenVariant: null,
     usersChosenVariants: [],
     usersLastGuessedVariant: {},
     usersGuessedVariants: [],
     usersWrongSelectedVariants: [],
-    phrasalVerbs: [
-        {id: 0, letter: 'A', Verb: 'Abide', VerbAndParticle: 'Abide by', Meaning: 'Accept or follow a decision or rule.', Example: 'We have to ABIDE BY what the court says.', CuttedExample: 'We have to _____ __ what the court says.', ExtractedVerb: 'ABIDE', ExtractedParticles: 'BY'},
-        {id: 1, letter: 'A', Verb: 'Account', VerbAndParticle: 'Account for', Meaning: 'To explain.', Example: 'They had to ACCOUNT FOR all the money that had gone missing.', CuttedExample: 'They had to _______ ___ all the money that had gone missing.', ExtractedVerb: 'ACCOUNT', ExtractedParticles: 'FOR'},
-        {id: 2, letter: 'A', Verb: 'Ache', VerbAndParticle: 'Ache for', Meaning: 'Want something or someone a lot.', Example: 'My partner\'s been away for a fortnight - I am ACHING FOR her.', CuttedExample: 'My partner\'s been away for a fortnight  - I am ______ ___ her.', ExtractedVerb: 'ACHING', ExtractedParticles: 'FOR'},
-        {id: 3, letter: 'A', Verb: 'Act', VerbAndParticle: 'Act on', MeaningAndExample: [
-                {Meaning: 'To take action because of something like information received.', Example: 'The police were ACTING ON a tip from an informer and caught the gang red-handed.', CuttedExample: 'The police were ______ __ a tip from an informer and caught the gang red-handed.', ExtractedVerb: 'ACTING', ExtractedParticles: 'ON'},
-                {Meaning: 'Affect.', Example: 'The medicine only ACTS ON infected tissue.', CuttedExample: 'The medicine only ____ __ infected tissue.', ExtractedVerb: 'ACTS', ExtractedParticles: 'ON'}
-            ]},
-        {id: 4, letter: 'A', Verb: 'Act', VerbAndParticle: 'Act out', MeaningAndExample: [
-                {Meaning: 'Perform something with actions and gestures.', Example: 'They ACTED OUT the story on stage.', CuttedExample: 'They _____ ___ the story on stage.', ExtractedVerb: 'ACTED', ExtractedParticles: 'OUT'},
-                {Meaning: 'Express an emotion in your behaviour.', Example: 'Their anger is ACTED OUT in their antisocial behaviour.', CuttedExample: 'Their anger is _____ ___ in their antisocial behaviour.', ExtractedVerb: 'ACTED', ExtractedParticles: 'OUT'}
-            ]},
-    ],
 }
 
-const quizReducer = (state = initialState, action) => {
-    switch (action.type) {
+export const quizSlice = createSlice({
+    name: 'quizPage',
+    initialState,
+    reducers: {
+        setNewQuestion(state, action: PayloadAction<number>) {
+            state.currentQuestion = state.questions[action.payload];
+        },
+        analyzeRightUsersAnswer(state, action: PayloadAction<IPhrasalVerbVariant>) {
+            // console.log(`@QS analyzeRightUsersAnswer:
+            //        \n~ state = ${state},
+            //        \n~ action = ${action.payload.verbAndParticle}`);
+            state.usersLastChosenVariant = action.payload;
+            state.usersLastGuessedVariant = action.payload;
+            state.usersChosenVariants?.push(action.payload);
+            /*state.usersGuessedVariants: [...state.usersGuessedVariants, {...state.usersLastGuessedVariant}];*/
+            state.usersGuessedVariants.push(action.payload);
+            state.usersWrongSelectedVariants = [];
+        },
+        analyzeWrongUsersAnswer(state, action: PayloadAction<IPhrasalVerbVariant>) {
+            // console.log(`@QS analyzeWrongUsersAnswer:
+            //        \n~ state = ${state},
+            //        \n~ action = ${action.payload.verbAndParticle}`);
+            state.usersLastChosenVariant = action.payload;
+            state.usersChosenVariants?.push(action.payload);
+            state.usersWrongSelectedVariants.push(action.payload);
+        },
+        savePrevQuestions(state, action: PayloadAction<IPhrasalVerbQuestion>) {
+            // console.log(`@QS savePrevQuestions:
+            //        \n~ state = ${state},
+            //        \n~ action = ${action.payload.questionText}`);
+            state.previousQuestions.push(action.payload);
+        },
+        resetUserActivity(state) {
+            //state.previousQuestions = [];
+            state.previousQuestions.length = 0;
+            state.usersLastChosenVariant = null;
+            state.usersChosenVariants = [];
+            state.usersLastGuessedVariant = {};
+            state.usersGuessedVariants = [];
+            state.usersWrongSelectedVariants = [];
+        },
+    },
 
-        case SET_NEW_QUESTION:
-            return {
-                ...state,
-                currentQuestion: state.questions[action.questionId]
-            }
+});
 
-        case ANALYZE_RIGHT_USERS_ANSWER:
-        {
-            return {
-                ...state,
-                usersLastChosenVariant: action.variant,
-                usersLastGuessedVariant: action.variant,
-                usersChosenVariants: [...state.usersChosenVariants, action.variant],
-                /*usersGuessedVariants: [...state.usersGuessedVariants, {...state.usersLastGuessedVariant}],*/
-                usersGuessedVariants: [...state.usersGuessedVariants, action.variant],
-                usersWrongSelectedVariants: [],
-            }
-        }
+// деструктуризируем поле actions которое получаем из Slice и в фигурных скобках указываем какие поля мы хотим получить.
+export const {setNewQuestion, analyzeRightUsersAnswer, analyzeWrongUsersAnswer,
+    resetUserActivity, savePrevQuestions} = quizSlice.actions;
 
-        case ANALYZE_WRONG_USERS_ANSWER:
-        {
-            return {
-                ...state,
-                usersLastChosenVariant: action.variant,
-                usersChosenVariants: [...state.usersChosenVariants, action.variant],
-                usersWrongSelectedVariants: [...state.usersWrongSelectedVariants, action.variant],
-            }
-        }
-
-        case SAVE_PREV_QUESTIONS:
-        {
-            return {
-                ...state,
-                previousQuestions: [...state.previousQuestions, action.question],
-            }
-        }
-
-        case RESET_USER_ACTIVITY:
-            return {
-                ...state,
-                previousQuestions: [],
-                usersLastChosenVariant: {},
-                usersChosenVariants: [],
-                usersLastGuessedVariant: {},
-                usersGuessedVariants: [],
-                usersWrongSelectedVariants: [],
-            }
-
-        default:
-            return state;
-    }
-}
-
-export const setNewQuestion = (questionId) => ({type: SET_NEW_QUESTION, questionId})
-export const analyzeRightUsersAnswer = (variant, questionId) => ({type: ANALYZE_RIGHT_USERS_ANSWER, variant, questionId})
-export const analyzeWrongUsersAnswer = (variant, questionId) => ({type: ANALYZE_WRONG_USERS_ANSWER, variant, questionId})
-export const savePrevQuestions = (question) => ({type: SAVE_PREV_QUESTIONS, question})
-export const resetUserActivity = () => ({type: RESET_USER_ACTIVITY})
-
-export default quizReducer;
+export default quizSlice.reducer;

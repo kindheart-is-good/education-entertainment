@@ -1,7 +1,14 @@
 import React from "react";
 import "./Modal.css";
 
-const Modal = ({active, setActive, children}) => {
+interface ModalProps {
+    active: boolean,
+    setActive: (is: boolean) => void,
+    children: any,
+
+}
+
+const Modal: React.FC<ModalProps> = ({ active, setActive, children }) => {
 
     return (
         <div

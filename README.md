@@ -3,14 +3,15 @@ ___
 
 ### This project is being developed using technologies:
 
-![react](https://img.shields.io/badge/React-18.2.0-lightgrey)
+![react](https://img.shields.io/badge/React-18.2.0-f98f37)
+![typescript](https://img.shields.io/badge/TypeScript-4.9.4-blue)
 
 
 ### npm packages that were used in the development of the project:
 
-* react-router-dom
-* redux
+* redux toolkit
 * react-redux
+* react-router-dom
 * framer-motion
 
 <div><i>This project was created with utility:</i></div>

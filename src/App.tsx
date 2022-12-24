@@ -3,9 +3,9 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Content from "./components/Content/Content";
-import QuizContainer from "./components/Quiz/QuizContainer";
+import Quiz from "./components/Quiz/Quiz";
 
-function App(props) {
+function App() {
     return (
         <div className='app-wrapper'>
             <Header/>
@@ -13,11 +13,11 @@ function App(props) {
             <div className='app-wrapper-content'>
                 <Routes>
                     <Route path="/"
-                           element={<Content />} />
+                           element={<Content/>}/>
                     <Route path="/content/"
-                           element={<Content />} />
+                           element={<Content/>}/>
                     <Route path="/quiz/*"
-                           element={<QuizContainer />} />
+                           element={<Quiz/>}/>
                 </Routes>
             </div>
         </div>
