@@ -1,11 +1,11 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {IPhrasalVerbQuestion, IPhrasalVerbVariant} from "../models/IPhrasalVerbQuestion";
+import {IPhrasalVerbQuiz, IPhrasalVerbVariant} from "../models/IPhrasalVerbQuiz";
 
 interface QuizState {
-    questions: IPhrasalVerbQuestion[];
+    questions: IPhrasalVerbQuiz[];
     numberOfQuestionsForGame: number;
-    currentQuestion: IPhrasalVerbQuestion | null;
-    previousQuestions: IPhrasalVerbQuestion[];
+    currentQuestion: IPhrasalVerbQuiz | null;
+    previousQuestions: IPhrasalVerbQuiz[];
     usersLastChosenVariant: IPhrasalVerbVariant | null;
     usersChosenVariants: IPhrasalVerbVariant[] | null;
     usersLastGuessedVariant: IPhrasalVerbVariant | null | {};
@@ -208,7 +208,7 @@ export const quizSlice = createSlice({
             state.usersChosenVariants?.push(action.payload);
             state.usersWrongSelectedVariants.push(action.payload);
         },
-        savePrevQuestions(state, action: PayloadAction<IPhrasalVerbQuestion>) {
+        savePrevQuestions(state, action: PayloadAction<IPhrasalVerbQuiz>) {
             // console.log(`@QS savePrevQuestions:
             //        \n~ state = ${state},
             //        \n~ action = ${action.payload.questionText}`);
@@ -227,7 +227,6 @@ export const quizSlice = createSlice({
 
 });
 
-// деструктуризируем поле actions которое получаем из Slice и в фигурных скобках указываем какие поля мы хотим получить.
 export const {setNewQuestion, analyzeRightUsersAnswer, analyzeWrongUsersAnswer,
     resetUserActivity, savePrevQuestions} = quizSlice.actions;
 

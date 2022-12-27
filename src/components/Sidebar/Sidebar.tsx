@@ -14,6 +14,10 @@ const Sidebar = () => {
                 <NavLink to="/quiz/" className={ navData => navData.isActive ? styles.active : styles.item }>Quiz (phrasal verbs)</NavLink>
             </div>
 
+            <div className={styles.item}>
+                <NavLink to="/testing-backend/" className={ navData => navData.isActive ? styles.active : styles.item }>Testing Backend</NavLink>
+            </div>
+
         </div>
     );
 };

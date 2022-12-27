@@ -1,0 +1,56 @@
+.quizWrapper {
+    grid-area: content;
+
+    min-height: 286px;
+    margin: 20px;
+    /*outline: solid 6px #e5e5e5;*/
+    border: 12px solid #fff53d;
+    border-radius: 16px;
+    /*background-color: #fff53d;*/
+    background-color: #e5e5e5;
+    text-align: center;
+
+    display: grid;
+    grid-template-columns: 210px 2fr 210px;
+    grid-template-rows: 1fr 1fr 150px;
+    grid-template-areas:
+    "topL top topR"
+    "mid mid mid"
+    "Left debug Right";
+}
+
+.introduction {
+    grid-area: topC;
+    padding-top: 50px;
+    font-size: 22px;
+}
+
+.top {
+    grid-area: top;
+    margin-top: 5px;
+}
+
+.mid {
+    grid-area: mid;
+}
+
+.card {
+    outline: solid 6px #fff53d;
+}
+
+.buttonOne {
+    margin: 50px;
+    padding: 10px;
+    font-size: 21px;
+}
+
+.debugSection {
+    grid-area: debug;
+    background-color: #868686;
+    /*background-color: #e5e5e5;*/
+}
+
+.debugSection span {
+    color: #e5e5e5;
+    font-size: 13px;
+}

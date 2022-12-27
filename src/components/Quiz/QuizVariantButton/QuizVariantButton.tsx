@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./QuizVariantButton.module.css";
-import {IPhrasalVerbVariant} from "../../../models/IPhrasalVerbQuestion";
+import {IPhrasalVerbVariant} from "../../../models/IPhrasalVerbQuiz";
 
 interface QuizVariantButtonProps {
     v: IPhrasalVerbVariant,

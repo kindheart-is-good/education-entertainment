@@ -1,8 +1,10 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import quizReducer from './quizSlice'
+import quizReducer from './quizSlice';
+import extApiReducer from "./extApiSlice";
 
 const rootReducer = combineReducers({
     quizPage: quizReducer,
+    extApiPage: extApiReducer,
 })
 
 export function setupStore() {

@@ -8,7 +8,7 @@ import Modal from "../Modal/Modal";
 import quizSlice,
     {setNewQuestion, analyzeRightUsersAnswer, analyzeWrongUsersAnswer,
     resetUserActivity, savePrevQuestions} from "../../store/quizSlice";
-import {IPhrasalVerbQuestion, IPhrasalVerbVariant} from "../../models/IPhrasalVerbQuestion";
+import {IPhrasalVerbQuiz, IPhrasalVerbVariant} from "../../models/IPhrasalVerbQuiz";
 
 function randomInteger(min: number, max: number) {
     let rand = min + Math.random() * (max + 1 - min);

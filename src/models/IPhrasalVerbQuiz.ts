@@ -1,4 +1,5 @@
-export interface IPhrasalVerbQuestion {
+
+export interface IPhrasalVerbQuiz {
     id: number;
     questionText: string;
     variants: IPhrasalVerbVariant[];

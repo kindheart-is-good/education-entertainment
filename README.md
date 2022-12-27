@@ -12,6 +12,7 @@ ___
 * redux toolkit
 * react-redux
 * react-router-dom
+* axios
 * framer-motion
 
 <div><i>This project was created with utility:</i></div>

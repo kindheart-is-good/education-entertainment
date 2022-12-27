@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Content from "./components/Content/Content";
 import Quiz from "./components/Quiz/Quiz";
+import FromBackend from "./components/FromBackend/FromBackend";
 
 function App() {
     return (
@@ -18,6 +19,8 @@ function App() {
                            element={<Content/>}/>
                     <Route path="/quiz/*"
                            element={<Quiz/>}/>
+                    <Route path="/testing-backend/*"
+                           element={<FromBackend/>}/>
                 </Routes>
             </div>
         </div>
