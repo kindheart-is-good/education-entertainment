@@ -35,6 +35,11 @@
     /*display: flex;*/
 }
 
+.bot {
+    grid-area: bot;
+    /*display: flex;*/
+}
+
 .card {
     outline: solid 6px #fff53d;
     margin: 50px;

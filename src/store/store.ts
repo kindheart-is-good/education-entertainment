@@ -1,9 +1,11 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import quizReducer from './quizSlice';
+import lettersGameReducer from "./lettersGameSlice";
 import extApiReducer from "./extApiSlice";
 
 const rootReducer = combineReducers({
     quizPage: quizReducer,
+    lettersGamePage: lettersGameReducer,
     extApiPage: extApiReducer,
 })
 

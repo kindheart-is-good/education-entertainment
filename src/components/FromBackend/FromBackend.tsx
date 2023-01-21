@@ -1,14 +1,9 @@
-import React, {useEffect, useRef} from "react";
-import styles from "./FromBackend.module.css"
+import React, {useState, useEffect, useRef} from "react";
+import styles from "./FromBackend.module.css";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import extApiSlice, {addReceivedPV} from "../../store/extApiSlice";
-import {IExamplePV} from "../../models/IExamplePV";
 import {fetchPVs} from "../../store/actions/extApiActions";
-
-function randomInteger(min: number, max: number) {
-    let rand = min + Math.random() * (max + 1 - min);
-    return Math.floor(rand);
-}
+import CardItem from "../FromBackend/CardItem";
 
 const FromBackend: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -17,8 +12,8 @@ const FromBackend: React.FC = () => {
     const {phrasalVerbs} = useAppSelector(state => state.extApiPage);
     const {lastPV, isLoading, error} = useAppSelector(state => state.extApiPage);
 
-    //const [isActivated, setActivation] = useState(false);
-    //const [counter, setCounter] = useState(0);
+    const [isFromState, setFromState] = useState(false);
+    const [isFromBackend, setFromBackend] = useState(false);
 
     let renderCount = useRef(1);
     useEffect(() => {
@@ -26,16 +21,20 @@ const FromBackend: React.FC = () => {
         console.log(" ######## THIS IS NEW RENDER: " + renderCount.current);
     })
 
+    useEffect(() => {
+        setFromBackend(true);
+    }, [])
+
     const showDebugSection = () => {
         return <div className={styles.debugSection}>
             <p><span>exampleId:</span> {lastPV?.exampleId}</p>
-            <p><span>exampleId:</span> {lastPV?.exampleFull}</p>
-            <p><span>exampleId:</span> {lastPV?.exampleFullUnderscore}</p>
-            <p><span>exampleId:</span> {lastPV?.exampleParticle}</p>
-            <p><span>exampleId:</span> {lastPV?.exampleVerb}</p>
-            <p><span>exampleId:</span> {lastPV?.meaning}</p>
-            <p><span>exampleId:</span> {lastPV?.verb}</p>
-            <p><span>exampleId:</span> {lastPV?.verbAndParticle}</p>
+            <p><span>exampleFull:</span> {lastPV?.exampleFull}</p>
+            <p><span>exampleFullUnderscore:</span> {lastPV?.exampleFullUnderscore}</p>
+            <p><span>exampleParticle:</span> {lastPV?.exampleParticle}</p>
+            <p><span>exampleVerb:</span> {lastPV?.exampleVerb}</p>
+            <p><span>meaning:</span> {lastPV?.meaning}</p>
+            <p><span>verb:</span> {lastPV?.verb}</p>
+            <p><span>verbAndParticle:</span> {lastPV?.verbAndParticle}</p>
         </div>
     }
 
@@ -56,7 +55,16 @@ const FromBackend: React.FC = () => {
                 }}>
                     From Internet
                 </button>
+
                 <button className={styles.buttonOne} onClick={()=>{
+                    setFromState(prev => !prev);
+                    dispatch(addReceivedPV(lastPV));    // срабатывает только после обновления страницы
+                }}>
+                    From State
+                </button>
+
+                <button className={styles.buttonOne} onClick={()=>{
+                    //setFromBackend(prev => !prev);
                     //fetchToSampleapis('https://localhost:44321/swagger/v1/swagger.json');
                     //fetchToSampleapis('https://localhost:44321/api/Example/GetRandomExampleDetails');
                     //fetchToSampleapis('https://localhost:44321/api/Example/GetListOfExamples');
@@ -68,19 +76,19 @@ const FromBackend: React.FC = () => {
             </div>
 
             <div className={styles.mid}>
-                <div className={styles.card}>
-                    {phrasalVerbs[0].verbAndParticle}
-                    <br/>
-                </div>
-
                 <pre className={styles.card}>
                     {isLoading && <h1>Идет загрузка...</h1>}
                     {error && <h1>{error}</h1>}
                     {JSON.stringify(lastPV, null, 2)}
                 </pre>
+
+                <div style={{ display: 'flex', margin: '50px' }}>
+                    {isFromState && <CardItem phrasalVerb={phrasalVerbs[0]} />}
+                    {(isFromBackend && lastPV) && <CardItem phrasalVerb={lastPV} />}
+                </div>
             </div>
 
-            { showDebugSection() }
+            {/*{ showDebugSection() }*/}
         </div>
     )
 }

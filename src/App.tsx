@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Content from "./components/Content/Content";
 import Quiz from "./components/Quiz/Quiz";
 import FromBackend from "./components/FromBackend/FromBackend";
+import LettersGame from "./components/LettersGame/LettersGame";
 
 function App() {
     return (
@@ -19,6 +20,8 @@ function App() {
                            element={<Content/>}/>
                     <Route path="/quiz/*"
                            element={<Quiz/>}/>
+                    <Route path="/guess-letters/*"
+                           element={<LettersGame/>}/>
                     <Route path="/testing-backend/*"
                            element={<FromBackend/>}/>
                 </Routes>

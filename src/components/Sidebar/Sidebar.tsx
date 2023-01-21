@@ -15,6 +15,10 @@ const Sidebar = () => {
             </div>
 
             <div className={styles.item}>
+                <NavLink to="/guess-letters/" className={ navData => navData.isActive ? styles.active : styles.item }>Guess Letters</NavLink>
+            </div>
+
+            <div className={styles.item}>
                 <NavLink to="/testing-backend/" className={ navData => navData.isActive ? styles.active : styles.item }>Testing Backend</NavLink>
             </div>
 
