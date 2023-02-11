@@ -17,12 +17,29 @@ const LettersGame: React.FC = () => {
             </div>
 
             <div className={styles.mid}>
-                <label>
-                    <input
-                        value={text}
-                        onChange={(e) => setText(e.target.value)}
-                    />
-                </label>
+                <div style={{ display: 'flex' }}>
+                    <label>
+                        <input
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
+                            size={1}
+                        />
+                    </label>
+                    <label>
+                        <input
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
+                            size={1}
+                        />
+                    </label>
+                    <label>
+                        <input
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
+                            size={1}
+                        />
+                    </label>
+                </div>
             </div>
 
             <div className={styles.bot}>

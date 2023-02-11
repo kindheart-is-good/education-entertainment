@@ -263,6 +263,7 @@ const Quiz: React.FC = () => {
                             whileTap={{
                                 color: '#f3f3f3'
                             }}>
+                    <p>your game progress:</p>
                     {questionCounter} / {numberOfQuestionsForGame}
                 </motion.div>
 

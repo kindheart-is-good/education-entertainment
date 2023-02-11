@@ -8,7 +8,7 @@ export const fetchPVs = createAsyncThunk(
     'pv/fetchRandomExampleDetails',
     async (_, thunkAPI) => {
         try {
-            const response = await axios.get<IExamplePV>('https://localhost:44321/api/Example/GetRandomExampleDetails');
+            const response = await axios.get<IExamplePV>( process.env.REACT_APP_API_URL + '/api/Example/GetRandomExampleDetails');
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue("Не удалось загрузить Phrasal Verb")

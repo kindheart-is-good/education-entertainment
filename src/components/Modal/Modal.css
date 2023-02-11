@@ -1,6 +1,8 @@
 .modal {
     height: 100vh;
-    width: 100vw;
+    width: 110vw;
+    /*width: 1700px;*/
+
     /*background-color: green;*/
     /*background-color: rgba(0,0,0,0.4);*/
     background-color: rgba(0,0,0,0.6);
@@ -9,8 +11,8 @@
     left: 0;
     /* Ниже 3-мя строчками отцентруем это Окно по горизонтали и по вертикали: */
     /*display: flex;*/
-    /*align-items: center;
-    justify-content: center;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
 
     /*transform: scale(0);*/    /* Т.е. уменьшим до такой степени что Окна не будет видно */
 
@@ -26,6 +28,13 @@
 
     opacity: 1;
     pointer-events: all;    /* Т.к. когда мы отключили pointer-events в css-классе modal то Окно становится некликабельным */
+
+    /* TODO: подвниуть окно немного вправо */
+    /*position: page;
+    right: 180px;*/
+    position: fixed;
+    /*right: 380px;*/
+    left: -75px;
 }
 
 .modalContent {

@@ -1,0 +1,55 @@
+{
+  "phrasalVerbs": [
+    {
+      "exampleId": 1584,
+      "exampleFull": "He HEATED the soup UP in the microwave.",
+      "exampleFullUnderscore": "He ______ the soup __ in the microwave.",
+      "exampleVerb": "HEATED",
+      "exampleParticle": "UP",
+      "meaning": "Make food hot.",
+      "verb": "Heat",
+      "verbAndParticle": "Heat up"
+    },
+    {
+      "exampleId": 1378,
+      "exampleFull": "I OPTED INTO the scheme.",
+      "exampleFullUnderscore": "I _____ ____ the scheme.",
+      "exampleVerb": "OPTED",
+      "exampleParticle": "INTO",
+      "meaning": "Choose to be a member or part of something.",
+      "verb": "Opt",
+      "verbAndParticle": "Opt into"
+    },
+    {
+      "exampleId": 811,
+      "exampleFull": "I really had to DRILL DOWN to get the answers from the database.",
+      "exampleFullUnderscore": "I really had to _____ ____ to get the answers from the database.",
+      "exampleVerb": "DRILL",
+      "exampleParticle": "DOWN",
+      "meaning": "Search through layers of information on a computer.",
+      "verb": "Drill",
+      "verbAndParticle": "Drill down"
+    },
+    {
+      "exampleId": 1811,
+      "exampleFull": "Things are SHAPING UP at work - everything's going well again.",
+      "exampleFullUnderscore": "Things are _______ __ at work - everything's going well again.",
+      "exampleVerb": "SHAPING",
+      "exampleParticle": "UP",
+      "meaning": "Develop in a positive way.",
+      "verb": "Shape",
+      "verbAndParticle": "Shape up"
+    }
+  ],
+  "phrasalVerb":
+    {
+      "exampleId": 2416,
+      "exampleFull": "WORD UP! You Ok?",
+      "exampleFullUnderscore": "____ __! You Ok?",
+      "exampleVerb": "WORD",
+      "exampleParticle": "UP",
+      "meaning": "A phrase that was used a greeting.",
+      "verb": "Word",
+      "verbAndParticle": "Word up"
+    }
+}

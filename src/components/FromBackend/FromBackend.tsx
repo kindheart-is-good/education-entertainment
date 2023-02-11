@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 import styles from "./FromBackend.module.css";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import extApiSlice, {addReceivedPV} from "../../store/extApiSlice";
+import extApiSlice, {addReceivedPV, fetchPVfromServer} from "../../store/extApiSlice";
 import {fetchPVs} from "../../store/actions/extApiActions";
 import CardItem from "../FromBackend/CardItem";
 
@@ -10,7 +10,9 @@ const FromBackend: React.FC = () => {
     //const {addReceivedPV} = extApiSlice.actions;
 
     const {phrasalVerbs} = useAppSelector(state => state.extApiPage);
-    const {lastPV, isLoading, error} = useAppSelector(state => state.extApiPage);
+    //const {lastPV, isLoading, error} = useAppSelector(state => state.extApiPage);
+    const {lastPV} = useAppSelector(state => state.extApiPage);
+    const {pvFromJsonServer, isLoading, error} = useAppSelector(state => state.extApiPage);
 
     const [isFromState, setFromState] = useState(false);
     const [isFromBackend, setFromBackend] = useState(false);
@@ -45,7 +47,7 @@ const FromBackend: React.FC = () => {
     }
 
     return (
-        <div className={styles.quizWrapper}>
+        <div className={styles.serverAnswer}>
 
             <div className={styles.top}>
                 <button className={styles.buttonOne} onClick={()=>{
@@ -54,6 +56,7 @@ const FromBackend: React.FC = () => {
                     fetchToSampleapis('https://api.sampleapis.com/coffee/hot');
                 }}>
                     From Internet
+                    (to console)
                 </button>
 
                 <button className={styles.buttonOne} onClick={()=>{
@@ -61,6 +64,12 @@ const FromBackend: React.FC = () => {
                     dispatch(addReceivedPV(lastPV));    // срабатывает только после обновления страницы
                 }}>
                     From State
+                </button>
+
+                <button className={styles.buttonOne} onClick={()=>{
+                    dispatch(fetchPVfromServer());
+                }}>
+                    From JSON server
                 </button>
 
                 <button className={styles.buttonOne} onClick={()=>{
@@ -83,7 +92,14 @@ const FromBackend: React.FC = () => {
                 </pre>
 
                 <div style={{ display: 'flex', margin: '50px' }}>
-                    {isFromState && <CardItem phrasalVerb={phrasalVerbs[0]} />}
+                    {isFromState && <CardItem phrasalVerb={phrasalVerbs[3]} />}
+
+                    <pre className={styles.card}>
+                        {isLoading && <h1>Идёт загрузка...</h1>}
+                        {error && <h1>{error}</h1>}
+                        {JSON.stringify(pvFromJsonServer, null, 2)}
+                    </pre>
+
                     {(isFromBackend && lastPV) && <CardItem phrasalVerb={lastPV} />}
                 </div>
             </div>
