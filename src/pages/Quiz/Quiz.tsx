@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {motion} from "framer-motion";
 import QuizQuestion from "./QuizQuestion/QuizQuestion";
 import QuizVariantButton from "./QuizVariantButton/QuizVariantButton";
-import Modal from "../Modal/Modal";
+import Modal from "../../components/Modal/Modal";
 import quizSlice,
     {setNewQuestion, analyzeRightUsersAnswer, analyzeWrongUsersAnswer,
     resetUserActivity, savePrevQuestions} from "../../store/quizSlice";

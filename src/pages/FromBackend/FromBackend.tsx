@@ -3,7 +3,7 @@ import styles from "./FromBackend.module.css";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import extApiSlice, {addReceivedPV, fetchPVfromServer} from "../../store/extApiSlice";
 import {fetchPVs} from "../../store/actions/extApiActions";
-import CardItem from "../FromBackend/CardItem";
+import CardItem from "../../components/Cards/CardItem";
 
 const FromBackend: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -94,7 +94,7 @@ const FromBackend: React.FC = () => {
                 <div style={{ display: 'flex', margin: '50px' }}>
                     {isFromState && <CardItem phrasalVerb={phrasalVerbs[3]} />}
 
-                    <pre className={styles.card}>
+                    <pre style={{ outline: 'solid 6px #fff53d', margin: '50px' }}>
                         {isLoading && <h1>Идёт загрузка...</h1>}
                         {error && <h1>{error}</h1>}
                         {JSON.stringify(pvFromJsonServer, null, 2)}

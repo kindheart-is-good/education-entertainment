@@ -1,0 +1,8 @@
+.card {
+    outline: solid 6px #fff53d;
+    margin: 50px;
+}
+
+.card span {
+    /*font-size: 13px;*/
+}

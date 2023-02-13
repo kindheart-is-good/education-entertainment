@@ -4,7 +4,7 @@ import {IExamplePV} from "../models/IExamplePV";
 import {fetchPVs} from "./actions/extApiActions";
 
 export const fetchPVfromServer = createAsyncThunk(
-    'pv/fetchPVfromServer',
+    'pv/fetchExample',
     async (_, thunkAPI) => {
         try {
             const response = await axios.get<IExamplePV[]>('http://localhost:3001/phrasalVerb');

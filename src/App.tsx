@@ -2,10 +2,10 @@ import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
-import Content from "./components/Content/Content";
-import Quiz from "./components/Quiz/Quiz";
-import FromBackend from "./components/FromBackend/FromBackend";
-import LettersGame from "./components/LettersGame/LettersGame";
+import Content from "./pages/Content/Content";
+import Quiz from "./pages/Quiz/Quiz";
+import LettersGame from "./pages/LettersGame/LettersGame";
+import FromBackend from "./pages/FromBackend/FromBackend";
 
 function App() {
     return (
@@ -15,19 +15,19 @@ function App() {
             <div className='app-wrapper-content'>
                 <Routes>
                     <Route path="/"
-                           element={<Content/>}/>
+                           element={<Content />} />
                     <Route path="/content/"
-                           element={<Content/>}/>
+                           element={<Content />} />
                     <Route path="/quiz/*"
-                           element={<Quiz/>}/>
+                           element={<Quiz />} />
                     <Route path="/guess-letters/*"
-                           element={<LettersGame/>}/>
+                           element={<LettersGame />} />
                     <Route path="/testing-backend/*"
-                           element={<FromBackend/>}/>
+                           element={<FromBackend />} />
                 </Routes>
             </div>
         </div>
-    );
+    )
 }
 
 export default App;

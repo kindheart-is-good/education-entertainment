@@ -1,0 +1,126 @@
+/*.variants {
+    grid-area: options;
+}*/
+
+.variantButton {
+    margin: 5px;
+    padding: 12px;
+    /*height: 100px;*/
+    width: 500px;
+
+    transition-property: background-color;
+    transition-duration: 1s;
+
+    border-radius: 12px;
+    background-color: white;
+    font-size: 20px;
+}
+
+.variantButton1 {
+    margin: 5px;
+    padding: 12px;
+    /*height: 100px;*/
+    width: 500px;
+
+    transition-property: background-color;
+    transition-duration: 1s;
+
+    border-radius: 12px;
+    background-color: white;
+    font-size: 20px;
+}
+
+/* CSS */
+.button17 {
+    margin: 5px;
+    /*padding: 2px 24px;*/
+    padding: 12px;
+    height: 51px;
+    /*width: auto;*/
+    width: 500px;
+    max-width: 100%;
+
+    border-radius: 24px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    background-color: #fff;
+    color: #3c4043;
+    fill: currentcolor;
+    position: relative;
+    align-items: center;
+    appearance: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    line-height: normal;
+    overflow: visible;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1), opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    will-change: transform, opacity;
+    z-index: 0;
+    /*font-family: "Google Sans", Roboto, Arial, sans-serif;*/
+    text-align: center;
+    text-transform: none;
+    font-size: 22px;
+    font-weight: 100;
+    /*letter-spacing: .25px;*/
+}
+
+.button17:hover {
+    background: #F6F9FE;
+    color: #174ea6;
+    /*color: #0192c6;*/
+}
+
+.button17:active {
+    box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+    outline: none;
+}
+
+.button17:focus {
+    outline: none;
+    border: 2px solid #0192c6;
+}
+
+.button17:not(:disabled) {
+    box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+.button17:not(:disabled):hover {
+    box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
+}
+
+.button17:not(:disabled):focus {
+    box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+.button17:not(:disabled):active {
+    box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+}
+
+.button17:disabled {
+    box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+    /*background-color: #373737;*/
+}
+
+.variantButtonIfGuessed {
+    margin: 5px;
+    padding: 12px;
+    background-color: #e3fd00;
+    font-size: 20px;
+}
+
+.variantButtonIfWrong {
+    margin: 5px;
+    padding: 12px;
+    background-color: #e2754e;
+    font-size: 20px;
+}
+
+.animated {
+    transition-property: background-color;
+    transition-duration: 3s;
+}

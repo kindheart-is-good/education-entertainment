@@ -1,6 +1,7 @@
 {
   "phrasalVerbs": [
     {
+      "id": 0,
       "exampleId": 1584,
       "exampleFull": "He HEATED the soup UP in the microwave.",
       "exampleFullUnderscore": "He ______ the soup __ in the microwave.",
@@ -11,6 +12,7 @@
       "verbAndParticle": "Heat up"
     },
     {
+      "id": 1,
       "exampleId": 1378,
       "exampleFull": "I OPTED INTO the scheme.",
       "exampleFullUnderscore": "I _____ ____ the scheme.",
@@ -21,6 +23,7 @@
       "verbAndParticle": "Opt into"
     },
     {
+      "id": 2,
       "exampleId": 811,
       "exampleFull": "I really had to DRILL DOWN to get the answers from the database.",
       "exampleFullUnderscore": "I really had to _____ ____ to get the answers from the database.",
@@ -31,6 +34,7 @@
       "verbAndParticle": "Drill down"
     },
     {
+      "id": 3,
       "exampleId": 1811,
       "exampleFull": "Things are SHAPING UP at work - everything's going well again.",
       "exampleFullUnderscore": "Things are _______ __ at work - everything's going well again.",

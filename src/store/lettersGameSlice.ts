@@ -1,11 +1,37 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import axios from "axios";
 import {IExamplePV} from "../models/IExamplePV";
-import {fetchPVs} from "./actions/extApiActions";
+
+/*
+export const fetchExample = createAsyncThunk(
+    'phrasalVerbs/fetchExample',
+    async (_, thunkAPI) => {
+        try {
+            const response = await axios.get<IExamplePV[]>(process.env.REACT_APP_API_URL + '/phrasalVerbs/1');
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue("Не удалось загрузить посты")
+        }
+    }
+)
+*/
+
+export const fetchExample = createAsyncThunk(
+    'phrasalVerbs/fetchExample',
+    async (exampleId: number, thunkAPI) => {
+        try {
+            const response = await axios.get<IExamplePV[]>(process.env.REACT_APP_API_URL + `/phrasalVerbs/${exampleId}`);
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue("Не удалось загрузить посты")
+        }
+    }
+)
 
 interface LettersGameState {
     phrasalVerbs: IExamplePV[];
-    receivedPVs: IExamplePV[];
-    lastPV: IExamplePV | null;
+    receivedExamples: IExamplePV[];
+    currentExample: IExamplePV | null;
     isLoading: boolean;
     error: string;
 }
@@ -53,8 +79,8 @@ const initialState: LettersGameState = {
             verbAndParticle: "Shape up"
         }
     ],
-    receivedPVs: [],
-    lastPV: null,
+    receivedExamples: [],
+    currentExample: null,
     isLoading: false,
     error: '',
 }
@@ -63,28 +89,31 @@ export const lettersGameSlice = createSlice({
     name: 'lettersGamePage',
     initialState,
     reducers: {
-        addReceivedPV(state, action: PayloadAction<IExamplePV | null>) {
+        addReceivedExample(state, action: PayloadAction<IExamplePV | null>) {
             //console.log(state);
             //console.log(action);
             if (action.payload) state.phrasalVerbs.push(action.payload);
         },
+        firstExampleWhenStart(state) {
+            state.currentExample = state.phrasalVerbs[0];
+        }
     },
     extraReducers: {
-        [fetchPVs.fulfilled.type]: (state, action: PayloadAction<IExamplePV>) => {      // Сценарий успешной загрузки
-            state.isLoading = false;
-            state.error = '';
-            state.lastPV = action.payload;
-        },
-        [fetchPVs.pending.type]: (state) => {                                           // Сценарий ожидания
+        [fetchExample.pending.type]: (state) => {                                           // Сценарий ожидания
             state.isLoading = true;
         },
-        [fetchPVs.rejected.type]: (state, action: PayloadAction<string>) => {           // Сценарий когда произошла ошибка
+        [fetchExample.fulfilled.type]: (state, action: PayloadAction<IExamplePV>) => {      // Сценарий успешной загрузки
+            state.isLoading = false;
+            state.error = '';
+            state.currentExample = action.payload;
+        },
+        [fetchExample.rejected.type]: (state, action: PayloadAction<string>) => {           // Сценарий когда произошла ошибка
             state.isLoading = false;
             state.error = action.payload;
         },
     }
 });
 
-export const {addReceivedPV} = lettersGameSlice.actions;
+export const {addReceivedExample, firstExampleWhenStart} = lettersGameSlice.actions;
 
 export default lettersGameSlice.reducer;

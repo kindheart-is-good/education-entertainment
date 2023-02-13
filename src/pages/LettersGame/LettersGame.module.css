@@ -1,7 +1,7 @@
 .quizWrapper {
     grid-area: content;
 
-    min-height: 286px;
+    max-height: 431px;
     margin: 20px;
     /*outline: solid 6px #e5e5e5;*/
     border: 12px solid #fff53d;
@@ -12,49 +12,52 @@
 
     display: grid;
     grid-template-columns: 210px 2fr 210px;
-    grid-template-rows: 165px 1fr 150px;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas:
-    "top top top"
-    "midL mid midR"
-    "debug bot botR";
+    "top top score"
+    "midL inputArea debug"
+    "buttonArea buttonArea buttonArea";
 }
 
 .introduction {
     grid-area: top;
     padding-top: 50px;
+    margin-left: 190px;
     font-size: 22px;
 }
 
 .top {
+    margin-left: 170px;
     grid-area: top;
-    margin-top: 5px;
+    margin-top: 50px;
 }
 
-.mid {
-    grid-area: mid;
+.score {
+    padding-top: 55px;
+    font-size: 27px;
+}
+
+.inputArea {
+    grid-area: inputArea;
+    margin: 30px;
+    padding-left: 90px;
     /*display: flex;*/
 }
 
-.bot {
-    grid-area: bot;
+.buttonArea {
+    grid-area: buttonArea;
     /*display: flex;*/
-}
-
-.card {
-    outline: solid 6px #fff53d;
-    margin: 50px;
-}
-
-.card span {
-    /*font-size: 13px;*/
-}
-
-.testing {
-    outline: solid 6px #fff53d;
 }
 
 .buttonOne {
-    margin: 50px;
+    margin-top: 30px;
+    padding: 10px;
+    font-size: 21px;
+}
+
+.buttonTwo {
+    margin: 5px;
+    margin-right: 50px;
     padding: 10px;
     font-size: 21px;
 }
