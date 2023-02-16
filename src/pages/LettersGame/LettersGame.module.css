@@ -1,7 +1,7 @@
 .quizWrapper {
     grid-area: content;
 
-    max-height: 431px;
+    max-height: 730px;
     margin: 20px;
     /*outline: solid 6px #e5e5e5;*/
     border: 12px solid #fff53d;
@@ -13,6 +13,7 @@
     display: grid;
     grid-template-columns: 210px 2fr 210px;
     grid-template-rows: 1fr 1fr 1fr;
+    /*grid-template-rows: 1fr 140px 1fr;*/
     grid-template-areas:
     "top top score"
     "midL inputArea debug"
@@ -26,41 +27,209 @@
     font-size: 22px;
 }
 
+.finalResult {
+    grid-area: top;
+    padding-top: 190px;
+    margin-left: 190px;
+    font-size: 27px;
+}
+
 .top {
     margin-left: 170px;
     grid-area: top;
     margin-top: 50px;
 }
 
-.score {
-    padding-top: 55px;
-    font-size: 27px;
+/*.question {
+    grid-area: top;
+    margin-top: 65px;
+    !*padding: 20px;*!
+}*/
+
+.questionTag {
+    font-size: 23px;
 }
+
+.questionText {
+    color: #0192c6;
+    font-size: 26px;
+}
+
+.questionMeaning {
+    font-size: 23px;
+    /*font-family: monospace;*/
+    color: grey;
+}
+
+
+
+.scoreWrapper {
+    grid-area: score;
+    margin-right: 60px;
+    margin-left: 0px;
+}
+
+.scoreDefault {
+    margin-top: 40px;
+    padding: 10px 10px;
+    border: 10px solid inherit;
+    border-radius: 30px;
+    background-color: #e3fd00;
+    /*background-color: #e8d2a1;*/
+    text-align: center;
+    font-size: 19px;
+}
+
+.scoreDefault span {
+    /*color: #e3fd00;*/
+}
+
+.scoreIfUserGuessed {
+    margin-top: 40px;
+    padding: 10px 10px;
+    border: 10px solid inherit;
+    border-radius: 30px;
+    background-color: #e3fd00;
+    /*background-color: #e8d2a1;*/
+    text-align: center;
+    font-size: 19px;
+}
+
+.scoreIfUserGuessed span {
+    /*color: #e3fd00;*/
+}
+
+.scoreIfUserWrong {
+    margin-top: 40px;
+    padding: 10px 10px;
+    border: 10px solid inherit;
+    border-radius: 30px;
+    /*background-color: #d2beb5;*/
+    /*background-color: #e9a379;*/
+    /*background-color: #d31e27;*/
+    background-color: #e2754e;
+    text-align: center;
+    font-size: 19px;
+}
+
+.scoreIfUserWrong span {
+    /*color: #d2beb5;*/
+}
+
+
 
 .inputArea {
     grid-area: inputArea;
-    margin: 30px;
+    margin-top: 30px;
     padding-left: 90px;
     /*display: flex;*/
 }
+
+.inputArea input {
+    font-size: 26px;
+    padding: 10px;
+    margin-left: 30px;
+    /*border: 1px solid #0192c6;*/
+    border: 1px solid snow;
+    border-bottom: 1px solid darkorange;
+    border-radius: 4px;
+}
+
+.inputArea input:active:focus-visible {
+    font-size: 26px;
+    padding: 10px;
+    margin-left: 30px;
+    border: 1px solid #0192c6;
+    border-radius: 4px;
+}
+
+#enter .inputElement:focus {
+    font-size: 26px;
+    padding: 10px;
+    margin-left: 30px;
+    border: 1px solid #0192c6;
+    border-radius: 4px;
+}
+
+.inputElementAfter {
+    font-size: 3px;
+}
+
+.lettersAmount1 {
+    margin-right: 170px;
+    font-size: 26px;
+    /*color: #e2754e;*/
+    color: darkorange;
+}
+.lettersAmount2 {
+    margin-right: 110px;
+    font-size: 26px;
+    /*color: #e2754e;*/
+    color: darkorange;
+}
+
+
 
 .buttonArea {
     grid-area: buttonArea;
     /*display: flex;*/
 }
 
-.buttonOne {
-    margin-top: 30px;
+.buttonStart {
+    margin-top: 70px;
     padding: 10px;
     font-size: 21px;
 }
 
-.buttonTwo {
-    margin: 5px;
-    margin-right: 50px;
-    padding: 10px;
+.buttonOne {
+    margin-top: 30px;
+    /*padding: 10px;*/
+    padding: 30px 26px;
     font-size: 21px;
+    border-radius: 50%;
+    border: 1px solid #0192c6;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
+
+#enter .buttonOne:focus {
+    border: 1px solid darkorange;
+}
+
+.buttonTwo {
+    margin-right: 50px;
+    margin-left: 20px;
+    margin-bottom: 40px;
+    padding: 13px;
+    font-size: 21px;
+    border: 1px solid darkorange;
+    border-radius: 35%;
+    box-shadow: 0 4px 9px #868686;
+}
+
+.buttonOne:hover {
+    /*background-color: #4CAF50;*/
+    /*background-image: linear-gradient(to bottom right, #FD8451, #FFBD6F);*/
+    /*background-image: linear-gradient(to bottom right, #5761B2, #1FC5A8);*/
+    background-image: linear-gradient(to bottom right, #56ab2f, #a8e063);
+    color: snow;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.buttonTwo:hover {
+    background-image: linear-gradient(to bottom right, #FD8451, #FFBD6F);
+    /*background-color: #4CAF50;*/
+    color: snow;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.buttonTwo:disabled {
+    border: none;
+    background-image: none;
+    background-color: #e5e5e5;
+    color: #e5e5e5;
+    box-shadow: 0 1px 3px #868686;
+}
+
+
 
 .debugSection {
     grid-area: debug;

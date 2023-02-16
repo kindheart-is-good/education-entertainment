@@ -7,7 +7,7 @@ export const fetchExample = createAsyncThunk(
     'phrasalVerbs/fetchExample',
     async (_, thunkAPI) => {
         try {
-            const response = await axios.get<IExamplePV[]>(process.env.REACT_APP_API_URL + '/phrasalVerbs/1');
+            const response = await axios.get<IExamplePV[]>(process.env.REACT_APP_API_URL2 + '/phrasalVerbs/1');
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue("Не удалось загрузить посты")
@@ -20,7 +20,7 @@ export const fetchExample = createAsyncThunk(
     'phrasalVerbs/fetchExample',
     async (exampleId: number, thunkAPI) => {
         try {
-            const response = await axios.get<IExamplePV[]>(process.env.REACT_APP_API_URL + `/phrasalVerbs/${exampleId}`);
+            const response = await axios.get<IExamplePV[]>(process.env.REACT_APP_API_URL2 + `/phrasalVerbs/${exampleId}`);
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue("Не удалось загрузить посты")

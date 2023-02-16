@@ -7,7 +7,8 @@ export const fetchPVfromServer = createAsyncThunk(
     'pv/fetchExample',
     async (_, thunkAPI) => {
         try {
-            const response = await axios.get<IExamplePV[]>('http://localhost:3001/phrasalVerb');
+            //const response = await axios.get<IExamplePV[]>('http://localhost:3001/phrasalVerb');
+            const response = await axios.get<IExamplePV>('https://api:7001/api/Example/GetRandomExampleDetails');
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue("Не удалось загрузить посты")

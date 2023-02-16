@@ -17,13 +17,17 @@ const LettersGame: React.FC = () => {
     const [particle, setParticle] = useState('');
     //const [currentQuestion, setCurrentQuestion] = useState(null);
 
+    const [isUserGuess, setUsersGuess] = useState(true);
     const [userScore, setUserScore] = useState(0);
     const [userLives, setUserLives] = useState(3);
     const [questionCounter, setQuestionCounter] = useState(-1);
     //const [userAnswered, setUserAnswered] = useState(0);
 
     const renderCount = useRef(1);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputVerbRef = useRef<HTMLInputElement>(null);
+    const buttonVerbRef = useRef<HTMLButtonElement>(null);
+    const lettersAmount1 = useRef<HTMLDivElement>(null);
+    const lettersAmount2 = useRef<HTMLDivElement>(null);
 
 
 
@@ -47,7 +51,7 @@ const LettersGame: React.FC = () => {
                     <p>CHECK this Game?</p>
                     <p>Press start button below</p>
                     <p>bro</p>
-                    <button className={styles.buttonOne}
+                    <button className={styles.buttonStart}
                             onClick={()=>{
                                 setQuestionCounter(prev => prev + 1);
                             }}>
@@ -73,15 +77,26 @@ const LettersGame: React.FC = () => {
 
     const showQuestion = useCallback((example: IExamplePV | null) => {
         return (
+            /*<div className={styles.top}>*/
             <div className={styles.top}>
-                <p>
+                <p className={styles.questionTag}>
+                    {/*Question #{currentQuestionNumber} (id:{props.id}):*/}
                     Question #{questionCounter + 1}:
                 </p>
-                {/*{phrasalVerbs[3].exampleFullUnderscore}*/}
-                {/*{ currentExample?.exampleFullUnderscore }*/}
-                {example?.exampleFullUnderscore}
-                {/*<p>word's length: {example.length}</p>*/}
-                <p>
+                <motion.p className={styles.questionText}
+                          whileHover={{
+                              scale: 1.185,
+                          }}
+                          whileTap={{
+                              color: '#f3f3f3'
+                          }}
+                >
+                    {/*{phrasalVerbs[3].exampleFullUnderscore}*/}
+                    {/*{ currentExample?.exampleFullUnderscore }*/}
+                    {example?.exampleFullUnderscore}
+                    {/*<p>word's length: {example.length}</p>*/}
+                </motion.p>
+                <p className={styles.questionMeaning}>
                     MEANING: ({example?.meaning})
                 </p>
             </div>
@@ -89,18 +104,58 @@ const LettersGame: React.FC = () => {
     }, [questionCounter])
 
     const showUserScore = () => {
-        return (
-            <div className={styles.scoreWrapper}>
-                <div><span>SCORE:</span> {userScore}</div>
-                <div><span>LIVES:</span> {userLives}</div>
+        if (isUserGuess && questionCounter === 0)
+        {
+            return <div className={styles.scoreWrapper}>
+                <motion.div className={styles.scoreDefault}
+                            whileHover={{
+                                scale: 1.12,
+                            }}
+                            whileTap={{
+                                color: '#f3f3f3'
+                            }}>
+                    <div><span>SCORE:</span> {userScore}</div>
+                    <div><span>LIVES:</span> {userLives}</div>
+                </motion.div>
             </div>
-        )
+        }
+        if (isUserGuess)
+        {
+            return <div className={styles.scoreWrapper}>
+                <motion.div className={styles.scoreIfUserGuessed}
+                            whileHover={{
+                                scale: 1.12,
+                            }}
+                            whileTap={{
+                                color: '#f3f3f3'
+                            }}>
+                    <div><span>SCORE:</span> {userScore}</div>
+                    <div><span>LIVES:</span> {userLives}</div>
+                </motion.div>
+            </div>
+        }
+        if (!isUserGuess)
+        {
+            return <div className={styles.scoreWrapper}>
+                <motion.div className={styles.scoreIfUserWrong}
+                            whileHover={{
+                                scale: 1.12,
+                            }}
+                            whileTap={{
+                                color: '#f3f3f3'
+                            }}>
+                    <div><span>SCORE:</span> {userScore}</div>
+                    <div><span>LIVES:</span> {userLives}</div>
+                </motion.div>
+            </div>
+        }
+        return <></>
     }
 
     const showFinalResult = () => {
         return (
             <>
-                <div className={styles.scoreFinalResult}>
+                <div className={styles.finalResult}>
                     <div><span>LIVES:</span> {userLives}</div>
                     <p style={{color: "orange"}}>Congratulations to you bro</p>
                     <p style={{color: "darkorange"}}>Your score:</p>
@@ -126,23 +181,41 @@ const LettersGame: React.FC = () => {
         )
     }
 
+    const [isUserInputVerb, setUserInputVerb] = useState(false);
+    const [lettersAmountState1, setLettersAmountState1] = useState<number | null>(null);
+    const [lettersAmountState2, setLettersAmountState2] = useState<number | null>(null);
     const showInput = () => {
         return (
             <>
                 <div className={styles.inputArea}>
                     <div style={{ display: 'flex' }}>
                         <label>
-                            <input
+                            <input className={styles.inputElement}
                                 type="text"
-                                placeholder="type verb here"
+                                placeholder="verb"
                                 value={verb}
-                                ref={inputRef}
-                                onChange={(e) => setVerb(e.target.value)}
+                                ref={inputVerbRef}
+                                size={6}
+                                maxLength={9}
+                                onChange={(e) => {
+                                        //buttonVerbRef.current?.disabled = true;
+                                        //window.document?.getElementById("buttonVerb")?.disabled = true;
+                                        //document.querySelector('buttonVerb')?.ariaDisabled;
+                                        //document.getElementsByName(localStorage.buttonVerb).disabled
+
+                                        setUserInputVerb(true);
+                                        //e.target.className = "inputElement"
+                                        //inputVerbRef.current?.className = "inputElement"
+                                        setVerb(e.target.value);
+                                    }
+                                }
                             />
-                            <input
+                            <input className={styles.inputElement}
                                 type="text"
-                                placeholder="type particle here"
+                                placeholder="particle"
                                 value={particle}
+                                size={6}
+                                maxLength={9}
                                 onChange={(e) => setParticle(e.target.value)}
                             />
                             {/* <input
@@ -154,75 +227,126 @@ const LettersGame: React.FC = () => {
                             autoFocus={true}
                         />*/}
                         </label>
-                        {/*<label>
-                        <input
-                            value={text}
-                            onChange={(e) => setText(e.target.value)}
-                            size={1}
-                        />
-                    </label>
-                    <label>
-                        <input
-                            value={text}
-                            onChange={(e) => setText(e.target.value)}
-                            size={1}
-                        />
-                    </label>*/}
+                    </div>
+                    <div>
+                        <span className={styles.lettersAmount1}
+                             ref={lettersAmount1}
+                        >
+                            {lettersAmountState1}
+                        </span>
+                        <span className={styles.lettersAmount2}
+                              ref={lettersAmount2}
+                        >
+                            {lettersAmountState2}
+                        </span>
                     </div>
                 </div>
             </>
         )
     }
 
+    let counterOpenLetters = useRef(0);
+    const [openLettersEnded, setOpenLettersEnded] = useState(false);
+    let openLetters = '';
+    const [isParticleHintActivate, setParticleHintActivate] = useState(false);
+    const [isLettersAmountActivate, setLettersAmountActivate] = useState(false);
     const buttonsPanel = () => {
         return (
             <div className={styles.buttonArea}>
                 <button className={styles.buttonOne}
                         onClick={()=>{
-                            //setUserAnswered(prev => prev + 1);
-                            compare();
+                            analyzeUsersAnswer();
                             setVerb('');
                             setParticle('');
                         }}>
                     CHECK ANSWER
                 </button>
+                <motion.p style={{color: "darkorange", fontSize: "20px", marginTop: "49px"}}
+                            whileHover={{
+                                scale: 1.18,
+                            }}
+                            whileTap={{
+                                color: '#f3f3f3'
+                            }}>
+                    HINTS:
+                </motion.p>
                 <p>
-                HINT:
                 <button className={styles.buttonTwo}
+                        id="buttonVerb"
+                        ref={buttonVerbRef}
+                        disabled={isUserInputVerb}
                         onClick={()=>{
+                            setUsersGuess(false);
+                            if (currentExample) {
+                                counterOpenLetters.current++;
+                                for (let i = 0; i < counterOpenLetters.current; i++) {
+                                    openLetters = openLetters.concat(currentExample.exampleVerb[i].toLowerCase());
+                                }
+                                setVerb(openLetters);
+                                setUserScore(prev => prev - 3);
+                                if (counterOpenLetters.current === currentExample.exampleVerb.length)
+                                {
+                                    setOpenLettersEnded(true);
+                                    setUserInputVerb(true);
+                                    return;
+                                }
+                            }
+                            inputVerbRef.current?.focus();
+                        }}>
+                    show next verb letter
+                </button>
+                <button className={styles.buttonTwo}
+                        disabled={isParticleHintActivate}
+                        onClick={()=>{
+                            setParticleHintActivate(true);
+                            setUsersGuess(prev => prev = false);
                             if (currentExample) setParticle(currentExample.exampleParticle.toLowerCase());
-                            inputRef.current?.focus();
+
+                            if (!openLettersEnded) inputVerbRef.current?.focus();
                             setUserScore(prev => prev - 5);
                         }}>
-                    Show particles
+                    show particles
                 </button>
-                HINT:
                 <button className={styles.buttonTwo}
+                        disabled={isLettersAmountActivate}
                         onClick={()=>{
-                            if (currentExample) setVerb(currentExample.exampleVerb[0].toLowerCase());
-                            inputRef.current?.focus();
-                            setUserScore(prev => prev - 3);
+                            setLettersAmountActivate(true);
+                            //lettersAmount1.current?.innerText = 10;
+                            //lettersAmount1.current?.innerHTML = 10;
+                            if (currentExample) setLettersAmountState1(currentExample.exampleVerb.length);
+                            if (currentExample) setLettersAmountState2(currentExample.exampleParticle.length);
                         }}>
-                    Show first verb letter
+                    how many letters
                 </button>
                 </p>
             </div>
         )
     }
 
-    /*const compare = (example: IExamplePV, text: string) => {
+    /*const analyzeUsersAnswer = (example: IExamplePV, text: string) => {
         console.log(text);*/
-    const compare = () => {
+    const analyzeUsersAnswer = () => {
+        counterOpenLetters.current = 0;
+        openLetters = '';
+        setOpenLettersEnded(false);
+        setUserInputVerb(false);
+        setParticleHintActivate(false);
+        setLettersAmountActivate(false);
+        setLettersAmountState1(null);
+        setLettersAmountState2(null);
+        console.log(questionCounter);
         console.log(text.toUpperCase());
         console.log(currentExample?.exampleVerb + ' ' + currentExample?.exampleParticle);
         console.log(userScore);
         if (text.toUpperCase() === (currentExample?.exampleVerb + ' ' + currentExample?.exampleParticle)) {
             /*if (text.toUpperCase() === (example?.exampleVerb + ' ' + example?.exampleParticle)) {*/
+            setUsersGuess(true);
             dispatch(fetchExample(questionCounter+1));
             setUserScore(prev => prev + 10);
             setQuestionCounter(prev => prev + 1);
             return;
         }
+        setUsersGuess(false);
         dispatch(fetchExample(questionCounter+1));
         setUserScore(prev => prev - 10);
         setUserLives(prev => prev - 1);
