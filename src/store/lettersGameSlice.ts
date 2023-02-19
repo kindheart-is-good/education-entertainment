@@ -20,7 +20,8 @@ export const fetchExample = createAsyncThunk(
     'phrasalVerbs/fetchExample',
     async (exampleId: number, thunkAPI) => {
         try {
-            const response = await axios.get<IExamplePV[]>(process.env.REACT_APP_API_URL2 + `/phrasalVerbs/${exampleId}`);
+            /*const response = await axios.get<IExamplePV[]>(process.env.REACT_APP_API_URL2 + `/phrasalVerbs/${exampleId}`);*/
+            const response = await axios.get<IExamplePV>(process.env.REACT_APP_API_URL + `/api/Example/GetRandomExampleDetails`);
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue("Не удалось загрузить посты")
@@ -95,7 +96,7 @@ export const lettersGameSlice = createSlice({
             if (action.payload) state.phrasalVerbs.push(action.payload);
         },
         firstExampleWhenStart(state) {
-            state.currentExample = state.phrasalVerbs[0];
+            state.currentExample = state.phrasalVerbs[2];
         }
     },
     extraReducers: {

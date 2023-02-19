@@ -116,6 +116,12 @@
     /*color: #d2beb5;*/
 }
 
+.scoreMessage {
+    margin-top: 13px;
+    font-size: 40px;
+    color: #e2754e
+}
+
 
 
 .inputArea {
@@ -126,9 +132,10 @@
 }
 
 .inputArea input {
-    font-size: 26px;
-    padding: 10px;
     margin-left: 30px;
+    padding: 10px;
+    /*color: #868686;*/
+    font-size: 26px;
     /*border: 1px solid #0192c6;*/
     border: 1px solid snow;
     border-bottom: 1px solid darkorange;

@@ -18,9 +18,11 @@ const LettersGame: React.FC = () => {
     //const [currentQuestion, setCurrentQuestion] = useState(null);
 
     const [isUserGuess, setUsersGuess] = useState(true);
-    const [userScore, setUserScore] = useState(0);
+    const [userScore, setUserScore] = useState(50);
+    const [scoreMessage, setScoreMessage] = useState("");
     const [userLives, setUserLives] = useState(3);
     const [questionCounter, setQuestionCounter] = useState(-1);
+    const [questionId, setQuestionId] = useState(400);
     //const [userAnswered, setUserAnswered] = useState(0);
 
     const renderCount = useRef(1);
@@ -54,6 +56,7 @@ const LettersGame: React.FC = () => {
                     <button className={styles.buttonStart}
                             onClick={()=>{
                                 setQuestionCounter(prev => prev + 1);
+                                setQuestionId(prev => prev + 1);
                             }}>
                         START THIS GAME
                     </button>
@@ -115,7 +118,7 @@ const LettersGame: React.FC = () => {
                                 color: '#f3f3f3'
                             }}>
                     <div><span>SCORE:</span> {userScore}</div>
-                    <div><span>LIVES:</span> {userLives}</div>
+                    {/*<div><span>LIVES:</span> {userLives}</div>*/}
                 </motion.div>
             </div>
         }
@@ -130,7 +133,7 @@ const LettersGame: React.FC = () => {
                                 color: '#f3f3f3'
                             }}>
                     <div><span>SCORE:</span> {userScore}</div>
-                    <div><span>LIVES:</span> {userLives}</div>
+                    {/*<div><span>LIVES:</span> {userLives}</div>*/}
                 </motion.div>
             </div>
         }
@@ -145,7 +148,14 @@ const LettersGame: React.FC = () => {
                                 color: '#f3f3f3'
                             }}>
                     <div><span>SCORE:</span> {userScore}</div>
-                    <div><span>LIVES:</span> {userLives}</div>
+                    {/*<div><span>LIVES:</span> {userLives}</div>*/}
+                </motion.div>
+
+                <motion.div className={styles.scoreMessage}
+                            /*animate={{ x: 100 }}
+                            transition={{ delay: 1 }}*/
+                    >
+                    {scoreMessage}
                 </motion.div>
             </div>
         }
@@ -156,9 +166,9 @@ const LettersGame: React.FC = () => {
         return (
             <>
                 <div className={styles.finalResult}>
-                    <div><span>LIVES:</span> {userLives}</div>
-                    <p style={{color: "orange"}}>Congratulations to you bro</p>
-                    <p style={{color: "darkorange"}}>Your score:</p>
+                    {/*<div><span>LIVES:</span> {userLives}</div>*/}
+                    <p style={{color: "orange"}}>sorry my bro, your score: 0</p>
+                    <p style={{color: "darkorange"}}>but you grab</p>
                     <motion.div
                         whileHover={{
                             scale: 1.3,
@@ -166,8 +176,9 @@ const LettersGame: React.FC = () => {
                         whileTap={{
                             color: '#f3f3f3'
                         }}>
-                        {userScore}
+                        {questionCounter}
                     </motion.div>
+                    <p style={{color: "darkorange"}}>questions</p>
                 </div>
                 {/*<div className={styles.buttonArea}>
                     <button className={styles.buttonOne}
@@ -283,7 +294,8 @@ const LettersGame: React.FC = () => {
                                     openLetters = openLetters.concat(currentExample.exampleVerb[i].toLowerCase());
                                 }
                                 setVerb(openLetters);
-                                setUserScore(prev => prev - 3);
+                                setUserScore(prev => prev - 2);
+                                setScoreMessage("- 2");
                                 if (counterOpenLetters.current === currentExample.exampleVerb.length)
                                 {
                                     setOpenLettersEnded(true);
@@ -304,17 +316,21 @@ const LettersGame: React.FC = () => {
 
                             if (!openLettersEnded) inputVerbRef.current?.focus();
                             setUserScore(prev => prev - 5);
+                            setScoreMessage("- 5");
                         }}>
-                    show particles
+                    show particle
                 </button>
                 <button className={styles.buttonTwo}
                         disabled={isLettersAmountActivate}
                         onClick={()=>{
                             setLettersAmountActivate(true);
+                            setUsersGuess(false);
                             //lettersAmount1.current?.innerText = 10;
                             //lettersAmount1.current?.innerHTML = 10;
                             if (currentExample) setLettersAmountState1(currentExample.exampleVerb.length);
                             if (currentExample) setLettersAmountState2(currentExample.exampleParticle.length);
+                            setUserScore(prev => prev - 1);
+                            setScoreMessage("- 1");
                         }}>
                     how many letters
                 </button>
@@ -341,16 +357,22 @@ const LettersGame: React.FC = () => {
         if (text.toUpperCase() === (currentExample?.exampleVerb + ' ' + currentExample?.exampleParticle)) {
             /*if (text.toUpperCase() === (example?.exampleVerb + ' ' + example?.exampleParticle)) {*/
             setUsersGuess(true);
-            dispatch(fetchExample(questionCounter+1));
+            /*dispatch(fetchExample(questionCounter+1));*/
+            dispatch(fetchExample(questionId+1));
             setUserScore(prev => prev + 10);
+            setScoreMessage("+ 10");
             setQuestionCounter(prev => prev + 1);
+            setQuestionId(prev => prev + 1);
             return;
         }
         setUsersGuess(false);
-        dispatch(fetchExample(questionCounter+1));
+        /*dispatch(fetchExample(questionCounter+1));*/
+        dispatch(fetchExample(questionId+1));
         setUserScore(prev => prev - 10);
-        setUserLives(prev => prev - 1);
+        /*setUserLives(prev => prev - 1);*/
+        setScoreMessage("- 10");
         setQuestionCounter(prev => prev + 1);
+        setQuestionId(prev => prev + 1);
         console.log(userScore);
     }
 
@@ -362,7 +384,8 @@ const LettersGame: React.FC = () => {
                 ?
                     showIntroduction()
                 :
-                (userLives > 0 && questionCounter < 4)
+                /*(questionCounter < 4)*/
+                (userScore > 0)
                     ?
                     <>
                         { showQuestion(currentExample) }
