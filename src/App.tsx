@@ -6,6 +6,7 @@ import Content from "./pages/Content/Content";
 import Quiz from "./pages/Quiz/Quiz";
 import LettersGame from "./pages/LettersGame/LettersGame";
 import DynamicContentGame from "./pages/DynamicContentGame/DynamicContentGame";
+import SearchPage from "./pages/SearchPage/SearchPage";
 import FromBackend from "./pages/FromBackend/FromBackend";
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
                            element={<LettersGame />} />
                     <Route path="/dynamic-content-game/*"
                            element={<DynamicContentGame />} />
+                    <Route path="/search-page/*"
+                           element={<SearchPage />} />
                     <Route path="/testing-backend/*"
                            element={<FromBackend />} />
                 </Routes>
