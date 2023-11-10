@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Sidebar.module.css';
 import {NavLink} from "react-router-dom";
-import SearchPage from "../../pages/SearchPage/SearchPage";
 
 const Sidebar = () => {
     return (
@@ -25,6 +24,10 @@ const Sidebar = () => {
 
             <div className={styles.item}>
                 <NavLink to="/search-page/" className={ navData => navData.isActive ? styles.active : styles.item }>Search Page</NavLink>
+            </div>
+
+            <div className={styles.item}>
+                <NavLink to="/card-library/" className={ navData => navData.isActive ? styles.active : styles.item }>Card Library</NavLink>
             </div>
 
             <div className={styles.item}>
