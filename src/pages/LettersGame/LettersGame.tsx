@@ -1,10 +1,16 @@
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {fetchExample} from "../../store/lettersGameSlice";
-import {firstExampleWhenStart} from "../../store/lettersGameSlice";
+import {firstExampleWhenStart, setNewExample} from "../../store/lettersGameSlice";
 import {IExamplePV} from '../../models/IExamplePV';
 import {motion} from "framer-motion";
 import styles from "./LettersGame.module.css";
+
+
+function randomIntegerFromRange(min: number, max: number) {
+    let rand = min + Math.random() * (max + 1 - min);
+    return Math.floor(rand);
+}
 
 const LettersGame: React.FC = () => {
 
@@ -39,7 +45,10 @@ const LettersGame: React.FC = () => {
         // setVerb("");
         // setParticle("");
         // setText("");
-        dispatch(firstExampleWhenStart());
+        /*dispatch(firstExampleWhenStart());*/
+        //let newRandomIndex = randomIntegerFromRange(1, 3);
+        //dispatch(setNewExample(1));
+        dispatch(setNewExample(questionCounter+1));
     }, [])
 
     useEffect(() => {
@@ -350,15 +359,17 @@ const LettersGame: React.FC = () => {
         setLettersAmountActivate(false);
         setLettersAmountState1(null);
         setLettersAmountState2(null);
-        console.log(questionCounter);
-        console.log(text.toUpperCase());
-        console.log(currentExample?.exampleVerb + ' ' + currentExample?.exampleParticle);
-        console.log(userScore);
+        console.log('~ questionCounter: ' + questionCounter);
+        console.log('~ text.toUpperCase(): ' + text.toUpperCase());
+        console.log('~ currentExample (exampleVerb & exampleParticle): ' + currentExample?.exampleVerb + ' ' + currentExample?.exampleParticle);
+        console.log('~ userScore: ' + userScore);
         if (text.toUpperCase() === (currentExample?.exampleVerb + ' ' + currentExample?.exampleParticle)) {
             /*if (text.toUpperCase() === (example?.exampleVerb + ' ' + example?.exampleParticle)) {*/
             setUsersGuess(true);
-            /*dispatch(fetchExample(questionCounter+1));*/
-            dispatch(fetchExample(questionId+1));
+            /*dispatch(fetchExample(questionCounter+1));*/ // <- OLD
+            //dispatch(fetchExample(questionId+1));
+            // ВРЕМЕННО ЗАМЕНИЛ fetchExample() на setNewExample()
+            dispatch(setNewExample(questionCounter+1));
             setUserScore(prev => prev + 10);
             setScoreMessage("+ 10");
             setQuestionCounter(prev => prev + 1);
@@ -366,14 +377,16 @@ const LettersGame: React.FC = () => {
             return;
         }
         setUsersGuess(false);
-        /*dispatch(fetchExample(questionCounter+1));*/
-        dispatch(fetchExample(questionId+1));
+        /*dispatch(fetchExample(questionCounter+1));*/ // <- OLD
+        //dispatch(fetchExample(questionId+1));
+        // ВРЕМЕННО ЗАМЕНИЛ fetchExample() на setNewExample()
+        dispatch(setNewExample(questionCounter+1));
         setUserScore(prev => prev - 10);
         /*setUserLives(prev => prev - 1);*/
         setScoreMessage("- 10");
         setQuestionCounter(prev => prev + 1);
         setQuestionId(prev => prev + 1);
-        console.log(userScore);
+        console.log('* userScore: ' + userScore);
     }
 
 

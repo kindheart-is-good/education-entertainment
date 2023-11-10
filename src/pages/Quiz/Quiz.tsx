@@ -10,7 +10,7 @@ import quizSlice,
     resetUserActivity, savePrevQuestions} from "../../store/quizSlice";
 import {IPhrasalVerbQuiz, IPhrasalVerbVariant} from "../../models/IPhrasalVerbQuiz";
 
-function randomInteger(min: number, max: number) {
+function randomIntegerFromRange(min: number, max: number) {
     let rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
 }
@@ -84,7 +84,7 @@ const Quiz: React.FC = () => {
         setUsersGuess(false);
         setNewLevel(true);
 
-        int = randomInteger(1, 19);
+        int = randomIntegerFromRange(1, 19);
         dispatch(setNewQuestion(int));     // не успевает передать (доходит после сворачивания окна), возможно из-за асинхронщины. Поэтому временным решением добавил дополнительное условие внутри getQuestion(). Второе решние добавить useEffect
         //setCurrentQuestion(currentQuestion);
         //console.log(`||| Question FROM activateNewQuizGame() \n||| props.id: ${currentQuestion.id}, q.id: ${question.id}`);
@@ -385,10 +385,10 @@ const Quiz: React.FC = () => {
                    \n`);
     }*/
     const generateNewQuestion = () => {
-        /*newRandomIndex = randomInteger(1, 18);
+        /*newRandomIndex = randomIntegerFromRange(1, 18);
         setNewQuestionIndex(newRandomIndex);*/
-        //int = randomInteger(1, 19);
-        //setNewQuestionIndex(randomInteger(1, 25));
+        //int = randomIntegerFromRange(1, 19);
+        //setNewQuestionIndex(randomIntegerFromRange(1, 25));
 
         /*if (previousQuestions.length > 0) {
             //debugger;
@@ -400,9 +400,9 @@ const Quiz: React.FC = () => {
             while (previousQuestions.some(q => q.id === newQuestionIndex))
             {
                 console.log('wrong INDEX = ' + newQuestionIndex + ', question id = ' + currentQuestion?.id)
-                /!*newRandomIndex = randomInteger(1, 18);
+                /!*newRandomIndex = randomIntegerFromRange(1, 18);
                 setNewQuestionIndex(newRandomIndex);*!/
-                setNewQuestionIndex(randomInteger(1, 25));
+                setNewQuestionIndex(randomIntegerFromRange(1, 25));
                 //debugger;
                 console.log('FIXED INDEX = ' + newQuestionIndex + ', question id = ' + currentQuestion?.id);
                 //debugger;
@@ -410,7 +410,7 @@ const Quiz: React.FC = () => {
             }
         }*/
 
-        let newRandomIndex = randomInteger(1, 25);
+        let newRandomIndex = randomIntegerFromRange(1, 25);
         dispatch(setNewQuestion(newRandomIndex));
         //dispatch(setNewQuestion(int));
         //setCurrentQuestion(currentQuestion);
