@@ -2,20 +2,6 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import axios from "axios";
 import {IExamplePV} from "../models/IExamplePV";
 
-/*
-export const fetchExample = createAsyncThunk(
-    'phrasalVerbs/fetchExample',
-    async (_, thunkAPI) => {
-        try {
-            const response = await axios.get<IExamplePV[]>(process.env.REACT_APP_API_URL2 + '/phrasalVerbs/1');
-            return response.data;
-        } catch (e) {
-            return thunkAPI.rejectWithValue("Не удалось загрузить посты")
-        }
-    }
-)
-*/
-
 export const fetchExample = createAsyncThunk(
     'phrasalVerbs/fetchExample',
     async (exampleId: number, thunkAPI) => {
@@ -25,6 +11,20 @@ export const fetchExample = createAsyncThunk(
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue("Не удалось загрузить посты")
+        }
+    }
+)
+
+export const fetchPVfromJsonServer = createAsyncThunk(
+    'phrasalVerbs/fetchExampleFromJsonServer',
+    /*async (_, thunkAPI) => {*/
+    async (exampleId: number, thunkAPI) => {
+        try {
+            /*const response = await axios.get<IExamplePV[]>(process.env.REACT_APP_API_URL2 + '/phrasalVerbs/1');*/
+            const response = await axios.get<IExamplePV[]>(process.env.REACT_APP_JSON_SERVER_URL + `/phrasalVerbs/${exampleId}`);
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue("Failed to load phrasal verb from JsonServer")
         }
     }
 )
@@ -183,6 +183,18 @@ export const lettersGameSlice = createSlice({
             state.currentExample = action.payload;
         },
         [fetchExample.rejected.type]: (state, action: PayloadAction<string>) => {           // Сценарий когда произошла ошибка
+            state.isLoading = false;
+            state.error = action.payload;
+        },
+        [fetchPVfromJsonServer.pending.type]: (state) => {                                           // Сценарий ожидания
+            state.isLoading = true;
+        },
+        [fetchPVfromJsonServer.fulfilled.type]: (state, action: PayloadAction<IExamplePV>) => {      // Сценарий успешной загрузки
+            state.isLoading = false;
+            state.error = '';
+            state.currentExample = action.payload;
+        },
+        [fetchPVfromJsonServer.rejected.type]: (state, action: PayloadAction<string>) => {           // Сценарий когда произошла ошибка
             state.isLoading = false;
             state.error = action.payload;
         },

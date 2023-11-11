@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 import styles from "./FromBackend.module.css";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import extApiSlice, {addReceivedPV, fetchPVfromServer} from "../../store/extApiSlice";
+import extApiSlice, {addReceivedPV, fetchPVfromJsonServer} from "../../store/extApiSlice";
 import {fetchPVs} from "../../store/actions/extApiActions";
 import CardItem from "../../components/Cards/CardItem";
 
@@ -67,7 +67,7 @@ const FromBackend: React.FC = () => {
                 </button>
 
                 <button className={styles.buttonOne} onClick={()=>{
-                    dispatch(fetchPVfromServer());
+                    dispatch(fetchPVfromJsonServer());
                 }}>
                     From JSON server
                 </button>

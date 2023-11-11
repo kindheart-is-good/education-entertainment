@@ -3,11 +3,11 @@ import axios from 'axios';
 import {IExamplePV} from "../models/IExamplePV";
 import {fetchPVs} from "./actions/extApiActions";
 
-export const fetchPVfromServer = createAsyncThunk(
+export const fetchPVfromJsonServer = createAsyncThunk(
     'pv/fetchExample',
     async (_, thunkAPI) => {
         try {
-            const response = await axios.get<IExamplePV[]>('http://localhost:3001/phrasalVerb');
+            const response = await axios.get<IExamplePV[]>('http://localhost:3001/TestPV');
             //const response = await axios.get<IExamplePV>('https://api:7001/api/Example/GetRandomExampleDetails');
             return response.data;
         } catch (e) {
@@ -99,15 +99,15 @@ export const extApiSlice = createSlice({
             //state.isLoading = false;
             //state.error = action.payload;
         },
-        [fetchPVfromServer.pending.type]: (state) => {                                           // Сценарий ожидания
+        [fetchPVfromJsonServer.pending.type]: (state) => {                                           // Сценарий ожидания
             state.isLoading = true;
         },
-        [fetchPVfromServer.fulfilled.type]: (state, action: PayloadAction<IExamplePV>) => {      // Сценарий успешной загрузки
+        [fetchPVfromJsonServer.fulfilled.type]: (state, action: PayloadAction<IExamplePV>) => {      // Сценарий успешной загрузки
             state.isLoading = false;
             state.error = '';
             state.pvFromJsonServer = action.payload;
         },
-        [fetchPVfromServer.rejected.type]: (state, action: PayloadAction<string>) => {           // Сценарий когда произошла ошибка
+        [fetchPVfromJsonServer.rejected.type]: (state, action: PayloadAction<string>) => {           // Сценарий когда произошла ошибка
             state.isLoading = false;
             state.error = action.payload;
         },

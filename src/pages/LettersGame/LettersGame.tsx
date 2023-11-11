@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import {fetchExample} from "../../store/lettersGameSlice";
+import {fetchExample, fetchPVfromJsonServer} from "../../store/lettersGameSlice";
 import {firstExampleWhenStart, setNewExample} from "../../store/lettersGameSlice";
 import {IExamplePV} from '../../models/IExamplePV';
 import {motion} from "framer-motion";
@@ -48,7 +48,8 @@ const LettersGame: React.FC = () => {
         /*dispatch(firstExampleWhenStart());*/
         //let newRandomIndex = randomIntegerFromRange(1, 3);
         //dispatch(setNewExample(1));
-        dispatch(setNewExample(questionCounter+1));
+        //dispatch(setNewExample(questionCounter+1));
+        dispatch(fetchPVfromJsonServer(questionCounter+1));
     }, [])
 
     useEffect(() => {
@@ -369,7 +370,8 @@ const LettersGame: React.FC = () => {
             /*dispatch(fetchExample(questionCounter+1));*/ // <- OLD
             //dispatch(fetchExample(questionId+1));
             // ВРЕМЕННО ЗАМЕНИЛ fetchExample() на setNewExample()
-            dispatch(setNewExample(questionCounter+1));
+            //dispatch(setNewExample(questionCounter+1));
+            dispatch(fetchPVfromJsonServer(questionCounter+1));
             setUserScore(prev => prev + 10);
             setScoreMessage("+ 10");
             setQuestionCounter(prev => prev + 1);
@@ -380,7 +382,8 @@ const LettersGame: React.FC = () => {
         /*dispatch(fetchExample(questionCounter+1));*/ // <- OLD
         //dispatch(fetchExample(questionId+1));
         // ВРЕМЕННО ЗАМЕНИЛ fetchExample() на setNewExample()
-        dispatch(setNewExample(questionCounter+1));
+        //dispatch(setNewExample(questionCounter+1));
+        dispatch(fetchPVfromJsonServer(questionCounter+1));
         setUserScore(prev => prev - 10);
         /*setUserLives(prev => prev - 1);*/
         setScoreMessage("- 10");
