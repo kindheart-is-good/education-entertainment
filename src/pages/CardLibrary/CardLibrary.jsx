@@ -7,6 +7,13 @@ const CardLibrary = () => {
 
     const [cards, setCards] = useState([]);
 
+    const deleteCardById = (id) => {
+      const updatedCards = cards.filter((card) => {
+        return card.id !== id;
+      });
+      setCards(updatedCards);
+    };
+
     const createCard = (title) => {
         //console.log('Need to add card with:', title);
         const updatedCards = [
@@ -22,7 +29,7 @@ const CardLibrary = () => {
     return (
         /*<div>number of elements in cards array is: {cards.length}</div>*/
         <div className={styles.content}>
-            <CardList cards={cards} />
+            <CardList cards={cards} onDelete={deleteCardById} />
             <CardCreate onCreate={createCard} />
         </div>
     )
