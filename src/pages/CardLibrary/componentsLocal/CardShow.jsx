@@ -25,6 +25,7 @@ const CardShow = ({ card, onEdit, onDelete }) => {
 
     return (
         <div className={styles.cardShow}>
+            <img alt="image-of-card" src={`https://picsum.photos/seed/${card.id}/300/200`} />
             <div>{content}</div>
             <div className={styles.actions}>
                 <button className={styles.edit} onClick={handleEditClick}>

@@ -39,6 +39,7 @@ const CardLibrary = () => {
     return (
         /*<div>number of elements in cards array is: {cards.length}</div>*/
         <div className={styles.content}>
+            <h1>List of Cards</h1>
             <CardList cards={cards} onEdit={editCardById} onDelete={deleteCardById} />
             <CardCreate onCreate={createCard} />
         </div>
