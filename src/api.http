@@ -1,0 +1,40 @@
+
+###
+
+# Get all cards
+GET http://localhost:3001/cards HTTP/1.1
+Content-Type: application/json
+
+###
+
+# Create a card
+POST http://localhost:3001/cards HTTP/1.1
+Content-Type: application/json
+
+{
+	"title": "appropriate",
+	"meaning": [
+		"подходящий",
+		"присваивать",
+		"подходяще"
+	],
+	"example": "What is an appropriate response to anger?",
+	"exampleWithUnderscores": "What is an ___________ response to anger?",
+	"length": 10
+}
+
+###
+
+# Update a card
+PUT http://localhost:3001/cards/1 HTTP/1.1
+Content-Type: application/json
+
+{
+	"length": 11
+}
+
+###
+
+# Delete a card
+DELETE http://localhost:3001/cards/1 HTTP/1.1
+Content-Type: application/json

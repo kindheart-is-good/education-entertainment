@@ -144,15 +144,52 @@
       "verbAndParticle": "Drill down"
     }
   ],
-  "TestPV":
+  "TestPV": {
+    "exampleId": 2416,
+    "exampleFull": "WORD UP! You Ok?",
+    "exampleFullUnderscore": "____ __! You Ok?",
+    "exampleVerb": "WORD",
+    "exampleParticle": "UP",
+    "meaning": "A phrase that was used a greeting.",
+    "verb": "Word",
+    "verbAndParticle": "Word up"
+  },
+  "cards": [
     {
-      "exampleId": 2416,
-      "exampleFull": "WORD UP! You Ok?",
-      "exampleFullUnderscore": "____ __! You Ok?",
-      "exampleVerb": "WORD",
-      "exampleParticle": "UP",
-      "meaning": "A phrase that was used a greeting.",
-      "verb": "Word",
-      "verbAndParticle": "Word up"
+      "title": "attempt",
+      "meaning": [
+        "попытка",
+        "пытаться",
+        "предпринимать"
+      ],
+      "example": "Did he make an attempt to explain his theory to you?",
+      "exampleWithUnderscores": "Did he make an _______ to explain his theory to you?",
+      "length": 7,
+      "id": 3
+    },
+    {
+      "title": "essentially",
+      "meaning": [
+        "в основном",
+        "преимущественно",
+        "главным образом"
+      ],
+      "example": "Social philosophy consists essentially in science and peace.",
+      "exampleWithUnderscores": "Social philosophy consists ___________ in science and peace.",
+      "length": 11,
+      "id": 10
+    },
+    {
+      "title": "appropriate",
+      "meaning": [
+        "подходящий",
+        "присваивать",
+        "подходяще"
+      ],
+      "example": "What is an appropriate response to anger?",
+      "exampleWithUnderscores": "What is an ___________ response to anger?",
+      "length": 10,
+      "id": 11
     }
+  ]
 }
