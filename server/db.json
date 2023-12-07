@@ -168,6 +168,18 @@
       "id": 3
     },
     {
+      "title": "encourage",
+      "meaning": [
+        "поощрять",
+        "способствовать",
+        "стимулировать"
+      ],
+      "example": "He hoped to encourage both sides to move forward at the negotiating table.",
+      "exampleWithUnderscores": "He hoped to _________ both sides to move forward at the negotiating table.",
+      "length": 9,
+      "id": 4
+    },
+    {
       "title": "essentially",
       "meaning": [
         "в основном",
@@ -188,7 +200,7 @@
       ],
       "example": "What is an appropriate response to anger?",
       "exampleWithUnderscores": "What is an ___________ response to anger?",
-      "length": 10,
+      "length": 11,
       "id": 11
     }
   ]
