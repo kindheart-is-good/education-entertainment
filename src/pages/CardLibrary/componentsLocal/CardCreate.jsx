@@ -1,31 +1,30 @@
-import React, {useState} from "react";
-import styles from "./Cards.module.css";
+import React, { useState } from "react";
+import styles from "./CardCreate.module.css";
 
 const CardCreate = ({ onCreate }) => {
+  const [title, setTitle] = useState("");
 
-    const [title, setTitle] = useState('');
+  const handleChange = (event) => {
+    setTitle(event.target.value);
+  };
 
-    const handleChange = (event) => {
-        setTitle(event.target.value);
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    onCreate(title);
+    setTitle("");
+  };
 
-        onCreate(title);
-        setTitle('');
-    }
-
-    return (
-        <div className={styles.cardCreate}>
-            <h3>Add a Card</h3>
-            <form onSubmit={handleSubmit}>
-                <label>Title</label>
-                <input className={styles.input} value={title} onChange={handleChange} />
-                <button className={styles.button}>Create!</button>
-            </form>
-        </div>
-    )
-}
+  return (
+    <div className={styles.cardCreate}>
+      <h3>Add a Card</h3>
+      <form onSubmit={handleSubmit}>
+        <label>Title</label>
+        <input className={styles.input} value={title} onChange={handleChange} />
+        <button className={styles.button}>Create!</button>
+      </form>
+    </div>
+  );
+};
 
 export default CardCreate;

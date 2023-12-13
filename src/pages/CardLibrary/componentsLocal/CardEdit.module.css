@@ -1,0 +1,196 @@
+
+.cardEdit form {
+    /*align-items: flex-start;*/
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardEdit label {
+    font-size: 0.9em;
+}
+
+.cardEdit input {
+    border-radius: 4px;
+    border: 1px solid #9f9f9f;
+
+    padding: 3px;
+    width: 130px;
+}
+
+.cardEdit button {
+    margin-top: 5px;
+
+    /*background-color: #fdfdfd;
+    border: 1px solid dimgrey;
+    border-radius: 4px;
+    padding: 1px;*/
+}
+
+
+
+/*
+ORIGINAL NAME И СТИЛИ ВЫГЛЯДЯТ ПРИМЕРНО ТАК:
+
+.button.is-primary {
+    background-color: #00d1b2;
+}
+
+.button.is-primary.is-inverted.is-hovered,
+.button.is-primary.is-inverted:hover {
+    background-color: #f2f2f2;
+}
+
+.button.is-primary.is-inverted.is-outlined.is-loading.is-focused:after,
+.button.is-primary.is-inverted.is-outlined.is-loading.is-hovered:after,
+.button.is-primary.is-inverted.is-outlined.is-loading:focus:after,
+.button.is-primary.is-inverted.is-outlined.is-loading:hover:after {
+    border-color: transparent transparent #00d1b2 #00d1b2!important
+}
+
+.button.is-primary.is-inverted.is-outlined[disabled],
+fieldset[disabled] .button.is-primary.is-inverted.is-outlined {
+    background-color:initial;
+    border-color:#fff;
+    box-shadow:none;
+    color:#fff;
+}
+*/
+
+.buttonIsPrimary {
+    background-color: #fdfdfd;
+    border-color:transparent;
+    color: black;
+}
+
+.buttonIsPrimary.is-hovered,
+.buttonIsPrimary:hover {
+    background-color: #d2beb5;
+    border-color:transparent;
+    color:#fff
+}
+
+.buttonIsPrimary.is-focused,
+.buttonIsPrimary:focus {
+    border-color:transparent;
+    color:#fff
+}
+
+.buttonIsPrimary.is-focused:not(:active),
+.buttonIsPrimary:focus:not(:active) {
+    box-shadow:0 0 0 .125em rgba(0,209,178,.25)
+}
+
+.buttonIsPrimary.is-active,.buttonIsPrimary:active {
+    background-color: #fdfdfd;
+    border-color:transparent;
+    color: #d2beb5;
+}
+
+.buttonIsPrimary[disabled],fieldset[disabled] .buttonIsPrimary {
+    background-color:#00d1b2;
+    border-color:#00d1b2;
+    box-shadow:none
+}
+
+.buttonIsPrimary.is-inverted {
+    background-color:#fff;
+    color:#00d1b2
+}
+
+.buttonIsPrimary.is-inverted.is-hovered,
+.buttonIsPrimary.is-inverted:hover {
+    background-color:#f2f2f2
+}
+
+.buttonIsPrimary.is-inverted[disabled],
+fieldset[disabled] .buttonIsPrimary.is-inverted {
+    background-color:#fff;
+    border-color:transparent;
+    box-shadow:none;
+    color:#00d1b2
+}
+
+.buttonIsPrimary.is-loading:after {
+    border-color:transparent transparent #fff #fff!important
+}
+
+.buttonIsPrimary.is-outlined {
+    background-color:initial;
+    border-color:#00d1b2;
+    color:#00d1b2
+}
+
+.buttonIsPrimary.is-outlined.is-focused,
+.buttonIsPrimary.is-outlined.is-hovered,.buttonIsPrimary.is-outlined:focus,.buttonIsPrimary.is-outlined:hover {
+    background-color:#00d1b2;
+    border-color:#00d1b2;
+    color:#fff
+}
+
+.buttonIsPrimary.is-outlined.is-loading:after {
+    border-color:transparent transparent #00d1b2 #00d1b2!important
+}
+
+.buttonIsPrimary.is-outlined.is-loading.is-focused:after,
+.buttonIsPrimary.is-outlined.is-loading.is-hovered:after,
+.buttonIsPrimary.is-outlined.is-loading:focus:after,
+.buttonIsPrimary.is-outlined.is-loading:hover:after {
+    border-color:transparent transparent #fff #fff!important
+}
+
+.buttonIsPrimary.is-outlined[disabled],
+fieldset[disabled] .buttonIsPrimary.is-outlined {
+    background-color:initial;
+    border-color:#00d1b2;
+    box-shadow:none;
+    color:#00d1b2
+}
+
+.buttonIsPrimary.is-inverted.is-outlined {
+    background-color:initial;
+    border-color:#fff;
+    color:#fff
+}
+
+.buttonIsPrimary.is-inverted.is-outlined.is-focused,
+.buttonIsPrimary.is-inverted.is-outlined.is-hovered,
+.buttonIsPrimary.is-inverted.is-outlined:focus,
+.buttonIsPrimary.is-inverted.is-outlined:hover {
+    background-color:#fff;
+    color:#00d1b2
+}
+
+.buttonIsPrimary.is-inverted.is-outlined.is-loading.is-focused:after,
+.buttonIsPrimary.is-inverted.is-outlined.is-loading.is-hovered:after,
+.buttonIsPrimary.is-inverted.is-outlined.is-loading:focus:after,
+.buttonIsPrimary.is-inverted.is-outlined.is-loading:hover:after {
+    border-color:transparent transparent #00d1b2 #00d1b2!important
+}
+
+.buttonIsPrimary.is-inverted.is-outlined[disabled],
+fieldset[disabled] .buttonIsPrimary.is-inverted.is-outlined {
+    background-color:initial;
+    border-color:#fff;
+    box-shadow:none;
+    color:#fff
+}
+
+.buttonIsPrimary.is-light {
+    background-color:#ebfffc;
+    color:#00947e
+}
+
+.buttonIsPrimary.is-light.is-hovered,
+.buttonIsPrimary.is-light:hover {
+    background-color:#defffa;
+    border-color:transparent;
+    color:#00947e
+}
+
+.buttonIsPrimary.is-light.is-active,
+.buttonIsPrimary.is-light:active {
+    background-color:#d1fff8;
+    border-color:transparent;
+    color:#00947e
+}
