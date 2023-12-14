@@ -1,12 +1,13 @@
-import React from "react";
-import CardShow from "./CardShow";
+import React, { useContext } from "react";
+import CardsContext from "../../../context/cards";
 import styles from "./CardShow.module.css";
+import CardShow from "./CardShow";
 
-const CardList = ({ cards, onEdit, onDelete }) => {
+const CardList = () => {
+  const { cards } = useContext(CardsContext);
+
   const renderedCards = cards.map((card) => {
-    return (
-      <CardShow key={card.id} card={card} onEdit={onEdit} onDelete={onDelete} />
-    );
+    return <CardShow key={card.id} card={card} />;
   });
 
   return <div className={styles.cardList}>{renderedCards}</div>;

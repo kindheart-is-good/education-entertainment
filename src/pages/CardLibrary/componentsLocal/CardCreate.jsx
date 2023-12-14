@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import CardsContext from "../../../context/cards";
 import styles from "./CardCreate.module.css";
 
-const CardCreate = ({ onCreate }) => {
+const CardCreate = () => {
   const [title, setTitle] = useState("");
+  const { createCard } = useContext(CardsContext);
 
   const handleChange = (event) => {
     setTitle(event.target.value);
@@ -11,7 +13,7 @@ const CardCreate = ({ onCreate }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    onCreate(title);
+    createCard(title);
     setTitle("");
   };
 

@@ -1,21 +1,22 @@
-import React, { useState } from "react";
-import CardEdit from "./CardEdit";
+import React, { useContext, useState } from "react";
+import CardsContext from "../../../context/cards";
 import styles from "./CardShow.module.css";
+import CardEdit from "./CardEdit";
 
-const CardShow = ({ card, onEdit, onDelete }) => {
+const CardShow = ({ card }) => {
   const [showEdit, setShowEdit] = useState(false);
+  const { deleteCardById } = useContext(CardsContext);
+
+  const handleDeleteClick = () => {
+    deleteCardById(card.id);
+  };
 
   const handleEditClick = () => {
     setShowEdit(!showEdit);
   };
 
-  const handleDeleteClick = () => {
-    onDelete(card.id);
-  };
-
-  const handleSubmit = (id, newTitle) => {
+  const handleSubmit = () => {
     setShowEdit(false);
-    onEdit(id, newTitle);
   };
 
   let content = <h3>{card.title}</h3>;
