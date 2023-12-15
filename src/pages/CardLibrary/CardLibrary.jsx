@@ -1,11 +1,11 @@
-import React, { useEffect, useContext } from "react";
-import CardsContext from "../../context/cards";
+import React, { useEffect } from "react";
+import useCardsContext from "../../hooks/use-cards-context";
 import styles from "./CardLibrary.module.css";
 import CardCreate from "./componentsLocal/CardCreate";
 import CardList from "./componentsLocal/CardList";
 
 const CardLibrary = () => {
-  const { fetchCards } = useContext(CardsContext);
+  const { fetchCards } = useCardsContext();
 
   useEffect(() => {
     fetchCards();

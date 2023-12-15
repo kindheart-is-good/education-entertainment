@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import styles from "./Quiz.module.css"
-import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
 import {motion} from "framer-motion";
 import QuizQuestion from "./QuizQuestion/QuizQuestion";
 import QuizVariantButton from "./QuizVariantButton/QuizVariantButton";

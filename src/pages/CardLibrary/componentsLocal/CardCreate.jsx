@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
-import CardsContext from "../../../context/cards";
+import React, { useState } from "react";
+import useCardsContext from "../../../hooks/use-cards-context";
 import styles from "./CardCreate.module.css";
 
 const CardCreate = () => {
   const [title, setTitle] = useState("");
-  const { createCard } = useContext(CardsContext);
+  const { createCard } = useCardsContext();
 
   const handleChange = (event) => {
     setTitle(event.target.value);

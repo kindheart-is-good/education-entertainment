@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
-import CardsContext from "../../../context/cards";
+import React, { useState } from "react";
+import useCardsContext from "../../../hooks/use-cards-context";
 import styles from "./CardShow.module.css";
 import CardEdit from "./CardEdit";
 
 const CardShow = ({ card }) => {
   const [showEdit, setShowEdit] = useState(false);
-  const { deleteCardById } = useContext(CardsContext);
+  const { deleteCardById } = useCardsContext();
 
   const handleDeleteClick = () => {
     deleteCardById(card.id);

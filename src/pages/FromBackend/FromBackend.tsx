@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import styles from "./FromBackend.module.css";
-import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
 import extApiSlice, {addReceivedPV, fetchPVfromJsonServer} from "../../store/extApiSlice";
 import {fetchPVs} from "../../store/actions/extApiActions";
 import CardItem from "../../components/Cards/CardItem";

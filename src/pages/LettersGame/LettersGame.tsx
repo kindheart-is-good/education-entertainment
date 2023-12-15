@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from "react";
-import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
 import {fetchExample, fetchPVfromJsonServer} from "../../store/lettersGameSlice";
 import {firstExampleWhenStart, setNewExample} from "../../store/lettersGameSlice";
 import {IExamplePV} from '../../models/IExamplePV';
