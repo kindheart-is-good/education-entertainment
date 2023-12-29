@@ -23,7 +23,7 @@ const CardCreate = () => {
       <form onSubmit={handleSubmit}>
         <label>Title</label>
         <input className={styles.input} value={title} onChange={handleChange} />
-        <button className={styles.button}>Create!</button>
+        <button className={styles.buttonCreate}>Create!</button>
       </form>
     </div>
   );

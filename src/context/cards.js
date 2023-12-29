@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import axios from "axios";
 
 const CardsContext = createContext();
@@ -6,12 +6,12 @@ const CardsContext = createContext();
 function Provider({ children }) {
   const [cards, setCards] = useState([]);
 
-  const fetchCards = async () => {
+  const fetchCards = useCallback(async () => {
     const response = await axios.get(
       process.env.REACT_APP_JSON_SERVER_URL + "/cards"
     );
     setCards(response.data);
-  };
+  }, []);
 
   const createCard = async (title) => {
     //console.log('Need to add card with:', title);

@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import useCardsContext from "../../hooks/use-cards-context";
 import styles from "./CardLibrary.module.css";
-import CardCreate from "./componentsLocal/CardCreate";
-import CardList from "./componentsLocal/CardList";
+import CardCreate from "./components-local/CardCreate";
+import CardList from "./components-local/CardList";
 
 const CardLibrary = () => {
   const { fetchCards } = useCardsContext();
 
   useEffect(() => {
     fetchCards();
-  }, []);
+  }, [fetchCards]);
 
   return (
     /*<div>number of elements in cards array is: {cards.length}</div>*/
