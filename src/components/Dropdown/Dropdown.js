@@ -1,9 +1,34 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
 import Panel from "../Panel/Panel";
 
 function Dropdown({ options, value, onChange }) {
     const [isOpen, setIsOpen] = useState(false);
+    const divEl = useRef();
+
+    useEffect(() => {
+        const handler = (event) => {
+                /* Прежде всего, делаю следующую проверку для случаев, когда divEl.current может быть null.
+                Например, если код написан так что этот div при некоторых условиях может быть невидимым, скрывать видимость. */
+            if (!divEl.current) {
+                return;
+            }
+                /* Хотя можно и просто написать так:
+                if (!divEl.current?.contains(event.target)) {
+                  setIsOpen(false);
+                }*/
+
+            if (!divEl.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener("click", handler, true);
+
+        return () => {
+            document.removeEventListener("click", handler);
+        };
+    }, []);
 
     const handleClick = () => {
         setIsOpen((currentIsOpen) => !currentIsOpen);
@@ -33,7 +58,7 @@ function Dropdown({ options, value, onChange }) {
     //}
 
     return (
-        <div className="w-48 relative">
+        <div ref={divEl} className="w-48 relative">
             <Panel
                 className="flex justify-between items-center cursor-pointer"
                 onClick={handleClick}
