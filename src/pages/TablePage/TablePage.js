@@ -8,9 +8,32 @@ function TablePage() {
         { name: "Lime", color: "bg-green-500", score: 4 },
     ];
 
+    const config = [
+        {
+            label: "Name",
+            render: (fruit) => fruit.name,
+        },
+        {
+            label: "Color",
+            render: (fruit) => <div className={`p-3 m-2 ${fruit.color}`} />,
+        },
+        {
+            label: "Score",
+            render: (fruit) => fruit.score,
+        },
+    ];
+
+    /* I gonna put the burden of coming up with a key on the developer who is using <Table /> component.
+      Because I really can't assume what properties will have data that passes inside of a <Table /> component.
+      For this purpose I created this function being used to generate a key.
+    */
+    const keyFn = (fruit) => {
+        return fruit.name;
+    };
+
     return (
         <div>
-            <Table data={data} />
+            <Table data={data} config={config} keyFn={keyFn} />
         </div>
     );
 }
