@@ -1,7 +1,6 @@
 import { Fragment } from "react";
-import styles from "./Table.module.css";
 
-function Table({ data, config, keyFn }) {
+function Table_tailwind({ data, config, keyFn }) {
     const renderedHeaders = config.map((column) => {
         if (column.header) {
             return <Fragment key={column.label}>{column.header()}</Fragment>; // wrap function column.header() with <div> to fix issue with key prop.
@@ -12,27 +11,27 @@ function Table({ data, config, keyFn }) {
     const renderedRows = data.map((rowData) => {
         const renderedCells = config.map((column) => {
             return (
-                <td key={column.label} className={styles.cell}>
+                <td key={column.label} className="p-3">
                     {column.render(rowData)}
                 </td>
             );
         });
 
         return (
-            <tr key={keyFn(rowData)} className={styles.cellWrapper}>
+            <tr key={keyFn(rowData)} className="border-b">
                 {renderedCells}
             </tr>
         );
     });
 
     return (
-        <table className={styles.tableWrapper}>
+        <table className="table-auto border-spacing-2">
             <thead>
-            <tr className={styles.row}>{renderedHeaders}</tr>
+            <tr className="border-b-2">{renderedHeaders}</tr>
             </thead>
             <tbody>{renderedRows}</tbody>
         </table>
     );
 }
 
-export default Table;
+export default Table_tailwind;

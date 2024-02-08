@@ -1,0 +1,16 @@
+.cell {
+    padding: 3px;
+}
+
+.cellWrapper {
+    border-bottom-width: 1px;
+}
+
+.tableWrapper {
+    table-layout: auto;
+    border-spacing: 0.5rem 0.5rem;
+}
+
+.row {
+    border-bottom-width: 2px;
+}

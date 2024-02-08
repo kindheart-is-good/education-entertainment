@@ -9,6 +9,9 @@ import LettersGame from "./pages/LettersGame/LettersGame";
 import DynamicContentGame from "./pages/DynamicContentGame/DynamicContentGame";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import CardLibrary from "./pages/CardLibrary/CardLibrary";
+import TensesPage from "./pages/TablePage/TensesPage";
+import TensesPage2 from "./pages/TablePage/TensesPage2";
+import TablePage from "./pages/TablePage/TablePage";
 import FromBackend from "./pages/FromBackend/FromBackend";
 
 function App() {
@@ -29,6 +32,8 @@ function App() {
             />
             <Route path="/search-page/*" element={<SearchPage />} />
             <Route path="/card-library/*" element={<CardLibrary />} />
+            <Route path="/table-page/*" element={<TablePage />} />
+            <Route path="/tenses-page/*" element={<><TensesPage /><TensesPage2 /></>} />
             <Route path="/testing-backend/*" element={<FromBackend />} />
           </Routes>
         </div>
