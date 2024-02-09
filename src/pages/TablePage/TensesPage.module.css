@@ -11,3 +11,21 @@
     text-align: center;
     font-size: 18px;
 }
+
+.tenseWrapper {
+    border: 6px solid lightgray;
+}
+
+.chapter {
+    background-color: #d2beb5;
+}
+
+.description {
+    /*background-color: #d4d4d4;*/
+    /*background-color: #fff;*/
+    background-color: rgb(209 213 219);
+}
+
+.build {
+    background-color: #fff;
+}

@@ -33,7 +33,7 @@ function App() {
             <Route path="/search-page/*" element={<SearchPage />} />
             <Route path="/card-library/*" element={<CardLibrary />} />
             <Route path="/table-page/*" element={<TablePage />} />
-            <Route path="/tenses-page/*" element={<><TensesPage /><TensesPage2 /></>} />
+            <Route path="/tenses-page/*" element={<><TensesPage2 /><TensesPage /></>} />
             <Route path="/testing-backend/*" element={<FromBackend />} />
           </Routes>
         </div>
